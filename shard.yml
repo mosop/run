@@ -1,0 +1,17 @@
+name: run
+version: 0.1.0
+
+authors:
+  - mosop
+
+license: MIT
+
+dependencies:
+  crystal_plus:
+    github: mosop/crystal_plus
+    version: ~> 0.1.2
+
+development_dependencies:
+  stdio:
+    github: mosop/stdio
+    version: ~> 0.1.3
