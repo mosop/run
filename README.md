@@ -62,7 +62,7 @@ cg.run
 
 This prints 100 of :) too.
 
-### Nested Contexts
+### Relative Paths
 
 ```crystal
 cg = Run::CommandGroup.new(chdir: "path")

@@ -51,7 +51,7 @@ module RunReadmeFeature
     end
   end
 
-  module NestedContexts
+  module RelativePaths
     it name do
       Dir.tmp do |dir|
         dir = File.real_path(dir)
