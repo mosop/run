@@ -23,7 +23,7 @@ cmd = Run::Command.new("echo", [":)"])
 cmd.run.wait # => prints ":)"
 ```
 
-### Addition
+### Additional Arguments
 
 ```crystal
 cmd = Run::Command.new("echo", [":)"])

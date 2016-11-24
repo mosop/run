@@ -11,7 +11,7 @@ module RunReadmeFeature
     end
   end
 
-  module Addition
+  module AdditionalArguments
     it name do
       Stdio.capture do |io|
         cmd = Run::Command.new("echo", [":)"])
