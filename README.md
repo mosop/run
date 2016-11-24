@@ -14,6 +14,8 @@ dependencies:
     github: mosop/run
 ```
 
+<a name="code_samples"></a>
+
 ## Code Samples
 
 ### Smiley
@@ -127,7 +129,7 @@ cg.run.wait
 require "run"
 ```
 
-And see [Features](#features) and [Wiki](https://github.com/mosop/run/wiki)!
+And see [Code Samples](#code_samples) and [Wiki](https://github.com/mosop/run/wiki)!
 
 ## Contributing
 
