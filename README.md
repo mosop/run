@@ -25,7 +25,7 @@ cmd = Run::Command.new("echo", [":)"])
 cmd.run.wait # => prints ":)"
 ```
 
-### Additional Arguments
+### Addition
 
 ```crystal
 cmd = Run::Command.new("echo", [":)"])
@@ -59,19 +59,19 @@ cg = Run::CommandGroup.new
 100.times do
   cg.command "echo", [":)"]
 end
-cg.run
+cg.run.wait
 ```
 
 This prints 100 of :) too.
 
-### Relative Paths
+### Nested Contexts
 
 ```crystal
 cg = Run::CommandGroup.new(chdir: "path")
 cg.command "pwd"
 cg.command "pwd", chdir: "to"
 cg.command "pwd", chdir: ".."
-cg.run
+cg.run.wait
 ```
 
 If the current directory is */Users/mosop*, this code prints:
@@ -82,45 +82,24 @@ If the current directory is */Users/mosop*, this code prints:
 /Users/mosop
 ```
 
-### Async
+### Parallel
 
 ```crystal
 cg = Run::CommandGroup.new
 cg.command "wget", %w(http://mosop.rocks)
 cg.command "wget", %w(http://mosop.yoga)
 cg.command "wget", %w(http://mosop.ninja)
-process_group = cg.run(async: true)
+process_group = cg.run(parallel: true)
 
 # do another thing
 
 process_group.wait
 ```
 
-Note: Running a single command is always asynchronous and you need to manually wait.
-
 ```crystal
 cmd = Run::Command.new("sleep", %w(100))
 process = cmd.run
 process.wait
-```
-
-### Group of Group
-
-```crystal
-dirs = %w(foo bar baz)
-cg = Run::CommandGroup.new do |g|
-  g.group do |g| # synchronous builds
-    dirs.each do |dir|
-      g.command "npm", %w(run build), chdir: dir
-    end
-  end
-  g.group(async: true) do |g| # asynchronous watches
-    dirs.each do |dir|
-      g.command "npm", %w(run watch), chdir: dir
-    end
-  end
-end
-cg.run.wait
 ```
 
 ## Usage

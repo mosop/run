@@ -45,7 +45,7 @@ module RunReadmeFeature
         100.times do
           cg.command "echo", [":)"]
         end
-        cg.run
+        cg.run.wait
         io.out.gets_to_end.should eq ":)\n" * 100
       end
     end
@@ -60,7 +60,7 @@ module RunReadmeFeature
           cg.command "pwd"
           cg.command "pwd", chdir: "to"
           cg.command "pwd", chdir: ".."
-          cg.run
+          cg.run.wait
           io.out.gets_to_end.should eq <<-EOS
           #{dir}/path
           #{dir}/path/to
@@ -71,15 +71,15 @@ module RunReadmeFeature
     end
   end
 
-  module Async
-    #   ### Async
+  module Parallel
+    #   ### Parallel
     #
     #   ```crystal
     #   cg = Run::CommandGroup.new
     #   cg.command "wget", %w(http://mosop.rocks)
     #   cg.command "wget", %w(http://mosop.yoga)
     #   cg.command "wget", %w(http://mosop.ninja)
-    #   process_group = cg.run(async: true)
+    #   process_group = cg.run(parallel: true)
     #
     #   # do another thing
     #
@@ -91,27 +91,6 @@ module RunReadmeFeature
     #   ```crystal
     #   process = Run::Command.new("sleep", %w(100)).run
     #   process.wait
-    #   ```
-  end
-
-  module GroupOfGroup
-    #   ### Group of Group
-    #
-    #   ```crystal
-    #   dirs = %w(foo bar baz)
-    #   cg = Run::CommandGroup.new do |g|
-    #     g.group(async: true) do |g|
-    #       dirs.each do |dir|
-    #         g.command "npm", %w(run build), chdir: dir
-    #       end
-    #     end
-    #     g.group(async: true) do |g|
-    #       dirs.each do |dir|
-    #         g.command "npm", %w(run watch), chdir: dir
-    #       end
-    #     end
-    #   end
-    #   cg.run.wait
     #   ```
   end
 end

@@ -10,8 +10,14 @@ dependencies:
   crystal_plus:
     github: mosop/crystal_plus
     version: ~> 0.1.2
+  callback:
+    github: mosop/callback
+    version: ~> 0.4.0
 
 development_dependencies:
   stdio:
     github: mosop/stdio
     version: ~> 0.1.3
+  trap-signal:
+    github: mosop/trap-signal
+    version: 0.1.1.1

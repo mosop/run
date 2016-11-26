@@ -1,73 +1,117 @@
 module Run
   class CommandGroup
-    macro method_missing(call)
-      {%
-        args = call.args.map{|i| i.id}.join(", ")
-      %}
+    Callback.enable
+    define_callback_group :abort, proc_type: Proc(::Run::ProcessGroup, ::Nil)
+    define_callback_group :abort_process, proc_type: Proc(::Run::Process, ::Nil)
 
-      {% if call.name == "[]" %}
-        @children[{{args.id}}]
-      {% elsif call.name == "[]?" %}
-        @children[{{args.id}}]?
-      {% elsif call.name == "[]=" %}
-        @children[{{call.args[0..-2].map{|i| i.id}.join(", ").id}}] = {{call.args.last.id}}
-      {% elsif call.name =~ /^\w/ %}
-        @children.{{call}}
-      {% else %}
-        @children {{call.name.id}} {{args.id}}
-      {% end %}
-    end
-
+    # Returns this parent group.
     getter? parent : CommandGroup?
+
+    # Returns this context.
     getter context : Context
 
+    # Returns all the commands and the command groups appended to this group.
+    getter children = [] of (Command | CommandGroup)
+
+    # Returns all the commands appended to this group.
+    getter commands = [] of Command
+
+    # Initializes a command group with context attributes.
+    #
+    # For more information about the arguments, see `Context#set`.
     def initialize(**options)
       @context = Context.new(**options)
     end
 
+    # Initializes a command group with context attributes and yield a block with self.
+    #
+    # For more information about the arguments, see `Context#set`.
     def initialize(**options, &block : CommandGroup -> _)
       initialize **options
       yield self
     end
 
-    def parent(parent)
+    # Sets a parent group.
+    def parent=(parent : CommandGroup)
       @parent = parent
-      @context.parent(parent.context)
-      self
+      @context.set parent: parent.context
     end
 
-    getter children = [] of (Command | CommandGroup)
-
+    # Appends a single command.
+    #
+    # It sets self to the appended command as the parent.
     def <<(command : Command)
-      @children << command.parent(self)
+      command.parent = self
+      @children << command
+      @commands << command
     end
 
+    # Appends a command group.
+    #
+    # It sets self to the appended group as the parent.
     def <<(group : CommandGroup)
       @children << group.parent(self)
     end
 
+    # Appends and returns a new single command.
+    #
+    # It initializes the command's context with the arguments.
     def command(*nameless, **named)
       Command.new(*nameless, **named).tap do |cmd|
         self << cmd
       end
     end
 
+    # Appends and returns a new command group.
+    #
+    # It initializes the group's context with the arguments.
     def group(**named)
       CommandGroup.new(**named).tap do |g|
         self << g
       end
     end
 
+    # Appends and returns a new command group and yield a block with the group.
+    #
+    # It initializes the command's context with the arguments.
     def group(**named, &block : CommandGroup -> _)
       group(**named).tap do |g|
         yield g
       end
     end
 
+    # Runs all commands and command groups under this group.
     def run(**options)
-      ProcessGroup.new(self, Context.new(**options)).tap do |pg|
-        pg.run
+      new_process(**options).tap do |pg|
+        pg.start
       end
+    end
+
+    # :nodoc:
+    def run(pg : ProcessGroup, **options)
+      new_process(pg, **options).tap do |pg|
+        pg.start
+      end
+    end
+
+    # :nodoc:
+    def new_process(**options)
+      ProcessGroup.new(nil, self, Context.new(**options))
+    end
+
+    # :nodoc:
+    def new_process(pg : ProcessGroup, **options)
+      ProcessGroup.new(pg, self, Context.new(**options))
+    end
+
+    # Delegated to #[] of the result of `#commands`.
+    def [](*args)
+      @commands[*args]
+    end
+
+    # Delegated to #[]? of the result of `#commands`.
+    def []?(*args)
+      @commands[*args]?
     end
   end
 end

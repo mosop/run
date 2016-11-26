@@ -1,1 +1,4 @@
 language: crystal
+script:
+  - scripts/build
+  - scripts/test

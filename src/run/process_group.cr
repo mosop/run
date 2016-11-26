@@ -1,88 +1,218 @@
 module Run
   class ProcessGroup
-    getter commands : CommandGroup
+    # Returns this parent group.
+    getter? parent : ProcessGroup?
+
+    # Returns this source command group.
+    getter source : CommandGroup
+
+    @run_context : Context
+
+    # Returns this context.
     getter context : Context
-    getter group_context : Context
+
+    # :nodoc:
+    getter? started : Bool?
+
+    # :nodoc:
+    getter? waited : Bool?
+
+    # :nodoc:
     getter? aborted : Bool?
-    @channel : Channel(Bool)
 
-    def initialize(@commands, @context)
-      @group_context = @context.dup.parent(commands.context)
-      @channel = Channel(Bool).new(@commands.size)
+    @start_channel : Channel(Process | ProcessGroup)
+    @wait_channel : Channel(Process | ProcessGroup)
+    @receive_mutex = Mutex.new
+    @abort_mutex = Mutex.new
+
+    # :nodoc:
+    def initialize(@parent, @source, @run_context)
+      @context = @run_context.dup.set(parent: source.context)
+      @start_channel = Channel(Process | ProcessGroup).new(@source.children.size)
+      @wait_channel = Channel(Process | ProcessGroup).new(@source.children.size)
     end
 
-    getter processes = [] of (Process | ProcessGroup)
-    getter running = [] of (Process | ProcessGroup)
-    getter exited = [] of (Process | ProcessGroup)
-    getter succeeded = [] of (Process | ProcessGroup)
-    getter unsucceeded = [] of (Process | ProcessGroup)
-
-    def run(**args)
-      @group_context.async ? run_async : run_sync
+    # Returns this parent group.
+    def parent : ProcessGroup
+      @parent.as(ProcessGroup)
     end
 
-    def run_sync
+    @futures = [] of Concurrent::Future(Nil)
+
+    # Returns all the child processes and groups.
+    getter children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter started_children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter unstarted_children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter waiting_children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter waited_children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter succeeded_children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter unsucceeded_children = [] of (Process | ProcessGroup)
+    # :nodoc:
+    getter aborted_children = [] of (Process | ProcessGroup)
+
+    # Returns all the child processes.
+    getter processes = [] of Process
+
+    # :nodoc:
+    def start
+      @context.parallel ? run_parallel : run_serial
+    end
+
+    # :nodoc:
+    def unstart
+      @started = false
+    end
+
+    # :nodoc:
+    def run_serial
       current_dir = Dir.current
-      @commands.each do |cmd|
-        cmd.run(**@context.current_dir(current_dir).to_args).tap do |process|
-          wait_process process
+      @source.children.each_with_index do |cmd, i|
+        cmd.new_process(self, **@run_context.set(current_dir: current_dir).to_args).tap do |process|
+          register_process i, process
           current_dir = process.context.chdir
         end
       end
-      wait
-    end
-
-    def run_async
-      @commands.each do |cmd|
-        cmd.run(**@context.to_args).tap do |process|
-          wait_process process
-        end
+      future do
+        @futures[0].get
       end
     end
 
-    def wait_process(process)
-      @processes << process
-      @running << process
-      if @group_context.async
+    # :nodoc:
+    def run_parallel
+      @source.children.each_with_index do |cmd, i|
+        cmd.new_process(self, **@run_context.to_args).tap do |process|
+          register_process i, process
+        end
+      end
+      @futures.each do |f|
         future do
-          wait_process2 process
+          f.get
+        end
+      end
+    end
+
+    # :nodoc:
+    def register_process(index, process)
+      @children << process
+      @processes << process if process.is_a?(Process)
+      f = if @context.parallel
+        lazy do
+          start_and_wait_process process
+          nil
         end
       else
-        wait_process2 process
+        lazy do
+          start_and_wait_process process
+          @futures[index + 1].get if @futures.size > index
+          nil
+        end
       end
+      @futures << f
     end
 
-    def wait_process2(process)
-      process.wait
-      @running.delete process
-      @exited << process
-      if process.success?
-        @succeeded << process
+    # :nodoc:
+    def start_and_wait_process(process)
+      process.unstart if @aborted_children.size > 0
+      if process.start
+        @started_children << process
+        @waiting_children << process
+        @start_channel.send process
+        process.wait
+        @wait_channel.send process
       else
-        @unsucceeded << process
+        @unstarted_children << process
+        @start_channel.send process
+        @wait_channel.send process
       end
-      @channel.send process.success? || !process.context.aborts_on_error
     end
 
+    # Waits for all the child processes and groups to terminate.
     def wait
-      while @running.size > 0
-        return abort unless @channel.receive
-      end
-      @channel.close
+      wait_without_abort
+      abort if !@aborted_children.empty?
     end
 
+    # :nodoc:
+    def wait_without_abort
+      receive_start
+      receive_wait do |process|
+        process.aborted?
+      end
+    end
+
+    # :nodoc:
+    def receive_start
+      @receive_mutex.synchronize do
+        unless @started
+          while (@started_children.size + @unstarted_children.size) < @source.children.size
+            process = @start_channel.receive
+          end
+          @started = true
+          @start_channel.close
+        end
+      end
+    end
+
+    # :nodoc:
+    def receive_wait
+      @receive_mutex.synchronize do
+        unless @waited
+          while @waiting_children.size > 0
+            process = @wait_channel.receive
+            if process.started?
+              @waiting_children.delete process
+              @waited_children << process
+              if process.success?
+                @succeeded_children << process
+              else
+                @unsucceeded_children << process
+              end
+              @aborted_children << process if process.aborted?
+            end
+            break if yield process
+          end
+          if @waiting_children.size == 0
+            @waited = true
+          end
+        end
+      end
+    end
+
+    # Aborts all the child processes and groups.
     def abort(signal = nil)
-      @aborted = true
-      @channel.close
-      @running.each do |process|
-        process.abort signal
+      @abort_mutex.synchronize do
+        unless @aborted
+          @source.run_callbacks_for_abort(self) do
+            @children.each do |process|
+              process.abort signal
+            end
+            wait_without_abort
+            @aborted = true
+          end
+        end
       end
     end
 
+    # Tests if all the child processes and groups successfully terminated.
     def success?
-      return false if @aborted
       wait
-      @commands.size == @succeeded.size
+      @source.children.size == @succeeded_children.size
+    end
+
+    # Delegated to [] of the result of `#processes`.
+    def [](*args)
+      @processes[*args]
+    end
+
+    # Delegated to []? of the result of `#processes`.
+    def []?(*args)
+      @processes[*args]?
     end
   end
 end

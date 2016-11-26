@@ -1,54 +1,24 @@
 module Run
-  struct Io
-    alias Type = Bool | IO::FileDescriptor | Nil
-    alias Arg = Type | Io
-    @value : Type
+  abstract struct Io
+    PIPE = Pipe.new
+    PARENT = Parent.new
+    NULL = Null.new
 
-    def initialize(@value : Type)
-    end
+    # :nodoc:
+    alias ArgNotNil = Bool | IO | Io
 
-    def self.parse_arg(current : Arg, arg : Arg)
-      case current
-      when Io
-        from_arg(arg)
-      else
-        case arg
-        when Nil
-          nil
-        when Bool
-          new(arg)
-        when IO::FileDescriptor
-          new(arg)
-        when Io
-          arg
-        end
-      end
-    end
+    alias Arg = ArgNotNil | Nil
 
-    def self.from_arg(arg : Arg)
+    # :nodoc:
+    def self.parse_arg(arg : ArgNotNil)
       case arg
       when Io
         arg
-      else
-        new(arg)
+      when IO
+        GenericIo.new(arg)
+      when Bool
+        arg ? PARENT : NULL
       end
-    end
-
-    def self.null
-      new(nil)
-    end
-
-    def for_exec
-      case v = @value
-      when Bool, IO::FileDescriptor
-        v
-      else
-        true
-      end
-    end
-
-    def for_run
-      @value
     end
   end
 end
