@@ -20,7 +20,6 @@ module RunWikiCallbacksAndEventsFeature
       what's wrong, :P!
       what's wrong, :P!!\n
       EOS
-      io.err.gets_to_end.should match /:P: command not found\n$/
     end
   end
 end
