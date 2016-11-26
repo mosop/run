@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Run::Context - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="../Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="../Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="../Run/Context.html">Context</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="../Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="../Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Process" data-name="run::process">
+      <a href="../Run/Process.html">Process</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Timeout" data-name="run::timeout">
+      <a href="../Run/Timeout.html">Timeout</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Timeout/Arg" data-name="run::timeout::arg">
+      <a href="../Run/Timeout/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Run::Context
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Run/Context.html">Run::Context</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L1" target="_blank">run/context.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#abort_signal-instance-method" class="signature"><strong>#abort_signal</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_timeout-instance-method" class="signature"><strong>#abort_timeout</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#aborts_on_error-instance-method" class="signature"><strong>#aborts_on_error</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#args-instance-method" class="signature"><strong>#args</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#chdir-instance-method" class="signature"><strong>#chdir</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clear_env-instance-method" class="signature"><strong>#clear_env</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command-instance-method" class="signature"><strong>#command</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dup-instance-method" class="signature"><strong>#dup</strong></a>
+        
+          <div class="summary"><p>Copies this context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#env-instance-method" class="signature"><strong>#env</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error-instance-method" class="signature"><strong>#error</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input-instance-method" class="signature"><strong>#input</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output-instance-method" class="signature"><strong>#output</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parallel-instance-method" class="signature"><strong>#parallel</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_args-instance-method" class="signature"><strong>#self_args</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_env-instance-method" class="signature"><strong>#self_env</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set%28command%3AString%7CNil%3Dnil%2Cargs%3AArray%28String%29%7CNil%3Dnil%2Cparent%3AContext%7CNil%3Dnil%2Cenv%3AHash%28String%2CString%29%7CNil%3Dnil%2Cclear_env%3ABool%7CNil%3Dnil%2Cshell%3ABool%7CNil%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%7CNil%3Dnil%2Cshow_dir%3ABool%7CNil%3Dnil%2Cshow_command%3ABool%7CNil%3Dnil%2Cabort_signal%3ASignal%7CNil%3Dnil%2Cparallel%3ABool%7CNil%3Dnil%2Cabort_on_error%3ABool%7CNil%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%7CNil%3Dnil%29-instance-method" class="signature"><strong>#set</strong>(command : String | Nil = <span class="n">nil</span>, args : Array(String) | Nil = <span class="n">nil</span>, parent : Context | Nil = <span class="n">nil</span>, env : Hash(String, String) | Nil = <span class="n">nil</span>, clear_env : Bool | Nil = <span class="n">nil</span>, shell : Bool | Nil = <span class="n">nil</span>, input : Io::Arg = <span class="n">nil</span>, output : Io::Arg = <span class="n">nil</span>, error : Io::Arg = <span class="n">nil</span>, chdir : String | Nil = <span class="n">nil</span>, show_dir : Bool | Nil = <span class="n">nil</span>, show_command : Bool | Nil = <span class="n">nil</span>, abort_signal : Signal | Nil = <span class="n">nil</span>, parallel : Bool | Nil = <span class="n">nil</span>, abort_on_error : Bool | Nil = <span class="n">nil</span>, abort_timeout : Timeout::Arg = <span class="n">nil</span>, current_dir : String | Nil = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Sets attributes to this context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shell-instance-method" class="signature"><strong>#shell</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shows_command-instance-method" class="signature"><strong>#shows_command</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shows_dir-instance-method" class="signature"><strong>#shows_dir</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="abort_signal-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_signal</strong>
+
+        <a class="method-permalink" href="#abort_signal-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L205" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_timeout-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_timeout</strong>
+
+        <a class="method-permalink" href="#abort_timeout-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L217" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="aborts_on_error-instance-method">
+      <div class="signature">
+        
+        def <strong>aborts_on_error</strong>
+
+        <a class="method-permalink" href="#aborts_on_error-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L213" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="args-instance-method">
+      <div class="signature">
+        
+        def <strong>args</strong>
+
+        <a class="method-permalink" href="#args-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L161" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="chdir-instance-method">
+      <div class="signature">
+        
+        def <strong>chdir</strong>
+
+        <a class="method-permalink" href="#chdir-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L193" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="clear_env-instance-method">
+      <div class="signature">
+        
+        def <strong>clear_env</strong>
+
+        <a class="method-permalink" href="#clear_env-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L173" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command-instance-method">
+      <div class="signature">
+        
+        def <strong>command</strong>
+
+        <a class="method-permalink" href="#command-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L153" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dup-instance-method">
+      <div class="signature">
+        
+        def <strong>dup</strong>
+
+        <a class="method-permalink" href="#dup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Copies this context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L96" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="env-instance-method">
+      <div class="signature">
+        
+        def <strong>env</strong>
+
+        <a class="method-permalink" href="#env-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L169" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error-instance-method">
+      <div class="signature">
+        
+        def <strong>error</strong>
+
+        <a class="method-permalink" href="#error-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L189" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input-instance-method">
+      <div class="signature">
+        
+        def <strong>input</strong>
+
+        <a class="method-permalink" href="#input-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L181" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output-instance-method">
+      <div class="signature">
+        
+        def <strong>output</strong>
+
+        <a class="method-permalink" href="#output-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L185" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parallel-instance-method">
+      <div class="signature">
+        
+        def <strong>parallel</strong>
+
+        <a class="method-permalink" href="#parallel-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L209" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_args-instance-method">
+      <div class="signature">
+        
+        def <strong>self_args</strong>
+
+        <a class="method-permalink" href="#self_args-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L157" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_env-instance-method">
+      <div class="signature">
+        
+        def <strong>self_env</strong>
+
+        <a class="method-permalink" href="#self_env-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L165" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set&#40;command:String|Nil&#61;nil,args:Array&#40;String&#41;|Nil&#61;nil,parent:Context|Nil&#61;nil,env:Hash&#40;String,String&#41;|Nil&#61;nil,clear_env:Bool|Nil&#61;nil,shell:Bool|Nil&#61;nil,input:Io::Arg&#61;nil,output:Io::Arg&#61;nil,error:Io::Arg&#61;nil,chdir:String|Nil&#61;nil,show_dir:Bool|Nil&#61;nil,show_command:Bool|Nil&#61;nil,abort_signal:Signal|Nil&#61;nil,parallel:Bool|Nil&#61;nil,abort_on_error:Bool|Nil&#61;nil,abort_timeout:Timeout::Arg&#61;nil,current_dir:String|Nil&#61;nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>set</strong>(command : String | Nil = <span class="n">nil</span>, args : Array(String) | Nil = <span class="n">nil</span>, parent : <a href="../Run/Context.html">Context</a> | Nil = <span class="n">nil</span>, env : Hash(String, String) | Nil = <span class="n">nil</span>, clear_env : Bool | Nil = <span class="n">nil</span>, shell : Bool | Nil = <span class="n">nil</span>, input : <a href="../Run/Io/Arg.html">Io::Arg</a> = <span class="n">nil</span>, output : <a href="../Run/Io/Arg.html">Io::Arg</a> = <span class="n">nil</span>, error : <a href="../Run/Io/Arg.html">Io::Arg</a> = <span class="n">nil</span>, chdir : String | Nil = <span class="n">nil</span>, show_dir : Bool | Nil = <span class="n">nil</span>, show_command : Bool | Nil = <span class="n">nil</span>, abort_signal : Signal | Nil = <span class="n">nil</span>, parallel : Bool | Nil = <span class="n">nil</span>, abort_on_error : Bool | Nil = <span class="n">nil</span>, abort_timeout : <a href="../Run/Timeout/Arg.html">Timeout::Arg</a> = <span class="n">nil</span>, current_dir : String | Nil = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#set%28command%3AString%7CNil%3Dnil%2Cargs%3AArray%28String%29%7CNil%3Dnil%2Cparent%3AContext%7CNil%3Dnil%2Cenv%3AHash%28String%2CString%29%7CNil%3Dnil%2Cclear_env%3ABool%7CNil%3Dnil%2Cshell%3ABool%7CNil%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%7CNil%3Dnil%2Cshow_dir%3ABool%7CNil%3Dnil%2Cshow_command%3ABool%7CNil%3Dnil%2Cabort_signal%3ASignal%7CNil%3Dnil%2Cparallel%3ABool%7CNil%3Dnil%2Cabort_on_error%3ABool%7CNil%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%7CNil%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets attributes to this context.</p>
+
+<p>If nil is specified, the attribute is not changed.</p>
+
+<p>For more information about the context attributes, see <a href="https://github.com/mosop/run/wiki/Context-Attributes" target="_blank">Wiki</a>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L75" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shell-instance-method">
+      <div class="signature">
+        
+        def <strong>shell</strong>
+
+        <a class="method-permalink" href="#shell-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L177" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shows_command-instance-method">
+      <div class="signature">
+        
+        def <strong>shows_command</strong>
+
+        <a class="method-permalink" href="#shows_command-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L201" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shows_dir-instance-method">
+      <div class="signature">
+        
+        def <strong>shows_dir</strong>
+
+        <a class="method-permalink" href="#shows_dir-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/0b1beb7558716b804532a5594fbec98785317e89/src/run/context.cr#L197" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
