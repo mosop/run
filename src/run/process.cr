@@ -100,7 +100,7 @@ module Run
           future do
             if impl = @impl
               impl.wait.exit_code.tap do |status|
-                abort if status != 0 && context.aborts_on_error
+                abort_without_kill if status != 0 && context.aborts_on_error
                 @wait_channel.send status
               end
             end
@@ -175,33 +175,42 @@ module Run
 
     # Aborts this process.
     def abort(signal : Signal? = nil)
+      _abort signal, kill: true
+    end
+
+    # :nodoc:
+    def abort_without_kill
+      _abort nil, nil
+    end
+
+    # :nodoc:
+    def _abort(signal, kill)
       @abort_mutex.synchronize do
         if started? && !aborted?
           if parent?
             parent.source.run_callbacks_for_abort_process(self) do
-              _abort signal
+              _abort2 signal, kill
             end
           else
-            _abort signal
+            _abort2 signal, kill
           end
         end
       end
     end
 
     # :nodoc:
-    def _abort(signal)
-      kill signal
+    def _abort2(signal, kill)
+      self.kill signal if kill
       begin
         context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
           break true unless exists?
-          kill signal
         end
       rescue Timeout::Elapsed
       end
       @aborted = true
     end
 
-    # :nodoc:
+    # Kill this process.
     def kill(signal = nil)
       begin
         kill! signal
@@ -211,7 +220,12 @@ module Run
     end
 
     # Kill this process.
+    #
+    # Raises an Errno (ESRCH) exception if no process or process group can be found.
     def kill!(signal : Signal? = nil)
+      puts "kill!: #{self}"
+      puts "kill!: #{context.command}"
+      puts "kill!: #{context.abort_signal}"
       impl.kill signal || context.abort_signal if exists?
     end
 

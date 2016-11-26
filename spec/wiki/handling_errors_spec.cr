@@ -11,7 +11,7 @@ module RunWikiHandlingErrorsFeature
         pg = cg.run(parallel: true)
         pg.wait
         p = pg[0]
-        p.output.rewind
+        # p.output.rewind
         # p.output.gets_to_end.should eq "15\n"
       end
     end
