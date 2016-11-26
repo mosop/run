@@ -5,7 +5,7 @@ module RunWikiHandlingErrorsFeature
     describe name do
       it "parallel" do
         cg = Run::CommandGroup.new(abort_timeout: 5) do |g|
-          g.command TRAP_SIGNAL
+          g.command TRAP_SIGNAL, output: STDOUT
           g.command "fail", abort_on_error: true
         end
         pg = cg.run(parallel: true)
