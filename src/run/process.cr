@@ -180,7 +180,7 @@ module Run
 
     # :nodoc:
     def abort_without_kill
-      _abort nil, nil
+      _abort nil, kill: false
     end
 
     # :nodoc:
@@ -200,12 +200,15 @@ module Run
 
     # :nodoc:
     def _abort2(signal, kill)
-      self.kill signal if kill
-      begin
-        context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
-          break true unless exists?
+      if kill
+        self.kill signal
+        begin
+          context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
+            puts "try_and_wait: #{self}"
+            break true unless exists?
+          end
+        rescue Timeout::Elapsed
         end
-      rescue Timeout::Elapsed
       end
       @aborted = true
     end
