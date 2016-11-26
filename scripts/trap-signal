@@ -1,6 +1,7 @@
 
 #!/bin/bash
 
+echo trap signal
 trap 'echo 15; exit 1' TERM
 while :
 do
