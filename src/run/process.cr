@@ -16,11 +16,19 @@ module Run
     getter? started : Bool?
 
     # :nodoc:
+    def wait_to_start
+      if @started.nil?
+        @start_channel.receive
+        @start_channel.close
+      end
+    end
+
+    # :nodoc:
     getter? aborted : Bool?
 
-    @wait_channel = Channel(Int32).new
+    @start_channel = Channel(Nil).new(1)
+    @wait_channel = Channel(Int32).new(1)
     @start_mutex = Mutex.new
-    @receive_mutex = Mutex.new
     @abort_mutex = Mutex.new
 
     # :nodoc:
@@ -53,7 +61,7 @@ module Run
     end
 
     # :nodoc:
-    def do_exec
+    def with_startup
       Dir.mkdir_p context.chdir
       show_dir if context.shows_dir
       show_command if context.shows_command
@@ -62,7 +70,7 @@ module Run
 
     # :nodoc:
     def exec
-      do_exec do
+      with_startup do
         context.exec
       end
     end
@@ -93,7 +101,7 @@ module Run
         if @started.nil?
           @abort_mutex.synchronize do
             unless @aborted
-              do_exec do
+              with_startup do
                 @impl = new_impl
               end
             end
@@ -104,14 +112,21 @@ module Run
             end
           end
           @started = !!@impl
+          @start_channel.send nil
         end
-        @started
       end
+      @started
     end
 
     # :nodoc:
     def unstart
-      @started = false
+      @start_mutex.synchronize do
+        if @started.nil?
+          @started = false
+          @start_channel.send nil
+        end
+      end
+      @started
     end
 
     # :nodoc:
@@ -162,7 +177,6 @@ module Run
 
     # Aborts this process.
     def abort(signal : Signal? = nil)
-      puts "abort: #{self} #{context.command} #{context.abort_signal}"
       @abort_mutex.synchronize do
         if started? && !aborted?
           if parent?
@@ -181,7 +195,6 @@ module Run
       kill signal
       begin
         context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
-          puts "try_and_wait: #{self}"
           break true unless exists?
         end
       rescue Timeout::Elapsed
@@ -202,13 +215,7 @@ module Run
     #
     # Raises an Errno (ESRCH) exception if no process or process group can be found.
     def kill!(signal : Signal? = nil)
-      puts "kill!: #{self} #{context.command} #{context.abort_signal} #{impl.pid}"
       impl.kill signal || context.abort_signal
-      10.times do
-        puts "kill!: exists #{exists?}"
-        break unless exists?
-        sleep 0.1
-      end
     end
 
     # Tests if the running process exists.

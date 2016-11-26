@@ -199,13 +199,9 @@ module Run
         unless @aborted
           @source.run_callbacks_for_abort(self) do
             @waiting_children.each do |process|
-              puts "abt: #{process} #{process.context.command}"
               process.abort signal
-              puts "?"
             end
-            puts "beg wait_without_abort"
             wait_without_abort
-            puts "end wait_without_abort"
             @aborted = true
           end
         end

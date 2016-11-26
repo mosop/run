@@ -4,17 +4,14 @@ module RunWikiHandlingErrorsFeature
   module Abort
     describe name do
       it "parallel" do
-          cg = Run::CommandGroup.new(abort_timeout: 5) do |g|
-            g.command TRAP_SIGNAL
-            g.command "fail", abort_on_error: true
-          end
-          pg = cg.run(parallel: true)
-          sleep 5
-          pg.wait
-          p = pg[0]
-          # io.out.gets_to_end.should eq "15\n"
-          # p.output.rewind
-          # p.output.gets_to_end.should eq "15\n"
+        cg = Run::CommandGroup.new(abort_timeout: 5) do |g|
+          g.command "sleep", %w(60)
+          g.command "fail", error: false, abort_on_error: true
+        end
+        pg = cg.run(parallel: true)
+        pg.wait
+        pg[0].aborted?.should be_true
+        pg[1].aborted?.should be_falsey
       end
     end
   end

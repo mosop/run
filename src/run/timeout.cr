@@ -36,7 +36,6 @@ module Run
       sleep prewait if prewait > 0
       left = value
       loop do
-        puts "interval: #{self}"
         break if yield
         sleep interval
         next if left == -1
