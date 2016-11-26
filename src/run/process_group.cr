@@ -42,7 +42,7 @@ module Run
 
     @futures = [] of Concurrent::Future(Nil)
 
-    # Returns all the child processes and groups.
+    # Returns all the child processes and groups that directly belong to this group.
     getter children = [] of (Process | ProcessGroup)
     # :nodoc:
     getter started_children = [] of (Process | ProcessGroup)
@@ -59,7 +59,7 @@ module Run
     # :nodoc:
     # getter aborted_children = [] of (Process | ProcessGroup)
 
-    # Returns all the child processes.
+    # Returns all the child processes that directly belong to this group.
     getter processes = [] of Process
 
     # :nodoc:

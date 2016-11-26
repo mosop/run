@@ -108,7 +108,7 @@ process.wait
 require "run"
 ```
 
-And see [Code Samples](#code_samples), [Wiki](https://github.com/mosop/run/wiki) and [API Document](http://mosop.me/run/)!
+And see [Code Samples](#code_samples), [Wiki](https://github.com/mosop/run/wiki) and [API Document](http://mosop.me/run/Run.html)!
 
 ## Release Notes
 
