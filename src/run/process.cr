@@ -202,7 +202,7 @@ module Run
       @aborted = true
     end
 
-    # Kill this process.
+    # Kills this process.
     def kill(signal : Signal? = nil)
       begin
         kill! signal
