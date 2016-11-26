@@ -91,15 +91,9 @@ cg.command "wget", %w(http://mosop.yoga)
 cg.command "wget", %w(http://mosop.ninja)
 process_group = cg.run(parallel: true)
 
-# do another thing
+# do other things
 
 process_group.wait
-```
-
-```crystal
-cmd = Run::Command.new("sleep", %w(100))
-process = cmd.run
-process.wait
 ```
 
 ## Usage
@@ -112,7 +106,7 @@ And see [Code Samples](#code_samples), [Wiki](https://github.com/mosop/run/wiki)
 
 ## Release Notes
 
-See [Releases](https://github.com/mosop/run/releases)
+See [Releases](https://github.com/mosop/run/releases).
 
 ## Contributing
 
