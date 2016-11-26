@@ -226,7 +226,13 @@ module Run
       puts "kill!: #{self}"
       puts "kill!: #{context.command}"
       puts "kill!: #{context.abort_signal}"
-      impl.kill signal || context.abort_signal if exists?
+      puts "kill!: #{impl.pid}"
+      10.times do
+        puts "kill!: exists #{exists?}"
+        break unless exists?
+        impl.kill signal || context.abort_signal
+        sleep 0.1
+      end
     end
 
     # Test if the running process exists.
