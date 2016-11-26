@@ -22,14 +22,17 @@ module Run
 
     @start_channel : Channel(Process | ProcessGroup)
     @wait_channel : Channel(Process | ProcessGroup)
+    @abort_channel : Channel(Bool)
     @receive_mutex = Mutex.new
     @abort_mutex = Mutex.new
+    @needs_abort : Bool?
 
     # :nodoc:
     def initialize(@parent, @source, @run_context)
       @context = @run_context.dup.set(parent: source.context)
       @start_channel = Channel(Process | ProcessGroup).new(@source.children.size)
       @wait_channel = Channel(Process | ProcessGroup).new(@source.children.size)
+      @abort_channel = Channel(Bool).new(@source.children.size)
     end
 
     # Returns this parent group.
@@ -48,13 +51,13 @@ module Run
     # :nodoc:
     getter waiting_children = [] of (Process | ProcessGroup)
     # :nodoc:
-    getter waited_children = [] of (Process | ProcessGroup)
+    getter terminated_children = [] of (Process | ProcessGroup)
     # :nodoc:
     getter succeeded_children = [] of (Process | ProcessGroup)
     # :nodoc:
     getter unsucceeded_children = [] of (Process | ProcessGroup)
     # :nodoc:
-    getter aborted_children = [] of (Process | ProcessGroup)
+    # getter aborted_children = [] of (Process | ProcessGroup)
 
     # Returns all the child processes.
     getter processes = [] of Process
@@ -118,7 +121,7 @@ module Run
 
     # :nodoc:
     def start_and_wait_process(process)
-      process.unstart if @aborted_children.size > 0
+      process.unstart if @needs_abort
       if process.start
         @started_children << process
         @waiting_children << process
@@ -134,16 +137,18 @@ module Run
 
     # Waits for all the child processes and groups to terminate.
     def wait
-      wait_without_abort
-      abort if !@aborted_children.empty?
+      _wait true
+      abort if @needs_abort
     end
 
     # :nodoc:
     def wait_without_abort
+      _wait false
+    end
+
+    def _wait(abort)
       receive_start
-      receive_wait do |process|
-        process.aborted?
-      end
+      receive_wait abort
     end
 
     # :nodoc:
@@ -160,25 +165,29 @@ module Run
     end
 
     # :nodoc:
-    def receive_wait
+    def receive_wait(abort)
       @receive_mutex.synchronize do
         unless @waited
           while @waiting_children.size > 0
             process = @wait_channel.receive
             if process.started?
               @waiting_children.delete process
-              @waited_children << process
+              @terminated_children << process
               if process.success?
                 @succeeded_children << process
               else
                 @unsucceeded_children << process
               end
-              @aborted_children << process if process.aborted?
+              if !process.success? && process.context.aborts_on_error
+                @needs_abort = true
+              end
             end
-            break if yield process
+            break if @needs_abort && abort
           end
           if @waiting_children.size == 0
             @waited = true
+            @wait_channel.close
+            @abort_channel.close
           end
         end
       end
@@ -189,7 +198,7 @@ module Run
       @abort_mutex.synchronize do
         unless @aborted
           @source.run_callbacks_for_abort(self) do
-            @children.each do |process|
+            @waiting_children.each do |process|
               process.abort signal
             end
             wait_without_abort

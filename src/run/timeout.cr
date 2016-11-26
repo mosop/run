@@ -36,13 +36,12 @@ module Run
       sleep prewait if prewait > 0
       left = value
       loop do
-        return if yield
+        break if yield
         sleep interval
         next if left == -1
         left -= interval
-        break if left <= 0
+        raise Elapsed.new if left <= 0
       end
-      raise Elapsed.new
     end
 
     # :nodoc:

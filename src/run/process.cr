@@ -12,13 +12,22 @@ module Run
     # :nodoc:
     getter? impl : ::Process?
 
-    # :nodoc:
+    # Tests if the running process is started.
     getter? started : Bool?
+
+    # Waits for the running process to be started.
+    def wait_to_start
+      if @started.nil?
+        @start_channel.receive
+        @start_channel.close
+      end
+    end
 
     # :nodoc:
     getter? aborted : Bool?
 
-    @wait_channel = Channel(Int32).new
+    @start_channel = Channel(Nil).new(1)
+    @wait_channel = Channel(Int32).new(1)
     @start_mutex = Mutex.new
     @abort_mutex = Mutex.new
 
@@ -52,7 +61,7 @@ module Run
     end
 
     # :nodoc:
-    def do_exec
+    def with_startup
       Dir.mkdir_p context.chdir
       show_dir if context.shows_dir
       show_command if context.shows_command
@@ -61,7 +70,7 @@ module Run
 
     # :nodoc:
     def exec
-      do_exec do
+      with_startup do
         context.exec
       end
     end
@@ -92,28 +101,32 @@ module Run
         if @started.nil?
           @abort_mutex.synchronize do
             unless @aborted
-              do_exec do
+              with_startup do
                 @impl = new_impl
               end
             end
           end
           future do
             if impl = @impl
-              impl.wait.exit_code.tap do |status|
-                abort if status != 0 && context.aborts_on_error
-                @wait_channel.send status
-              end
+              @wait_channel.send impl.wait.exit_code
             end
           end
           @started = !!@impl
+          @start_channel.send nil
         end
-        @started
       end
+      @started
     end
 
     # :nodoc:
     def unstart
-      @started = false
+      @start_mutex.synchronize do
+        if @started.nil?
+          @started = false
+          @start_channel.send nil
+        end
+      end
+      @started
     end
 
     # :nodoc:
@@ -131,14 +144,10 @@ module Run
       output.puts a.join(" ")
     end
 
-    @exit_code : Int32? = nil
-
     # Returns the exit status returned by the running process.
     #
     # Returns nil if the process is not terminated.
-    def exit_code? : Int32?
-      @exit_code ||= receive_and_close?
-    end
+    getter? exit_code : Int32?
 
     # Returns the exit status returned by the running process.
     #
@@ -150,13 +159,6 @@ module Run
     # Waits for the running process to terminate.
     def wait
       @exit_code ||= receive_and_close
-    end
-
-    # :nodoc:
-    def receive_and_close?
-      @wait_channel.receive?.tap do |status|
-        @wait_channel.close if status
-      end
     end
 
     # :nodoc:
@@ -194,15 +196,14 @@ module Run
       begin
         context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
           break true unless exists?
-          kill signal
         end
       rescue Timeout::Elapsed
       end
       @aborted = true
     end
 
-    # :nodoc:
-    def kill(signal = nil)
+    # Kill this process.
+    def kill(signal : Signal? = nil)
       begin
         kill! signal
       rescue ex : Errno
@@ -210,14 +211,21 @@ module Run
       end
     end
 
-    # Kill this process.
+    # Kills this process.
+    #
+    # Raises an Errno (ESRCH) exception if no process or process group can be found.
     def kill!(signal : Signal? = nil)
       impl.kill signal || context.abort_signal if exists?
     end
 
-    # Test if the running process exists.
+    # Tests if the running process exists.
     def exists?
-      started? && !aborted? && impl.exists?
+      started? && !aborted? && !terminated? && impl.exists?
+    end
+
+    # Tests if the running process is terminated.
+    def terminated?
+      exit_code?
     end
   end
 end
