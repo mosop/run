@@ -20,6 +20,7 @@ module Run
 
     @wait_channel = Channel(Int32).new
     @start_mutex = Mutex.new
+    @receive_mutex = Mutex.new
     @abort_mutex = Mutex.new
 
     # :nodoc:
@@ -99,10 +100,7 @@ module Run
           end
           future do
             if impl = @impl
-              impl.wait.exit_code.tap do |status|
-                abort_without_kill if status != 0 && context.aborts_on_error
-                @wait_channel.send status
-              end
+              @wait_channel.send impl.wait.exit_code
             end
           end
           @started = !!@impl
@@ -131,14 +129,10 @@ module Run
       output.puts a.join(" ")
     end
 
-    @exit_code : Int32? = nil
-
     # Returns the exit status returned by the running process.
     #
     # Returns nil if the process is not terminated.
-    def exit_code? : Int32?
-      @exit_code ||= receive_and_close?
-    end
+    getter? exit_code : Int32?
 
     # Returns the exit status returned by the running process.
     #
@@ -150,13 +144,6 @@ module Run
     # Waits for the running process to terminate.
     def wait
       @exit_code ||= receive_and_close
-    end
-
-    # :nodoc:
-    def receive_and_close?
-      @wait_channel.receive?.tap do |status|
-        @wait_channel.close if status
-      end
     end
 
     # :nodoc:
@@ -175,46 +162,35 @@ module Run
 
     # Aborts this process.
     def abort(signal : Signal? = nil)
-      _abort signal, kill: true
-    end
-
-    # :nodoc:
-    def abort_without_kill
-      _abort nil, kill: false
-    end
-
-    # :nodoc:
-    def _abort(signal, kill)
+      puts "abort: #{self} #{context.command} #{context.abort_signal}"
       @abort_mutex.synchronize do
         if started? && !aborted?
           if parent?
             parent.source.run_callbacks_for_abort_process(self) do
-              _abort2 signal, kill
+              _abort signal
             end
           else
-            _abort2 signal, kill
+            _abort signal
           end
         end
       end
     end
 
     # :nodoc:
-    def _abort2(signal, kill)
-      if kill
-        self.kill signal
-        begin
-          context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
-            puts "try_and_wait: #{self}"
-            break true unless exists?
-          end
-        rescue Timeout::Elapsed
+    def _abort(signal)
+      kill signal
+      begin
+        context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
+          puts "try_and_wait: #{self}"
+          break true unless exists?
         end
+      rescue Timeout::Elapsed
       end
       @aborted = true
     end
 
     # Kill this process.
-    def kill(signal = nil)
+    def kill(signal : Signal? = nil)
       begin
         kill! signal
       rescue ex : Errno
@@ -226,21 +202,23 @@ module Run
     #
     # Raises an Errno (ESRCH) exception if no process or process group can be found.
     def kill!(signal : Signal? = nil)
-      puts "kill!: #{self}"
-      puts "kill!: #{context.command}"
-      puts "kill!: #{context.abort_signal}"
-      puts "kill!: #{impl.pid}"
+      puts "kill!: #{self} #{context.command} #{context.abort_signal} #{impl.pid}"
+      impl.kill signal || context.abort_signal
       10.times do
         puts "kill!: exists #{exists?}"
         break unless exists?
-        impl.kill signal || context.abort_signal
         sleep 0.1
       end
     end
 
-    # Test if the running process exists.
+    # Tests if the running process exists.
     def exists?
-      started? && !aborted? && impl.exists?
+      started? && !aborted? && !terminated? && impl.exists?
+    end
+
+    # Tests if the running process is terminated.
+    def terminated?
+      exit_code?
     end
   end
 end

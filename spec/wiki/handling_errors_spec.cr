@@ -9,6 +9,7 @@ module RunWikiHandlingErrorsFeature
             g.command "fail", abort_on_error: true
           end
           pg = cg.run(parallel: true)
+          sleep 5
           pg.wait
           p = pg[0]
           # io.out.gets_to_end.should eq "15\n"
