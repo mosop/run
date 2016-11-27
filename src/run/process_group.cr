@@ -64,7 +64,7 @@ module Run
 
     # :nodoc:
     def start
-      @context.parallel ? run_parallel : run_serial
+      @context.parallel? ? run_parallel : run_sequential
     end
 
     # :nodoc:
@@ -73,7 +73,7 @@ module Run
     end
 
     # :nodoc:
-    def run_serial
+    def run_sequential
       current_dir = Dir.current
       @source.children.each_with_index do |cmd, i|
         cmd.new_process(self, **@run_context.set(current_dir: current_dir).to_args).tap do |process|
@@ -104,7 +104,7 @@ module Run
     def register_process(index, process)
       @children << process
       @processes << process if process.is_a?(Process)
-      f = if @context.parallel
+      f = if @context.parallel?
         lazy do
           start_and_wait_process process
           nil
@@ -178,7 +178,7 @@ module Run
               else
                 @unsucceeded_children << process
               end
-              if !process.success? && process.context.aborts_on_error
+              if !process.success? && process.context.aborts_on_error?
                 @needs_abort = true
               end
             end

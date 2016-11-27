@@ -63,8 +63,8 @@ module Run
     # :nodoc:
     def with_startup
       Dir.mkdir_p context.chdir
-      show_dir if context.shows_dir
-      show_command if context.shows_command
+      show_dir if context.shows_dir?
+      show_command if context.shows_command?
       yield
     end
 
@@ -81,8 +81,8 @@ module Run
         command: context.command,
         args: context.args,
         env: context.env,
-        clear_env: context.clear_env,
-        shell: context.shell,
+        clear_env: context.clears_env?,
+        shell: context.shell?,
         input: context.input.for_run,
         output: context.output.for_run,
         error: context.error.for_run,
