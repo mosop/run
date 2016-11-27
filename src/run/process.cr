@@ -6,6 +6,8 @@ module Run
     # Returns this source command group.
     getter source : Command
 
+    @run_context : Context
+
     # Returns this context.
     getter context : Context
 
@@ -32,7 +34,8 @@ module Run
     @abort_mutex = Mutex.new
 
     # :nodoc:
-    def initialize(@parent, @source, @context)
+    def initialize(@parent, @source, @run_context)
+      @context = @run_context.dup.name(@source.context.name)
     end
 
     # Returns this parent group.

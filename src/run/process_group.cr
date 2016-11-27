@@ -29,7 +29,7 @@ module Run
 
     # :nodoc:
     def initialize(@parent, @source, @run_context)
-      @context = @run_context.dup.parent(source.context).parallel(source.context.parallel?)
+      @context = @run_context.dup.parent(source.context).name(source.context.name).parallel(source.context.parallel?)
       @start_channel = Channel(Process | ProcessGroup).new(@source.children.size)
       @wait_channel = Channel(Process | ProcessGroup).new(@source.children.size)
       @abort_channel = Channel(Bool).new(@source.children.size)

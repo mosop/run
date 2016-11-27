@@ -13,6 +13,13 @@ module Run
       @context = Context.new(command, *nameless, **named)
     end
 
+    # Initializes a command with context attributes.
+    #
+    # For more information about the arguments, see `Context#set`.
+    def initialize(name : Symbol, command : String, args : Array(String), *nameless, **named)
+      @context = Context.new(name, command, args, *nameless, **named)
+    end
+
     # Returns this parent group.
     def parent : CommandGroup
       @parent.as(CommandGroup)

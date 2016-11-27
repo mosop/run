@@ -9,7 +9,7 @@ class Run::Context
   # Initializes a new context with the attributes.
   #
   # For more information about the arguments, see `#set`.
-  def initialize(command, **options)
+  def initialize(command : String, **options)
     self.command = command
     set **options
   end
@@ -17,7 +17,25 @@ class Run::Context
   # Initializes a new context with the attributes.
   #
   # For more information about the arguments, see `#set`.
-  def initialize(command, args, **options)
+  def initialize(command : String, args : Array(String), **options)
+    self.command = command
+    self.args = args
+    set **options
+  end
+
+  # Initializes a new context with the attributes.
+  #
+  # For more information about the arguments, see `#set`.
+  def initialize(name : Symbol, **options)
+    self.name = name.to_s
+    set **options
+  end
+
+  # Initializes a new context with the attributes.
+  #
+  # For more information about the arguments, see `#set`.
+  def initialize(name : Symbol, command : String, args : Array(String), **options)
+    self.name = name.to_s
     self.command = command
     self.args = args
     set **options
@@ -51,7 +69,8 @@ class Run::Context
   # If nil is specified, the attribute is not changed.
   #
   # For more information about the context attributes, see [Wiki](https://github.com/mosop/run/wiki/Context-Attributes).
-  def set(command : String? = nil, args : Array(String)? = nil, parent : Context? = nil, env : Hash(String, String)? = nil, clear_env : Bool? = nil, shell : Bool? = nil, input : Io::Arg = nil, output : Io::Arg = nil, error : Io::Arg = nil, chdir : String? = nil, show_dir : Bool? = nil, show_command : Bool? = nil, abort_signal : Signal? = nil, parallel : Bool? = nil, abort_on_error : Bool? = nil, abort_timeout : Timeout::Arg = nil, current_dir : String? = nil)
+  def set(name : String? = nil, command : String? = nil, args : Array(String)? = nil, parent : Context? = nil, env : Hash(String, String)? = nil, clear_env : Bool? = nil, shell : Bool? = nil, input : Io::Arg = nil, output : Io::Arg = nil, error : Io::Arg = nil, chdir : String? = nil, show_dir : Bool? = nil, show_command : Bool? = nil, abort_signal : Signal? = nil, parallel : Bool? = nil, abort_on_error : Bool? = nil, abort_timeout : Timeout::Arg = nil, current_dir : String? = nil)
+    @name = name unless name.nil?
     @command = command unless command.nil?
     @args = args unless args.nil?
     @parent = parent unless parent.nil?
@@ -211,6 +230,10 @@ class Run::Context
     def {{predicate}}? : Bool
       {{block.body}}
     end
+  end
+
+  __property :name, String, String? do
+    self_name
   end
 
   __property :command, String do
