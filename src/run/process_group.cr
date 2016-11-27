@@ -29,7 +29,7 @@ module Run
 
     # :nodoc:
     def initialize(@parent, @source, @run_context)
-      @context = @run_context.dup.set(parent: source.context)
+      @context = @run_context.dup.parent(source.context).parallel(source.context.parallel?)
       @start_channel = Channel(Process | ProcessGroup).new(@source.children.size)
       @wait_channel = Channel(Process | ProcessGroup).new(@source.children.size)
       @abort_channel = Channel(Bool).new(@source.children.size)
@@ -61,6 +61,9 @@ module Run
 
     # Returns all the child processes that directly belong to this group.
     getter processes = [] of Process
+
+    # Returns all the child process groups that directly belong to this group.
+    getter process_groups = [] of ProcessGroup
 
     # :nodoc:
     def start
@@ -103,7 +106,12 @@ module Run
     # :nodoc:
     def register_process(index, process)
       @children << process
-      @processes << process if process.is_a?(Process)
+      case process
+      when Process
+        @processes << process
+      else
+        @process_groups << process
+      end
       f = if @context.parallel?
         lazy do
           start_and_wait_process process

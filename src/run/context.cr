@@ -264,7 +264,7 @@ class Run::Context
   end
 
   __property? :parallel do
-    __get_by_each :parallel, Bool, false
+    !!self_parallel
   end
 
   __property? :abort_on_error, :aborts_on_error do

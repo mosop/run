@@ -16,6 +16,9 @@ module Run
     # Returns all the commands appended to this group.
     getter commands = [] of Command
 
+    # Returns all the command groups appended to this group.
+    getter command_groups = [] of CommandGroup
+
     # Initializes a command group with context attributes.
     #
     # For more information about the arguments, see `Context#set`.
@@ -50,7 +53,9 @@ module Run
     #
     # It sets self to the appended group as the parent.
     def <<(group : CommandGroup)
-      @children << group.parent(self)
+      group.parent = self
+      @children << group
+      @command_groups << group
     end
 
     # Appends and returns a new single command.
