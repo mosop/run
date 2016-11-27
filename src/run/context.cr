@@ -64,7 +64,7 @@ class Run::Context
   # :nodoc:
   getter? current_dir : String?
 
-  # Sets the attributes to this context.
+  # Sets the attributes and returns self.
   #
   # If nil is specified, the attribute is not changed.
   #
@@ -91,6 +91,11 @@ class Run::Context
     self
   end
 
+  # :nodoc:
+  def set(context : Context)
+    set **context.to_args
+  end
+
   # Copies this context.
   def dup
     Context.new(**to_args)
@@ -99,6 +104,7 @@ class Run::Context
   # :nodoc:
   def to_args
     {
+      name: @name,
       command: @command,
       args: @args,
       parent: @parent,

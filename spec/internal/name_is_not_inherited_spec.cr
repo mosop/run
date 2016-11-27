@@ -10,6 +10,7 @@ module RunWikiInternalNameIsNotInheritedFeature
         g.command name: "command", command: "echo"
       end
       process = cg.run
+      process.wait
       process.context.name.should eq "group"
       process.process_groups.first.context.name.should be_nil
       process.processes.first.context.name.should eq "command"

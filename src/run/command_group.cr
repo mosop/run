@@ -1,8 +1,12 @@
 module Run
   class CommandGroup
     Callback.enable
-    define_callback_group :abort, proc_type: Proc(::Run::ProcessGroup, ::Nil)
-    define_callback_group :abort_process, proc_type: Proc(::Run::Process, ::Nil)
+    define_callback_group :success, proc_type: Proc(::Run::Process, ::Nil)
+    define_callback_group :group_success, proc_type: Proc(::Run::ProcessGroup, ::Nil)
+    define_callback_group :error, proc_type: Proc(::Run::Process, ::Nil)
+    define_callback_group :group_error, proc_type: Proc(::Run::ProcessGroup, ::Nil)
+    define_callback_group :abort, proc_type: Proc(::Run::Process, ::Nil)
+    define_callback_group :group_abort, proc_type: Proc(::Run::ProcessGroup, ::Nil)
 
     # Returns this parent group.
     getter? parent : CommandGroup?
@@ -150,9 +154,9 @@ module Run
     #
     # For more information about the context attributes, see `Context#set`.
     def group(child : CommandGroup, &block : CommandGroup -> _)
-      group << child
-      yield group
-      group
+      self << child
+      yield child
+      child
     end
 
     # Runs all commands and command groups under this group.
@@ -163,20 +167,27 @@ module Run
     end
 
     # :nodoc:
-    def run(pg : ProcessGroup, **options)
-      new_process(pg, **options).tap do |pg|
+    def run(pg : ProcessGroup, run_context : Context)
+      new_process(pg, run_context).tap do |pg|
         pg.start
       end
     end
 
     # :nodoc:
-    def new_process(**options)
-      ProcessGroup.new(nil, self, Context.new(**options))
+    def new_process(**attrs)
+      rc = Context.new(**attrs)
+      ProcessGroup.new(nil, self, rc)
     end
 
     # :nodoc:
-    def new_process(pg : ProcessGroup, **options)
-      ProcessGroup.new(pg, self, Context.new(**options))
+    def new_process(pg : ProcessGroup)
+      new_process(pg, Context.new)
+    end
+
+    # :nodoc:
+    def new_process(pg : ProcessGroup, attrs : Context)
+      rc = pg.run_context.dup.set(attrs)
+      ProcessGroup.new(pg, self, rc)
     end
 
     # Delegated to #[] of the result of `#commands`.

@@ -39,8 +39,8 @@ module Run
     end
 
     # :nodoc:
-    def exec(pg : ProcessGroup, **options)
-      new_process(pg, **options).exec
+    def exec(pg : ProcessGroup, run_context : Context)
+      new_process(pg, run_context).exec
     end
 
     # Run this command with additional context attributes.
@@ -51,20 +51,27 @@ module Run
     end
 
     # :nodoc:
-    def run(pg : ProcessGroup, **options) : Process
-      new_process(**options).tap do |process|
+    def run(pg : ProcessGroup, run_context : Context) : Process
+      new_process(pg, run_context).tap do |process|
         process.start
       end
     end
 
     # :nodoc:
-    def new_process(**options) : Process
-      Process.new(nil, self, Context.new(**options).set(parent: context))
+    def new_process(**attrs) : Process
+      rc = Context.new(**attrs)
+      Process.new(nil, self, rc)
     end
 
     # :nodoc:
-    def new_process(pg : ProcessGroup?, **options) : Process
-      Process.new(pg, self, Context.new(**options).set(parent: context))
+    def new_process(pg : ProcessGroup) : Process
+      new_process pg, Context.new
+    end
+
+    # :nodoc:
+    def new_process(pg : ProcessGroup, attrs : Context) : Process
+      rc = pg.run_context.dup.set(attrs)
+      Process.new(pg, self, rc)
     end
   end
 end
