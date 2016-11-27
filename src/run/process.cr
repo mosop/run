@@ -3,8 +3,30 @@ module Run
     # Returns this parent group.
     getter? parent : ProcessGroup?
 
+    # Returns this parent group.
+    def parent : ProcessGroup
+      @parent.as(ProcessGroup)
+    end
+
+    # Tests if this process is the root.
+    def root?
+      !parent?
+    end
+
+    # Returns this root group.
+    def root_group? : ProcessGroup?
+      root? ? nil : parent.root
+    end
+
+    # Returns this root group.
+    def root_group : ProcessGroup
+      root_group?.as(ProcessGroup)
+    end
+
     # Returns this source command group.
     getter source : Command
+
+    @run_context : Context
 
     # Returns this context.
     getter context : Context
@@ -15,29 +37,16 @@ module Run
     # Tests if the running process is started.
     getter? started : Bool?
 
-    # Waits for the running process to be started.
-    def wait_to_start
-      if @started.nil?
-        @start_channel.receive
-        @start_channel.close
-      end
-    end
-
     # :nodoc:
     getter? aborted : Bool?
 
-    @start_channel = Channel(Nil).new(1)
-    @wait_channel = Channel(Int32).new(1)
     @start_mutex = Mutex.new
+    @wait_mutex = Mutex.new
     @abort_mutex = Mutex.new
 
     # :nodoc:
-    def initialize(@parent, @source, @context)
-    end
-
-    # Returns this parent group.
-    def parent : ProcessGroup
-      @parent.as(ProcessGroup)
+    def initialize(@parent, @source, @run_context)
+      @context = @run_context.dup.parent(@source.context).name(@source.context.name)
     end
 
     # :nodoc:
@@ -63,8 +72,8 @@ module Run
     # :nodoc:
     def with_startup
       Dir.mkdir_p context.chdir
-      show_dir if context.shows_dir
-      show_command if context.shows_command
+      show_dir if context.shows_dir?
+      show_command if context.shows_command?
       yield
     end
 
@@ -81,8 +90,8 @@ module Run
         command: context.command,
         args: context.args,
         env: context.env,
-        clear_env: context.clear_env,
-        shell: context.shell,
+        clear_env: context.clears_env?,
+        shell: context.shell?,
         input: context.input.for_run,
         output: context.output.for_run,
         error: context.error.for_run,
@@ -99,20 +108,14 @@ module Run
     def start
       @start_mutex.synchronize do
         if @started.nil?
-          @abort_mutex.synchronize do
-            unless @aborted
-              with_startup do
-                @impl = new_impl
-              end
+          unless aborted?
+            with_startup do
+              @impl = new_impl
             end
+            @started = true
+          else
+            @started = false
           end
-          future do
-            if impl = @impl
-              @wait_channel.send impl.wait.exit_code
-            end
-          end
-          @started = !!@impl
-          @start_channel.send nil
         end
       end
       @started
@@ -123,10 +126,46 @@ module Run
       @start_mutex.synchronize do
         if @started.nil?
           @started = false
-          @start_channel.send nil
         end
       end
       @started
+    end
+
+    # :nodoc:
+    def wait
+      @wait_mutex.synchronize do
+        if @terminated.nil?
+          if start
+            @exit_code = status = impl.wait.exit_code
+            @terminated = true
+            if status == 0
+              success!
+            else
+              error!
+            end
+          else
+            @terminated = false
+          end
+        end
+      end
+      @terminated
+    end
+
+    # :nodoc:
+    def success!
+      if parent?
+        parent.source.run_callbacks_for_success(self) do
+        end
+      end
+    end
+
+    # :nodoc:
+    def error!
+      if parent?
+        parent.source.run_callbacks_for_error(self) do
+        end
+        root_group.abort if context.aborts_on_error?
+      end
     end
 
     # :nodoc:
@@ -152,20 +191,8 @@ module Run
     # Returns the exit status returned by the running process.
     #
     # It waits for the running process to terminate.
-    def exit_code : Int32
-      @exit_code ||= receive_and_close
-    end
-
-    # Waits for the running process to terminate.
-    def wait
-      @exit_code ||= receive_and_close
-    end
-
-    # :nodoc:
-    def receive_and_close
-      @wait_channel.receive.tap do |status|
-        @wait_channel.close
-      end
+    def exit_code : Int32?
+      @exit_code if wait
     end
 
     # Tests if the running process is successfully terminated.
@@ -178,13 +205,17 @@ module Run
     # Aborts this process.
     def abort(signal : Signal? = nil)
       @abort_mutex.synchronize do
-        if started? && !aborted?
-          if parent?
-            parent.source.run_callbacks_for_abort_process(self) do
+        if @aborted.nil?
+          if unstart && !terminated?
+            if parent?
+              parent.source.run_callbacks_for_abort(self) do
+                _abort signal
+              end
+            else
               _abort signal
             end
           else
-            _abort signal
+            @aborted = false
           end
         end
       end
@@ -202,7 +233,7 @@ module Run
       @aborted = true
     end
 
-    # Kill this process.
+    # Kills this process.
     def kill(signal : Signal? = nil)
       begin
         kill! signal
@@ -220,7 +251,7 @@ module Run
 
     # Tests if the running process exists.
     def exists?
-      started? && !aborted? && !terminated? && impl.exists?
+      started? && !terminated? && !aborted? && impl.exists?
     end
 
     # Tests if the running process is terminated.
