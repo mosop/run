@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-mkdir -p bin
-crystal build -o bin/trap-signal lib/trap-signal/src/trap-signal.cr

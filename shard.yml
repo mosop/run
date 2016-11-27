@@ -18,6 +18,3 @@ development_dependencies:
   stdio:
     github: mosop/stdio
     version: ~> 0.1.3
-  trap-signal:
-    github: mosop/trap-signal
-    version: 0.1.1.1
