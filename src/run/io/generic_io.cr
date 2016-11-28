@@ -7,7 +7,7 @@ struct Run::Io
     end
 
     def for_exec
-      @io
+      @io.as(IO::FileDescriptor)
     end
 
     def for_run
