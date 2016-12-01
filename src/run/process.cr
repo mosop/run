@@ -23,7 +23,7 @@ module Run
       root_group?.as(ProcessGroup)
     end
 
-    # Returns this source command group.
+    # Returns this source command.
     getter source : Command
 
     @run_context : Context
