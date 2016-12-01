@@ -30,8 +30,73 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+  <li class="parent " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
       <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForAbort" data-name="run::commandgroup::callbackcustomprocresulttypeforabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForAbort.html">CallbackCustomProcResultTypeForAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForError" data-name="run::commandgroup::callbackcustomprocresulttypeforerror">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForError.html">CallbackCustomProcResultTypeForError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupAbort" data-name="run::commandgroup::callbackcustomprocresulttypeforgroupabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForGroupAbort.html">CallbackCustomProcResultTypeForGroupAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupError" data-name="run::commandgroup::callbackcustomprocresulttypeforgrouperror">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForGroupError.html">CallbackCustomProcResultTypeForGroupError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupSuccess" data-name="run::commandgroup::callbackcustomprocresulttypeforgroupsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForGroupSuccess.html">CallbackCustomProcResultTypeForGroupSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForSuccess" data-name="run::commandgroup::callbackcustomprocresulttypeforsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForSuccess.html">CallbackCustomProcResultTypeForSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForAbort" data-name="run::commandgroup::callbackcustomproctypeforabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForAbort.html">CallbackCustomProcTypeForAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForError" data-name="run::commandgroup::callbackcustomproctypeforerror">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForError.html">CallbackCustomProcTypeForError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupAbort" data-name="run::commandgroup::callbackcustomproctypeforgroupabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForGroupAbort.html">CallbackCustomProcTypeForGroupAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupError" data-name="run::commandgroup::callbackcustomproctypeforgrouperror">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForGroupError.html">CallbackCustomProcTypeForGroupError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupSuccess" data-name="run::commandgroup::callbackcustomproctypeforgroupsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForGroupSuccess.html">CallbackCustomProcTypeForGroupSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForSuccess" data-name="run::commandgroup::callbackcustomproctypeforsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForSuccess.html">CallbackCustomProcTypeForSuccess</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -118,7 +183,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L2" target="_blank">run/process.cr</a>
+      <a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L2" target="_blank">run/process.cr</a>
     
     <br/>
   
@@ -161,7 +226,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#exit_code%3AInt32-instance-method" class="signature"><strong>#exit_code</strong> : Int32</a>
+        <a href="#exit_code%3AInt32%7CNil-instance-method" class="signature"><strong>#exit_code</strong> : Int32 | Nil</a>
         
           <div class="summary"><p>Returns the exit status returned by the running process.</p></div>
         
@@ -184,7 +249,7 @@
       <li class="entry-summary">
         <a href="#kill%28signal%3ASignal%7CNil%3Dnil%29-instance-method" class="signature"><strong>#kill</strong>(signal : Signal | Nil = <span class="n">nil</span>)</a>
         
-          <div class="summary"><p>Kill this process.</p></div>
+          <div class="summary"><p>Kills this process.</p></div>
         
       </li>
     
@@ -217,6 +282,27 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#root%3F-instance-method" class="signature"><strong>#root?</strong></a>
+        
+          <div class="summary"><p>Tests if this process is the root.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root_group%3AProcessGroup-instance-method" class="signature"><strong>#root_group</strong> : ProcessGroup</a>
+        
+          <div class="summary"><p>Returns this root group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root_group%3F%3AProcessGroup%7CNil-instance-method" class="signature"><strong>#root_group?</strong> : ProcessGroup | Nil</a>
+        
+          <div class="summary"><p>Returns this root group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#source%3ACommand-instance-method" class="signature"><strong>#source</strong> : Command</a>
         
           <div class="summary"><p>Returns this source command group.</p></div>
@@ -241,20 +327,6 @@
         <a href="#terminated%3F-instance-method" class="signature"><strong>#terminated?</strong></a>
         
           <div class="summary"><p>Tests if the running process is terminated.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#wait-instance-method" class="signature"><strong>#wait</strong></a>
-        
-          <div class="summary"><p>Waits for the running process to terminate.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#wait_to_start-instance-method" class="signature"><strong>#wait_to_start</strong></a>
-        
-          <div class="summary"><p>Waits for the running process to be started.</p></div>
         
       </li>
     
@@ -300,7 +372,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L179" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L206" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -318,7 +390,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -336,7 +408,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -354,17 +426,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L222" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L253" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="exit_code:Int32-instance-method">
+    <div class="entry-detail" id="exit_code:Int32|Nil-instance-method">
       <div class="signature">
         
-        def <strong>exit_code</strong> : Int32
+        def <strong>exit_code</strong> : Int32 | Nil
 
-        <a class="method-permalink" href="#exit_code%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#exit_code%3AInt32%7CNil-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Returns the exit status returned by the running process.</p>
@@ -374,7 +446,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L194" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -394,7 +466,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L150" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L189" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -412,7 +484,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L58" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -425,12 +497,12 @@
         <a class="method-permalink" href="#kill%28signal%3ASignal%7CNil%3Dnil%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Kill this process.</p></div>
+        <div class="doc"><p>Kills this process.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L206" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L237" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -450,7 +522,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L217" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L248" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -468,7 +540,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -486,7 +558,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -504,7 +576,61 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root?-instance-method">
+      <div class="signature">
+        
+        def <strong>root?</strong>
+
+        <a class="method-permalink" href="#root%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if this process is the root.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root_group:ProcessGroup-instance-method">
+      <div class="signature">
+        
+        def <strong>root_group</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+
+        <a class="method-permalink" href="#root_group%3AProcessGroup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this root group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root_group?:ProcessGroup|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>root_group?</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a> | Nil
+
+        <a class="method-permalink" href="#root_group%3F%3AProcessGroup%7CNil-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this root group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -522,7 +648,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -540,7 +666,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -560,7 +686,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L174" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L201" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -578,43 +704,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L227" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="wait-instance-method">
-      <div class="signature">
-        
-        def <strong>wait</strong>
-
-        <a class="method-permalink" href="#wait-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Waits for the running process to terminate.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L160" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="wait_to_start-instance-method">
-      <div class="signature">
-        
-        def <strong>wait_to_start</strong>
-
-        <a class="method-permalink" href="#wait_to_start-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Waits for the running process to be started.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/process.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/process.cr#L258" target="_blank">View source</a>]
         
       </div>
     </div>

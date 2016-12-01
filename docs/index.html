@@ -30,8 +30,73 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+  <li class="parent " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
       <a href="Run/CommandGroup.html">CommandGroup</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForAbort" data-name="run::commandgroup::callbackcustomprocresulttypeforabort">
+      <a href="Run/CommandGroup/CallbackCustomProcResultTypeForAbort.html">CallbackCustomProcResultTypeForAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForError" data-name="run::commandgroup::callbackcustomprocresulttypeforerror">
+      <a href="Run/CommandGroup/CallbackCustomProcResultTypeForError.html">CallbackCustomProcResultTypeForError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupAbort" data-name="run::commandgroup::callbackcustomprocresulttypeforgroupabort">
+      <a href="Run/CommandGroup/CallbackCustomProcResultTypeForGroupAbort.html">CallbackCustomProcResultTypeForGroupAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupError" data-name="run::commandgroup::callbackcustomprocresulttypeforgrouperror">
+      <a href="Run/CommandGroup/CallbackCustomProcResultTypeForGroupError.html">CallbackCustomProcResultTypeForGroupError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupSuccess" data-name="run::commandgroup::callbackcustomprocresulttypeforgroupsuccess">
+      <a href="Run/CommandGroup/CallbackCustomProcResultTypeForGroupSuccess.html">CallbackCustomProcResultTypeForGroupSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForSuccess" data-name="run::commandgroup::callbackcustomprocresulttypeforsuccess">
+      <a href="Run/CommandGroup/CallbackCustomProcResultTypeForSuccess.html">CallbackCustomProcResultTypeForSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForAbort" data-name="run::commandgroup::callbackcustomproctypeforabort">
+      <a href="Run/CommandGroup/CallbackCustomProcTypeForAbort.html">CallbackCustomProcTypeForAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForError" data-name="run::commandgroup::callbackcustomproctypeforerror">
+      <a href="Run/CommandGroup/CallbackCustomProcTypeForError.html">CallbackCustomProcTypeForError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupAbort" data-name="run::commandgroup::callbackcustomproctypeforgroupabort">
+      <a href="Run/CommandGroup/CallbackCustomProcTypeForGroupAbort.html">CallbackCustomProcTypeForGroupAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupError" data-name="run::commandgroup::callbackcustomproctypeforgrouperror">
+      <a href="Run/CommandGroup/CallbackCustomProcTypeForGroupError.html">CallbackCustomProcTypeForGroupError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupSuccess" data-name="run::commandgroup::callbackcustomproctypeforgroupsuccess">
+      <a href="Run/CommandGroup/CallbackCustomProcTypeForGroupSuccess.html">CallbackCustomProcTypeForGroupSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForSuccess" data-name="run::commandgroup::callbackcustomproctypeforsuccess">
+      <a href="Run/CommandGroup/CallbackCustomProcTypeForSuccess.html">CallbackCustomProcTypeForSuccess</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -113,7 +178,7 @@
 <pre><code class='language-crystal'>cmd <span class="o">=</span> <span class="t">Run</span><span class="t">::</span><span class="t">Command</span>.<span class="k">new</span>(<span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;:&#41;&quot;</span>])
 cmd.run.wait <span class="c"># &#61;&gt; prints &quot;:&#41;&quot;</span></code></pre>
 
-<h3>Addition</h3>
+<h3>Additional Arguments</h3>
 
 <pre><code class='language-crystal'>cmd <span class="o">=</span> <span class="t">Run</span><span class="t">::</span><span class="t">Command</span>.<span class="k">new</span>(<span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;:&#41;&quot;</span>])
 <span class="s">%w(hello goodbye)</span>.each <span class="k">do</span> <span class="o">|</span>i<span class="o">|</span>
@@ -166,13 +231,9 @@ cg.command <span class="s">&quot;wget&quot;</span>, <span class="s">%w(http://mo
 cg.command <span class="s">&quot;wget&quot;</span>, <span class="s">%w(http://mosop.ninja)</span>
 process_group <span class="o">=</span> cg.run(parallel: <span class="n">true</span>)
 
-<span class="c"># do another thing</span>
+<span class="c"># do other things</span>
 
 process_group.wait</code></pre>
-
-<pre><code class='language-crystal'>cmd <span class="o">=</span> <span class="t">Run</span><span class="t">::</span><span class="t">Command</span>.<span class="k">new</span>(<span class="s">&quot;sleep&quot;</span>, <span class="s">%w(100)</span>)
-process <span class="o">=</span> cmd.run
-process.wait</code></pre>
 
 <h2>Usage</h2>
 
@@ -182,7 +243,7 @@ process.wait</code></pre>
 
 <h2>Release Notes</h2>
 
-<p>See <a href="https://github.com/mosop/run/releases" target="_blank">Releases</a></p>
+<p>See <a href="https://github.com/mosop/run/releases" target="_blank">Releases</a>.</p>
 
 <h2>Contributing</h2>
 

@@ -30,8 +30,73 @@
       
     </li>
   
-  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+  <li class="parent " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
       <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForAbort" data-name="run::commandgroup::callbackcustomprocresulttypeforabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForAbort.html">CallbackCustomProcResultTypeForAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForError" data-name="run::commandgroup::callbackcustomprocresulttypeforerror">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForError.html">CallbackCustomProcResultTypeForError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupAbort" data-name="run::commandgroup::callbackcustomprocresulttypeforgroupabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForGroupAbort.html">CallbackCustomProcResultTypeForGroupAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupError" data-name="run::commandgroup::callbackcustomprocresulttypeforgrouperror">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForGroupError.html">CallbackCustomProcResultTypeForGroupError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForGroupSuccess" data-name="run::commandgroup::callbackcustomprocresulttypeforgroupsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForGroupSuccess.html">CallbackCustomProcResultTypeForGroupSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcResultTypeForSuccess" data-name="run::commandgroup::callbackcustomprocresulttypeforsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcResultTypeForSuccess.html">CallbackCustomProcResultTypeForSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForAbort" data-name="run::commandgroup::callbackcustomproctypeforabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForAbort.html">CallbackCustomProcTypeForAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForError" data-name="run::commandgroup::callbackcustomproctypeforerror">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForError.html">CallbackCustomProcTypeForError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupAbort" data-name="run::commandgroup::callbackcustomproctypeforgroupabort">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForGroupAbort.html">CallbackCustomProcTypeForGroupAbort</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupError" data-name="run::commandgroup::callbackcustomproctypeforgrouperror">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForGroupError.html">CallbackCustomProcTypeForGroupError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForGroupSuccess" data-name="run::commandgroup::callbackcustomproctypeforgroupsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForGroupSuccess.html">CallbackCustomProcTypeForGroupSuccess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup/CallbackCustomProcTypeForSuccess" data-name="run::commandgroup::callbackcustomproctypeforsuccess">
+      <a href="../Run/CommandGroup/CallbackCustomProcTypeForSuccess.html">CallbackCustomProcTypeForSuccess</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -118,7 +183,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L2" target="_blank">run/command.cr</a>
+      <a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L2" target="_blank">run/command.cr</a>
     
     <br/>
   
@@ -132,6 +197,13 @@
     
       <li class="entry-summary">
         <a href="#new%28command%3AString%2C%2Anameless%2C%2A%2Anamed%29-class-method" class="signature"><strong>.new</strong>(command : String, *nameless, **named)</a>
+        
+          <div class="summary"><p>Initializes a command with context attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28name%3ASymbol%2Ccommand%3AString%2Cargs%3AArray%28String%29%2C%2Anameless%2C%2A%2Anamed%29-class-method" class="signature"><strong>.new</strong>(name : Symbol, command : String, args : Array(String), *nameless, **named)</a>
         
           <div class="summary"><p>Initializes a command with context attributes.</p></div>
         
@@ -223,12 +295,32 @@
       
         <div class="doc"><p>Initializes a command with context attributes.</p>
 
-<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28command%3AString%7CNil%3Dnil%2Cargs%3AArray%28String%29%7CNil%3Dnil%2Cparent%3AContext%7CNil%3Dnil%2Cenv%3AHash%28String%2CString%29%7CNil%3Dnil%2Cclear_env%3ABool%7CNil%3Dnil%2Cshell%3ABool%7CNil%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%7CNil%3Dnil%2Cshow_dir%3ABool%7CNil%3Dnil%2Cshow_command%3ABool%7CNil%3Dnil%2Cabort_signal%3ASignal%7CNil%3Dnil%2Cparallel%3ABool%7CNil%3Dnil%2Cabort_on_error%3ABool%7CNil%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%7CNil%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%7CNil%3Dnil%2Ccommand%3AString%7CNil%3Dnil%2Cargs%3AArray%28String%29%7CNil%3Dnil%2Cparent%3AContext%7CNil%3Dnil%2Cenv%3AHash%28String%2CString%29%7CNil%3Dnil%2Cclear_env%3ABool%7CNil%3Dnil%2Cshell%3ABool%7CNil%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%7CNil%3Dnil%2Cshow_dir%3ABool%7CNil%3Dnil%2Cshow_command%3ABool%7CNil%3Dnil%2Cabort_signal%3ASignal%7CNil%3Dnil%2Cparallel%3ABool%7CNil%3Dnil%2Cabort_on_error%3ABool%7CNil%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%7CNil%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;name:Symbol,command:String,args:Array&#40;String&#41;,*nameless,**named&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(name : Symbol, command : String, args : Array(String), *nameless, **named)
+
+        <a class="method-permalink" href="#new%28name%3ASymbol%2Ccommand%3AString%2Cargs%3AArray%28String%29%2C%2Anameless%2C%2A%2Anamed%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a command with context attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%7CNil%3Dnil%2Ccommand%3AString%7CNil%3Dnil%2Cargs%3AArray%28String%29%7CNil%3Dnil%2Cparent%3AContext%7CNil%3Dnil%2Cenv%3AHash%28String%2CString%29%7CNil%3Dnil%2Cclear_env%3ABool%7CNil%3Dnil%2Cshell%3ABool%7CNil%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%7CNil%3Dnil%2Cshow_dir%3ABool%7CNil%3Dnil%2Cshow_command%3ABool%7CNil%3Dnil%2Cabort_signal%3ASignal%7CNil%3Dnil%2Cparallel%3ABool%7CNil%3Dnil%2Cabort_on_error%3ABool%7CNil%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%7CNil%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -251,7 +343,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -271,7 +363,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -289,7 +381,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -307,7 +399,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -325,7 +417,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -343,7 +435,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/mosop/run/blob/fcfac17ec4b99128876d8b288aa2356d501e35ab/src/run/command.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/mosop/run/blob/f2d0e2cd62fd11314e92e0b2f62a6578c09e9230/src/run/command.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
