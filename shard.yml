@@ -1,5 +1,5 @@
 name: run
-version: 0.4.0.2
+version: 0.4.0.3
 
 authors:
   - mosop
@@ -12,7 +12,7 @@ dependencies:
     version: ~> 0.1.2
   callback:
     github: mosop/callback
-    version: 0.4.0.2
+    version: 0.4.1
 
 development_dependencies:
   stdio:
