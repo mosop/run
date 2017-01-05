@@ -8,7 +8,6 @@ module Run
 
   # :nodoc:
   def self.<<(process : ProcessLike)
-    STDERR.puts process
     case process
     when Process
       @@processes << process
