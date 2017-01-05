@@ -18,7 +18,7 @@ Dir.mktmpdir do |dir|
       versions = []
       `git ls-remote`.chomp.split("\n").each do |line|
         sha, ref = line.split(/\s+/)
-        if VERSION =~ line
+        if VERSION =~ ref
           versions << Gem::Version.new($1)
         elsif ref == "refs/heads/gh-pages"
           gh_pages_found = true
