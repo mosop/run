@@ -1,72 +1,72 @@
 module Run
   class Process
     # Returns this parent group.
-    getter? parent : ProcessGroup?
-
-    # Returns this parent group.
-    def parent : ProcessGroup
-      @parent.as(ProcessGroup)
-    end
-
-    # Tests if this process is the root.
-    def root?
-      !parent?
-    end
-
-    # Returns this root group.
-    def root_group? : ProcessGroup?
-      root? ? nil : parent.root
-    end
+    getter parent : ProcessGroup
 
     # Returns this root group.
     def root_group : ProcessGroup
-      root_group?.as(ProcessGroup)
+      @parent.root
     end
 
     # Returns this source command.
     getter source : Command
 
-    @run_context : Context
-
     # Returns this context.
     getter context : Context
 
-    # :nodoc:
-    getter? impl : ::Process?
-
-    # Tests if the running process is started.
-    getter? started : Bool?
-
-    # :nodoc:
-    getter? aborted : Bool?
-
+    @run_context : Context
+    @impl : ::Process?
     @start_mutex = Mutex.new
     @wait_mutex = Mutex.new
     @abort_mutex = Mutex.new
 
     # :nodoc:
     def initialize(@parent, @source, @run_context)
-      @context = @run_context.dup.parent(@source.context).name(@source.context.name)
+      @context = @run_context.dup
+        .parent(@source.context)
+        .name(@source.context.name)
     end
 
-    # :nodoc:
-    def impl
-      @impl.as(::Process)
+    # Returns this input IO.
+    def input? : IO?
+      context.input.input || begin
+        if impl = @impl
+          impl.input
+        end
+      end
     end
 
     # Returns this input IO.
     def input : IO
-      context.input.input || impl.input
+      input?.not_nil!
+    end
+
+    # Returns this output IO.
+    def output? : IO?
+      context.output.output || begin
+        if impl = @impl
+          impl.output
+        end
+      end
     end
 
     # Returns this output IO.
     def output : IO
-      context.output.output || impl.output
+      output?.not_nil!
+    end
+
+    # Returns this error IO.
+    def error? : IO?
+      context.error.error || begin
+        if impl = @impl
+          impl.error
+        end
+      end
     end
 
     # Returns this error IO.
     def error : IO
-      context.error.error || impl.error
+      error?.not_nil!
     end
 
     # :nodoc:
@@ -108,14 +108,10 @@ module Run
     def start
       @start_mutex.synchronize do
         if @started.nil?
-          unless aborted?
-            with_startup do
-              @impl = new_impl
-            end
-            @started = true
-          else
-            @started = false
+          with_startup do
+            @impl = new_impl
           end
+          @started = true
         end
       end
       @started
@@ -134,37 +130,19 @@ module Run
     # :nodoc:
     def wait
       @wait_mutex.synchronize do
-        if @terminated.nil?
+        if @waited.nil?
           if start
-            @exit_code = status = impl.wait.exit_code
-            @terminated = true
-            if status == 0
-              success!
-            else
-              error!
+            @exit_code = status = @impl.not_nil!.wait.exit_code
+            @waited = true
+            if status != 0
+              if context.aborts_on_error?
+                root_group.abort
+              end
             end
           else
-            @terminated = false
+            @waited = false
           end
         end
-      end
-      @terminated
-    end
-
-    # :nodoc:
-    def success!
-      if parent?
-        parent.source.run_callbacks_for_success(self) do
-        end
-      end
-    end
-
-    # :nodoc:
-    def error!
-      if parent?
-        parent.source.run_callbacks_for_error(self) do
-        end
-        root_group.abort if context.aborts_on_error?
       end
     end
 
@@ -185,35 +163,26 @@ module Run
 
     # Returns the exit status returned by the running process.
     #
-    # Returns nil if the process is not terminated.
-    getter? exit_code : Int32?
-
-    # Returns the exit status returned by the running process.
-    #
     # It waits for the running process to terminate.
-    def exit_code : Int32?
-      @exit_code if wait
+    @exit_code : Int32?
+    def exit_code? : Int32?
+      wait
+      @exit_code
     end
 
     # Tests if the running process is successfully terminated.
     #
     # It waits for the running process to terminate.
     def success?
-      exit_code == 0
+      @exit_code == 0
     end
 
     # Aborts this process.
     def abort(signal : Signal? = nil)
       @abort_mutex.synchronize do
         if @aborted.nil?
-          if unstart && !terminated?
-            if parent?
-              parent.source.run_callbacks_for_abort(self) do
-                _abort signal
-              end
-            else
-              _abort signal
-            end
+          if unstart && !exited?
+            _abort signal
           else
             @aborted = false
           end
@@ -246,17 +215,37 @@ module Run
     #
     # Raises an Errno (ESRCH) exception if no process or process group can be found.
     def kill!(signal : Signal? = nil)
-      impl.kill signal || context.abort_signal if exists?
+      if impl = exists?
+        impl.kill signal || context.abort_signal
+      end
     end
 
     # Tests if the running process exists.
     def exists?
-      started? && !terminated? && !aborted? && impl.exists?
+      if impl = @impl
+        return impl if !exited? && !aborted? && impl.exists?
+      end
     end
 
-    # Tests if the running process is terminated.
+    # Tests if the process is unstarted, exited or aborted.
     def terminated?
-      exit_code?
+      unstarted? || exited? || aborted?
+    end
+
+    # Tests if the process is started and exited.
+    def exited?
+      !@exit_code.nil?
+    end
+
+    # Tests if the running process is started.
+    getter? started : Bool?
+
+    # Tests if the running process is aborted.
+    getter? aborted : Bool?
+
+    # Tests if the running process is unstarted.
+    def unstarted?
+      @started == false
     end
   end
 end

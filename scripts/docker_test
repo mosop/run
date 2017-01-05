@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run --rm -v `pwd`/lib:/app/lib -v `pwd`/lib/callback:/app/lib/callback -v `pwd`/scripts:/app/scripts -v `pwd`/spec:/app/spec -v `pwd`/src:/app/src mosop/run:latest scripts/build_and_test

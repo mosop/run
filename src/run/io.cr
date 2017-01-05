@@ -22,3 +22,5 @@ module Run
     end
   end
 end
+
+require "./io/*"

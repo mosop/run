@@ -1,13 +1,5 @@
 module Run
   class CommandGroup
-    Callback.enable
-    define_callback_group :success, proc_type: Proc(::Run::Process, ::Nil)
-    define_callback_group :group_success, proc_type: Proc(::Run::ProcessGroup, ::Nil)
-    define_callback_group :error, proc_type: Proc(::Run::Process, ::Nil)
-    define_callback_group :group_error, proc_type: Proc(::Run::ProcessGroup, ::Nil)
-    define_callback_group :abort, proc_type: Proc(::Run::Process, ::Nil)
-    define_callback_group :group_abort, proc_type: Proc(::Run::ProcessGroup, ::Nil)
-
     # Returns this parent group.
     getter? parent : CommandGroup?
 
@@ -31,30 +23,30 @@ module Run
     # Initializes a command group with context attributes.
     #
     # For more information about the arguments, see `Context#set`.
-    def initialize(**options)
-      initialize Context.new(**options)
+    def initialize(**attrs)
+      initialize Context.new(**attrs)
     end
 
     # Initializes a command group with context attributes.
     #
     # For more information about the arguments, see `Context#set`.
-    def initialize(name : Symbol, **options)
-      initialize Context.new(name, **options)
+    def initialize(name : Symbol, **attrs)
+      initialize Context.new(name, **attrs)
     end
 
     # Initializes a command group with context attributes and yield a block with self.
     #
     # For more information about the arguments, see `Context#set`.
-    def initialize(**options, &block : CommandGroup -> _)
-      initialize **options
+    def initialize(**attrs, &block : CommandGroup -> _)
+      initialize **attrs
       yield self
     end
 
     # Initializes a command group with context attributes and yield a block with self.
     #
     # For more information about the arguments, see `Context#set`.
-    def initialize(name : Symbol, **options, &block : CommandGroup -> _)
-      initialize name, **options
+    def initialize(name : Symbol, **attrs, &block : CommandGroup -> _)
+      initialize name, **attrs
       yield self
     end
 
@@ -160,34 +152,48 @@ module Run
     end
 
     # Runs all commands and command groups under this group.
-    def run(**options)
-      new_process(**options).tap do |pg|
+    def run(**attrs)
+      new_process(Context.new(**attrs)).tap do |pg|
         pg.start
       end
     end
 
+    # # :nodoc:
+    # def run(pg : ProcessGroup, run_context : Context)
+    #   new_process(pg, run_context).tap do |pg|
+    #     pg.start
+    #   end
+    # end
+
     # :nodoc:
-    def run(pg : ProcessGroup, run_context : Context)
-      new_process(pg, run_context).tap do |pg|
-        pg.start
+    def new_process_context(run_context : Context)
+      run_context.dup
+        .parent(context)
+        .name(context.name)
+        .set(parallel: context.self_parallel)
+    end
+
+    # :nodoc:
+    def new_process(attrs : Context)
+      new_process(nil, attrs)
+    end
+
+    # :nodoc:
+    def new_process(parent : ProcessGroup)
+      new_process(parent, Context.new)
+    end
+
+    # :nodoc:
+    def new_process(parent : ProcessGroup?, attrs : Context)
+      rc = if parent
+        parent.run_context.dup.set(attrs)
+      else
+        attrs.dup
       end
-    end
-
-    # :nodoc:
-    def new_process(**attrs)
-      rc = Context.new(**attrs)
-      ProcessGroup.new(nil, self, rc)
-    end
-
-    # :nodoc:
-    def new_process(pg : ProcessGroup)
-      new_process(pg, Context.new)
-    end
-
-    # :nodoc:
-    def new_process(pg : ProcessGroup, attrs : Context)
-      rc = pg.run_context.dup.set(attrs)
-      ProcessGroup.new(pg, self, rc)
+      pg = ProcessGroup.new(parent, new_process_context(rc), rc)
+      parent << pg if parent
+      pg << self
+      pg
     end
 
     # Delegated to #[] of the result of `#commands`.

@@ -18,32 +18,30 @@ module Run
       root? ? self : parent.root
     end
 
-    # Returns this source command group.
-    getter source : CommandGroup
-
     # :nodoc:
     getter run_context : Context
 
     # Returns this context.
     getter context : Context
 
-    @wait_channel : Channel(Process | ProcessGroup)
-    @wait_count : Int32
+    @start_mutex = Mutex.new
     @wait_mutex = Mutex.new
     @abort_mutex = Mutex.new
+    @sequential_channel = Channel(Nil).new(1)
 
     # :nodoc:
-    def initialize(@parent, @source, @run_context)
-      @context = @run_context.dup.parent(@source.context)
-        .set(name: @source.context.name, parallel: @source.context.self_parallel)
-      @wait_channel = Channel(Process | ProcessGroup).new(@source.children.size)
-      @wait_count = @source.children.size
+    def initialize
+      @context = Context.new
+      @run_context = Context.new
     end
 
-    @futures = [] of Concurrent::Future(Nil)
+    # :nodoc:
+    def initialize(@parent, @context, @run_context)
+      @sequential_channel.send nil
+    end
 
     # Returns all the child processes and groups that directly belong to this group.
-    getter children = [] of (Process | ProcessGroup)
+    getter children = [] of ProcessLike
 
     # Returns all the child processes that directly belong to this group.
     getter processes = [] of Process
@@ -52,113 +50,67 @@ module Run
     getter process_groups = [] of ProcessGroup
 
     # :nodoc:
-    def start
-      context.parallel? ? run_parallel : run_sequential
-    end
-
-    # :nodoc:
-    def unstart
-      @started = false
-    end
-
-    # :nodoc:
-    def run_sequential
-      current_dir = Dir.current
-      @source.children.each_with_index do |cmd, i|
-        cmd.new_process(self, Context.new(current_dir: current_dir)).tap do |process|
-          register_process i, process
-          current_dir = process.context.chdir
-        end
-      end
-      future do
-        @futures[0].get
+    def <<(cg : CommandGroup)
+      cg.children.each do |child|
+        self << child.new_process(self)
       end
     end
 
     # :nodoc:
-    def run_parallel
-      @source.children.each_with_index do |cmd, i|
-        cmd.new_process(self).tap do |process|
-          register_process i, process
-        end
-      end
-      @futures.each do |f|
-        future do
-          f.get
-        end
-      end
-    end
-
-    # :nodoc:
-    def register_process(index, process)
+    def <<(process : ProcessLike)
+      Run << process
       @children << process
       case process
       when Process
         @processes << process
-      else
+      when ProcessGroup
         @process_groups << process
       end
-      f = if context.parallel?
-        lazy do
-          start_and_wait_process process
-          nil
-        end
-      else
-        lazy do
-          start_and_wait_process process
-          @futures[index + 1].get if index < @futures.size
-          nil
-        end
-      end
-      @futures << f
     end
 
     # :nodoc:
-    def start_and_wait_process(process)
-      process.start
-      process.wait
-      @wait_channel.send process
+    def start
+      @start_mutex.synchronize do
+        if context.parallel?
+          @children.dup.each do |child|
+            future do
+              child.wait
+            end
+          end
+        else
+          future do
+            @sequential_channel.receive
+            @children.dup.each do |child|
+              child.wait
+            end
+          end
+        end
+      end
+    end
+
+    # :nodoc:
+    def unstart
+      @start_mutex.synchronize do
+        @children.dup.each do |child|
+          child.unstart
+        end
+      end
     end
 
     # Waits for all the child processes and groups to terminate.
     def wait
       @wait_mutex.synchronize do
-        if @wait_count > 0
-          until @wait_count == 0
-            @wait_channel.receive
-            @wait_count -= 1
-          end
-          @wait_channel.close
-          if children_success?
-            success!
-          else
-            error!
-          end
+        @children.dup.each do |child|
+          child.wait
         end
-      end
-    end
-
-    # :nodoc:
-    def success!
-      source.run_callbacks_for_group_success(self) do
-      end
-    end
-
-    # :nodoc:
-    def error!
-      source.run_callbacks_for_group_error(self) do
       end
     end
 
     # Aborts all the descendant processes.
     def abort(signal = nil)
       @abort_mutex.synchronize do
-        if @wait_count > 0
-          @source.run_callbacks_for_group_abort(self) do
-            @children.each do |process|
-              process.abort signal
-            end
-          end
+        @children.each do |child|
+          child.abort signal
         end
       end
     end

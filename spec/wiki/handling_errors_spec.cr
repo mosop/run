@@ -5,7 +5,7 @@ module RunWikiHandlingErrorsFeature
     describe name do
       it "serial" do
         Stdio.capture do |io|
-          cg = Run::CommandGroup.new do |g|
+          cg = Run.group do |g|
             g.command "fail", error: false, abort_on_error: true
             g.command "echo", %w(test)
           end
@@ -15,7 +15,7 @@ module RunWikiHandlingErrorsFeature
       end
 
       it "parallel" do
-        cg = Run::CommandGroup.new(abort_timeout: 5) do |g|
+        cg = Run.group(abort_timeout: 5) do |g|
           g.command "sleep", %w(60)
           g.command "fail", error: false, abort_on_error: true
         end

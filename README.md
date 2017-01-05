@@ -28,7 +28,7 @@ cmd.run.wait # => prints ":)"
 ### Additional Arguments
 
 ```crystal
-cmd = Run::Command.new("echo", [":)"])
+cmd = Run.command("echo", [":)"])
 %w(hello goodbye).each do |i|
   cmd.run(args: [i]).wait
 end
@@ -44,7 +44,7 @@ This prints:
 ### Over and Over
 
 ```crystal
-cmd = Run::Command.new("echo", [":)"])
+cmd = Run.command("echo", [":)"])
 100.times do
   cmd.run.wait
 end
@@ -55,7 +55,7 @@ This prints 100 of :).
 ### Multiple at Once
 
 ```crystal
-cg = Run::CommandGroup.new
+cg = Run.group
 100.times do
   cg.command "echo", [":)"]
 end
@@ -67,7 +67,7 @@ This prints 100 of :) too.
 ### Nested Contexts
 
 ```crystal
-cg = Run::CommandGroup.new(chdir: "path")
+cg = Run.group(chdir: "path")
 cg.command "pwd"
 cg.command "pwd", chdir: "to"
 cg.command "pwd", chdir: ".."
@@ -85,7 +85,7 @@ If the current directory is */Users/mosop*, this code prints:
 ### Parallel
 
 ```crystal
-cg = Run::CommandGroup.new
+cg = Run.group
 cg.command "wget", %w(http://mosop.rocks)
 cg.command "wget", %w(http://mosop.yoga)
 cg.command "wget", %w(http://mosop.ninja)

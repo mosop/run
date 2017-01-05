@@ -4,7 +4,7 @@ module RunReadmeFeature
   module Smiley
     it name do
       Stdio.capture do |io|
-        cmd = Run::Command.new("echo", [":)"])
+        cmd = Run.command("echo", [":)"])
         cmd.run.wait
         io.out.gets_to_end.should eq ":)\n"
       end
@@ -14,7 +14,7 @@ module RunReadmeFeature
   module AdditionalArguments
     it name do
       Stdio.capture do |io|
-        cmd = Run::Command.new("echo", [":)"])
+        cmd = Run.command("echo", [":)"])
         %w(hello goodbye).each do |i|
           cmd.run(args: [i]).wait
         end
@@ -29,7 +29,7 @@ module RunReadmeFeature
   module OverAndOver
     it name do
       Stdio.capture do |io|
-        cmd = Run::Command.new("echo", [":)"])
+        cmd = Run.command("echo", [":)"])
         100.times do
           cmd.run.wait
         end
@@ -41,7 +41,7 @@ module RunReadmeFeature
   module MultipleAtOnce
     it name do
       Stdio.capture do |io|
-        cg = Run::CommandGroup.new
+        cg = Run.group
         100.times do
           cg.command "echo", [":)"]
         end
@@ -56,7 +56,7 @@ module RunReadmeFeature
       Dir.tmp do |dir|
         dir = File.real_path(dir)
         Stdio.capture do |io|
-          cg = Run::CommandGroup.new(chdir: "#{dir}/path")
+          cg = Run.group(chdir: "#{dir}/path")
           cg.command "pwd"
           cg.command "pwd", chdir: "to"
           cg.command "pwd", chdir: ".."
@@ -75,7 +75,7 @@ module RunReadmeFeature
     #   ### Parallel
     #
     #   ```crystal
-    #   cg = Run::CommandGroup.new
+    #   cg = Run.group
     #   cg.command "wget", %w(http://mosop.rocks)
     #   cg.command "wget", %w(http://mosop.yoga)
     #   cg.command "wget", %w(http://mosop.ninja)
@@ -89,7 +89,7 @@ module RunReadmeFeature
     #   Note: Running a single command is always asynchronous and you need to manually wait.
     #
     #   ```crystal
-    #   process = Run::Command.new("sleep", %w(100)).run
+    #   process = Run.command("sleep", %w(100)).run
     #   process.wait
     #   ```
   end

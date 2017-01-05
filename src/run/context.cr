@@ -2,43 +2,43 @@ class Run::Context
   # Initializes a new context with the attributes.
   #
   # For more information about the arguments, see `#set`.
-  def initialize(**options)
-    set **options
+  def initialize(**attrs)
+    set **attrs
   end
 
   # Initializes a new context with the attributes.
   #
   # For more information about the arguments, see `#set`.
-  def initialize(command : String, **options)
+  def initialize(command : String, **attrs)
     self.command = command
-    set **options
+    set **attrs
   end
 
   # Initializes a new context with the attributes.
   #
   # For more information about the arguments, see `#set`.
-  def initialize(command : String, args : Array(String), **options)
-    self.command = command
-    self.args = args
-    set **options
-  end
-
-  # Initializes a new context with the attributes.
-  #
-  # For more information about the arguments, see `#set`.
-  def initialize(name : Symbol, **options)
-    self.name = name.to_s
-    set **options
-  end
-
-  # Initializes a new context with the attributes.
-  #
-  # For more information about the arguments, see `#set`.
-  def initialize(name : Symbol, command : String, args : Array(String), **options)
-    self.name = name.to_s
+  def initialize(command : String, args : Array(String), **attrs)
     self.command = command
     self.args = args
-    set **options
+    set **attrs
+  end
+
+  # Initializes a new context with the attributes.
+  #
+  # For more information about the arguments, see `#set`.
+  def initialize(name : Symbol, **attrs)
+    self.name = name.to_s
+    set **attrs
+  end
+
+  # Initializes a new context with the attributes.
+  #
+  # For more information about the arguments, see `#set`.
+  def initialize(name : Symbol, command : String, args : Array(String), **attrs)
+    self.name = name.to_s
+    self.command = command
+    self.args = args
+    set **attrs
   end
 
   # Returns this parent context.
