@@ -14,9 +14,15 @@ Dir.mktmpdir do |dir|
       `git init`
       `git config --local credential.helper 'store --file #{cred_file}'`
       `git remote add origin https://github.com/mosop/run.git`
+      gh_pages_found = false
       versions = []
       `git ls-remote`.chomp.split("\n").each do |line|
-        versions << Gem::Version.new($1) if VERSION =~ line.split(/\s+/)[1]
+        sha, ref = line.split(/\s+/)
+        if VERSION =~ line
+          versions << Gem::Version.new($1)
+        elsif ref == "refs/heads/gh-pages"
+          gh_pages_found = true
+        end
       end
       version = versions.sort.last
       exit unless version
@@ -28,19 +34,21 @@ Dir.mktmpdir do |dir|
       Dir.mktmpdir do |dir|
         Dir.chdir(dir) do
           ver_dir = File.join(dir, "v#{version}")
-          `git init`
-          `git config --local credential.helper 'store --file #{cred_file}'`
-          `git remote add origin https://github.com/mosop/run.git`
-          `git pull origin gh-pages`
-          `git checkout -b gh-pages origin/gh-pages`
-          Dir.glob("*") do |f|
-            `rm -rf #{f}` unless f.start_with?("v")
+          if gh_pages_found
+            `git init`
+            `git config --local credential.helper 'store --file #{cred_file}'`
+            `git remote add origin https://github.com/mosop/run.git`
+            `git pull origin gh-pages`
+            `git checkout -b gh-pages origin/gh-pages`
+            Dir.glob("*") do |f|
+              `rm -rf #{f}` unless f.start_with?("v")
+            end
+            `rm -rf .git`
           end
           `cp -a #{doc_dir}/* #{dir}/`
           `rm -rf #{ver_dir}`
           `mkdir -p #{ver_dir}`
           `cp -a #{doc_dir}/* #{ver_dir}/`
-          `rm -rf .git`
           `git init`
           `git config --local credential.helper 'store --file #{cred_file}'`
           `git remote add origin https://github.com/mosop/run.git`
