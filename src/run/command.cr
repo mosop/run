@@ -35,7 +35,7 @@ module Run
     #
     # It executes this commmand with C exec. So, the current process is replaced with the executing process.
     def exec(**attrs)
-      new_process(**attrs).exec
+      new_process(Context.new(**attrs)).exec
     end
 
     # :nodoc:
