@@ -104,14 +104,10 @@ require "run"
 
 And see [Code Samples](#code_samples), [Wiki](https://github.com/mosop/run/wiki) and [API Document](http://mosop.me/run/Run.html)!
 
+## Versioning Policy
+
+See [Wiki](https://github.com/mosop/mosop.github.io/wiki/Versioning-Policy).
+
 ## Release Notes
 
 See [Releases](https://github.com/mosop/run/releases).
-
-## Contributing
-
-1. Fork it ( https://github.com/mosop/run/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
