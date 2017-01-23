@@ -174,7 +174,7 @@ module Run
     #
     # It waits for the running process to terminate.
     def success?
-      @exit_code == 0
+      exit_code? == 0
     end
 
     # Aborts this process.
