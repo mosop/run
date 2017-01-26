@@ -1,3 +1,5 @@
 require "crystal_plus/named_tuple/#merge"
-require "./*"
+require "./version"
+require "./run/as_single_command"
+require "./run/as_single_process"
 require "./run/*"

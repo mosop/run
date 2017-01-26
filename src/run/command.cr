@@ -1,10 +1,6 @@
 module Run
   class Command
-    # Returns this parent group.
-    getter? parent : CommandGroup?
-
-    # Returns this context.
-    getter context : Context
+    include AsSingleCommand
 
     # Initializes a command with context attributes.
     #
@@ -20,17 +16,6 @@ module Run
       @context = Context.new(name, *nameless, **named)
     end
 
-    # Returns this parent group.
-    def parent : CommandGroup
-      @parent.as(CommandGroup)
-    end
-
-    # Sets a parent group.
-    def parent=(parent : CommandGroup)
-      @parent = parent
-      @context.set parent: parent.context
-    end
-
     # Executes this command with additional context attributes.
     #
     # It executes this commmand with C exec. So, the current process is replaced with the executing process.
@@ -38,24 +23,12 @@ module Run
       new_process(Context.new(**attrs)).exec
     end
 
-    # :nodoc:
-    # def exec(pg : ProcessGroup, run_context : Context)
-    #   new_process(pg, run_context).exec
-    # end
-
     # Run this command with additional context attributes.
     def run(**attrs) : Process
       new_process(Context.new(**attrs)).tap do |process|
         process.start
       end
     end
-
-    # :nodoc:
-    # def run(pg : ProcessGroup, run_context : Context) : Process
-    #   new_process(pg, run_context).tap do |process|
-    #     process.start
-    #   end
-    # end
 
     # :nodoc:
     def new_process(attrs : Context) : Process

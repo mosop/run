@@ -1,3 +1,4 @@
 module Run
-  alias ProcessLike = Process | ProcessGroup
+  alias CommandLike = Command | CommandGroup | Function
+  alias ProcessLike = Process | ProcessGroup | FunctionProcess
 end

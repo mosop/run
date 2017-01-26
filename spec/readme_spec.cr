@@ -71,26 +71,19 @@ module RunReadmeFeature
     end
   end
 
-  module Parallel
-    #   ### Parallel
-    #
-    #   ```crystal
-    #   cg = Run.group
-    #   cg.command "wget", %w(http://mosop.rocks)
-    #   cg.command "wget", %w(http://mosop.yoga)
-    #   cg.command "wget", %w(http://mosop.ninja)
-    #   process_group = cg.run(parallel: true)
-    #
-    #   # do another thing
-    #
-    #   process_group.wait
-    #   ```
-    #
-    #   Note: Running a single command is always asynchronous and you need to manually wait.
-    #
-    #   ```crystal
-    #   process = Run.command("sleep", %w(100)).run
-    #   process.wait
-    #   ```
+  module RunningCodeBlocks
+    it name do
+      Stdio.capture do |io|
+        cg = Run.group
+        100.times do
+          cg.function do
+            puts ":)"
+            1
+          end
+        end
+        cg.run.wait
+        io.out.gets_to_end.should eq ":)\n" * 100
+      end
+    end
   end
 end

@@ -96,6 +96,21 @@ process_group = cg.run(parallel: true)
 process_group.wait
 ```
 
+### Running Code Blocks
+
+```crystal
+cg = Run.group
+100.times do
+  cg.function do
+    puts ":)"
+    1
+  end
+end
+cg.run.wait
+```
+
+This prints 100 of :).
+
 ## Usage
 
 ```crystal

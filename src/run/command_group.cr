@@ -6,14 +6,17 @@ module Run
     # Returns this context.
     getter context : Context
 
-    # Returns all the commands and the command groups appended to this group.
-    getter children = [] of (Command | CommandGroup)
+    # Returns all the children appended to this group.
+    getter children = [] of CommandLike
 
     # Returns all the commands appended to this group.
     getter commands = [] of Command
 
     # Returns all the command groups appended to this group.
     getter command_groups = [] of CommandGroup
+
+    # Returns all the functions appended to this group.
+    getter functions = [] of Function
 
     # :nodoc:
     def initialize(context : Context)
@@ -72,6 +75,15 @@ module Run
       group.parent = self
       @children << group
       @command_groups << group
+    end
+
+    # Appends a function.
+    #
+    # It sets self to the appended function as the parent.
+    def <<(function : Function)
+      function.parent = self
+      @children << function
+      @functions << function
     end
 
     # Appends and returns a new single command.
@@ -151,19 +163,23 @@ module Run
       child
     end
 
-    # Runs all commands and command groups under this group.
+    # Appends and returns a new function.
+    #
+    # It initializes the function's context attributes with the arguments.
+    #
+    # For more information about the context attributes, see `Context#set`.
+    def function(*nameless, **named, &block : Function::ProcType)
+      cmd = Function.new(*nameless, **named, &block)
+      self << cmd
+      cmd
+    end
+
+    # Runs all children under this group.
     def run(**attrs)
       new_process(Context.new(**attrs)).tap do |pg|
         pg.start
       end
     end
-
-    # # :nodoc:
-    # def run(pg : ProcessGroup, run_context : Context)
-    #   new_process(pg, run_context).tap do |pg|
-    #     pg.start
-    #   end
-    # end
 
     # :nodoc:
     def new_process_context(run_context : Context)
