@@ -1,6 +1,6 @@
 module Run
   class Command
-    include AsSingleCommand
+    include AsCommand
 
     # Initializes a command with context attributes.
     #

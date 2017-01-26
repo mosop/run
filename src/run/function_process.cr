@@ -1,6 +1,6 @@
 module Run
   class FunctionProcess
-    include AsSingleProcess
+    include AsProcess
 
     @impl : Impl?
     getter signal_channel = Channel(Signal).new

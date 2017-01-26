@@ -1,6 +1,6 @@
 module Run
   class Process
-    include AsSingleProcess
+    include AsProcess
 
     @impl : ::Process?
 

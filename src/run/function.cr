@@ -1,6 +1,6 @@
 module Run
   class Function
-    include AsSingleCommand
+    include AsCommand
 
     alias ProcType = Proc(FunctionProcess, Int32)
 

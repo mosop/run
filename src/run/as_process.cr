@@ -1,5 +1,5 @@
 module Run
-  module AsSingleProcess
+  module AsProcess
     # Returns this parent group.
     getter parent : ProcessGroup
 
@@ -9,7 +9,7 @@ module Run
     end
 
     # Returns this source command.
-    getter source : AsSingleCommand
+    getter source : AsCommand
 
     # Returns this context.
     getter context : Context

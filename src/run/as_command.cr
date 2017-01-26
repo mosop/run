@@ -1,5 +1,5 @@
 module Run
-  module AsSingleCommand
+  module AsCommand
     # Returns this parent group.
     getter? parent : CommandGroup?
 
