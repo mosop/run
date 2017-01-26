@@ -27,7 +27,6 @@ module Run
     @start_mutex = Mutex.new
     @wait_mutex = Mutex.new
     @abort_mutex = Mutex.new
-    @sequential_channel = Channel(Nil).new(1)
 
     # :nodoc:
     def initialize
@@ -37,7 +36,6 @@ module Run
 
     # :nodoc:
     def initialize(@parent, @context, @run_context)
-      @sequential_channel.send nil
     end
 
     # Returns all the child processes and groups that directly belong to this group.
@@ -79,7 +77,6 @@ module Run
           end
         else
           future do
-            @sequential_channel.receive
             @children.dup.each do |child|
               child.wait
             end
