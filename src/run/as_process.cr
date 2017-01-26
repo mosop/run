@@ -9,7 +9,7 @@ module Run
     end
 
     # Returns this source command.
-    getter source : AsCommand
+    getter command : AsCommand
 
     # Returns this context.
     getter context : Context
@@ -20,10 +20,10 @@ module Run
     @abort_mutex = Mutex.new
 
     # :nodoc:
-    def initialize(@parent, @source, @run_context)
+    def initialize(@parent, @command, @run_context)
       @context = @run_context.dup
-        .parent(@source.context)
-        .name(@source.context.name)
+        .parent(@command.context)
+        .name(@command.context.name)
     end
 
     # :nodoc:

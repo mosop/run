@@ -7,7 +7,7 @@ module Run
 
     # Returns the source function.
     def function : Function
-      @source.as(Function)
+      @command.as(Function)
     end
 
     # :nodoc:

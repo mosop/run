@@ -4,6 +4,11 @@ module Run
 
     @impl : ::Process?
 
+    # Returns the source command.
+    def command : Command
+      @command.as(Command)
+    end
+
     # :nodoc:
     def exec
       with_startup do
