@@ -6,35 +6,18 @@ module Run
     getter signal_channel = Channel(Signal).new
 
     # Returns the source function.
-    def function : Function
-      @command.as(Function)
+    def function : ProcessFunction
+      @command.as(ProcessFunction)
     end
 
     # :nodoc:
     class Impl
-      @future : Concurrent::Future(Int32)?
-      @wait_mutex = Mutex.new
+      @impl : ::Process
 
       def initialize(@process : FunctionProcess)
-        @future = future do
-          @process.function.proc.call(@process)
+        @impl = ::Process.fork do
+          ::Process.exit @process.function.proc.call
         end
-      end
-
-      @exit_code : Int32?
-      def exit_code
-        wait
-        @exit_code.not_nil!
-      end
-
-      def wait
-        @wait_mutex.synchronize do
-          if future = @future
-            @exit_code = future.get
-            @future = nil
-          end
-        end
-        self
       end
 
       def input
@@ -46,12 +29,16 @@ module Run
       def error
       end
 
+      def wait
+        @impl.wait
+      end
+
       def exists?
-        @future
+        @impl.exists?
       end
 
       def kill(signal)
-        @process.signal_channel.send signal
+        @impl.kill signal
       end
     end
 

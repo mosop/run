@@ -15,8 +15,11 @@ module Run
     # Returns all the command groups appended to this group.
     getter command_groups = [] of CommandGroup
 
-    # Returns all the functions appended to this group.
-    getter functions = [] of Function
+    # Returns all the fiber functions appended to this group.
+    getter fiber_functions = [] of FiberFunction
+
+    # Returns all the process functions appended to this group.
+    getter process_functions = [] of ProcessFunction
 
     # :nodoc:
     def initialize(context : Context)
@@ -77,13 +80,22 @@ module Run
       @command_groups << group
     end
 
-    # Appends a function.
+    # Appends a fiber function.
     #
     # It sets self to the appended function as the parent.
-    def <<(function : Function)
+    def <<(function : FiberFunction)
       function.parent = self
       @children << function
-      @functions << function
+      @fiber_functions << function
+    end
+
+    # Appends a process function.
+    #
+    # It sets self to the appended function as the parent.
+    def <<(function : ProcessFunction)
+      function.parent = self
+      @children << function
+      @process_functions << function
     end
 
     # Appends and returns a new single command.
@@ -163,13 +175,28 @@ module Run
       child
     end
 
-    # Appends and returns a new function.
+    # Appends and returns a new fiber function.
     #
-    # It initializes the function's context attributes with the arguments.
+    # The function will be run in a new fiber.
     #
-    # For more information about the context attributes, see `Context#set`.
-    def function(*nameless, **named, &block : Function::ProcType)
-      cmd = Function.new(*nameless, **named, &block)
+    # This method initializes the function's context attributes with the *named* arguments.
+    #
+    # For more information about the *named* arguments, see `Context#set`.
+    def spawn(**named, &block : FiberFunction::ProcType)
+      cmd = FiberFunction.new(**named, &block)
+      self << cmd
+      cmd
+    end
+
+    # Appends and returns a new process function.
+    #
+    # The function will be run in a new forked process.
+    #
+    # This method initializes the function's context attributes with the *named* arguments.
+    #
+    # For more information about the *named* arguments, see `Context#set`.
+    def fork(**named, &block : ProcessFunction::ProcType)
+      cmd = ProcessFunction.new(**named, &block)
       self << cmd
       cmd
     end

@@ -72,17 +72,35 @@ module RunReadmeFeature
   end
 
   module RunningCodeBlocks
-    it name do
-      Stdio.capture do |io|
-        cg = Run.group
-        100.times do
-          cg.function do
-            puts ":)"
-            1
+    module InAFiber
+      it name do
+        Stdio.capture do |io|
+          cg = Run.group
+          100.times do
+            cg.spawn do
+              puts ":)"
+              1
+            end
           end
+          cg.run.wait
+          io.out.gets_to_end.should eq ":)\n" * 100
         end
-        cg.run.wait
-        io.out.gets_to_end.should eq ":)\n" * 100
+      end
+    end
+
+    module InAFiber
+      it name do
+        Stdio.capture do |io|
+          cg = Run.group
+          100.times do
+            cg.fork do
+              puts ":)"
+              1
+            end
+          end
+          cg.run.wait
+          io.out.gets_to_end.should eq ":)\n" * 100
+        end
       end
     end
   end

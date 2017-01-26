@@ -1,17 +1,15 @@
 module Run
-  class Function
+  class ProcessFunction
     include AsCommand
 
-    alias ProcType = Proc(FunctionProcess, Int32)
+    alias ProcType = Proc(Int32)
 
     getter proc : ProcType
 
-    # Initializes a function with context attributes.
-    #
-    # For more information about the arguments, see `Context#set`.
+    # :nodoc:
     def initialize(**named, &block : ProcType)
-      @proc = block
       @context = Context.new(**named)
+      @proc = block
     end
 
     # :nodoc:

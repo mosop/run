@@ -98,10 +98,12 @@ process_group.wait
 
 ### Running Code Blocks
 
+* In a fiber
+
 ```crystal
 cg = Run.group
 100.times do
-  cg.function do
+  cg.fiber do
     puts ":)"
     1
   end
@@ -109,7 +111,18 @@ end
 cg.run.wait
 ```
 
-This prints 100 of :).
+*  In a forked process
+
+```crystal
+cg = Run.group
+100.times do
+  cg.fork do
+    puts ":)"
+    1
+  end
+end
+cg.run.wait
+```
 
 ## Usage
 
