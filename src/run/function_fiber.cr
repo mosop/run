@@ -16,7 +16,7 @@ module Run
       @wait_mutex = Mutex.new
 
       def initialize(@process : FunctionFiber)
-        @future = lazy do
+        @future = future do
           @process.function.proc.call
         end
       end
@@ -37,13 +37,13 @@ module Run
         self
       end
 
-      def input
+      def input?
       end
 
-      def output
+      def output?
       end
 
-      def error
+      def error?
       end
 
       def exists?

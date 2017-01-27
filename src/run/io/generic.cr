@@ -1,22 +1,49 @@
 module Run
   struct Io
     # :nodoc:
-    struct Pipe < Io
+    struct Generic < Io
+      @io : IO
+
+      def initialize(@io : IO)
+      end
+
       def for_exec
-        true
       end
 
       def for_run
+        @io
       end
 
       def fork_input
+        io = @io
         r, w = IO.pipe(read_blocking: true)
-        Fork.new(self, w, r)
+        f = future do
+          begin
+            IO.copy(io, w)
+            Fork.new(self, w, r)
+          rescue ex
+            Fork.new(self, w, r, exception: ex)
+          ensure
+            w.close
+          end
+        end
+        AsyncFork.new(f)
       end
 
       def fork_output
+        io = @io
         r, w = IO.pipe(write_blocking: true)
-        Fork.new(self, r, w)
+        f = future do
+          begin
+            IO.copy(io, r)
+            Fork.new(self, r, w)
+          rescue ex
+            Fork.new(self, r, w, exception: ex)
+          ensure
+            w.close
+          end
+        end
+        AsyncFork.new(f)
       end
 
       def fork_error

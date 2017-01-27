@@ -1,6 +1,5 @@
 module Run
   abstract struct Io
-    PIPE = Pipe.new
     PARENT = Parent.new
     NULL = Null.new
 
@@ -14,10 +13,19 @@ module Run
       case arg
       when Io
         arg
+      when IO::FileDescriptor
+        Fd.new(arg)
       when IO
-        GenericIo.new(arg)
+        Generic.new(arg)
       when Bool
         arg ? PARENT : NULL
+      end
+    end
+
+    # :nodoc:
+    def reopen(old, new)
+      if C.dup2(old.fd, new.fd) == -1
+        raise Errno.new("dup2() error.")
       end
     end
   end

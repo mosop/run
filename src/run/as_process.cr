@@ -118,11 +118,7 @@ module Run
 
     # Returns this input IO.
     def input? : IO?
-      context.input.input || begin
-        if impl = @impl
-          impl.input
-        end
-      end
+      context.input.input_for_process?(@impl)
     end
 
     # Returns this input IO.
@@ -132,11 +128,7 @@ module Run
 
     # Returns this output IO.
     def output? : IO?
-      context.output.output || begin
-        if impl = @impl
-          impl.output
-        end
-      end
+      context.input.output_for_process?(@impl)
     end
 
     # Returns this output IO.
@@ -146,11 +138,7 @@ module Run
 
     # Returns this error IO.
     def error? : IO?
-      context.error.error || begin
-        if impl = @impl
-          impl.error
-        end
-      end
+      context.input.error_for_process?(@impl)
     end
 
     # Returns this error IO.

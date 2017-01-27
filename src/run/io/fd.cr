@@ -1,33 +1,40 @@
 module Run
   struct Io
     # :nodoc:
-    struct Parent < Io
+    struct Fd < Io
+      @io : IO::FileDescriptor
+
+      def initialize(@io : IO::FileDescriptor)
+      end
+
       def for_exec
-        true
+        @io
       end
 
       def for_run
-        true
+        @io
       end
 
       def fork_input
-        Fork.new(self, nil, nil)
+        Fork.new(self, @io, @io)
       end
 
       def fork_output
-        Fork.new(self, nil, nil)
+        Fork.new(self, @io, @io)
       end
 
       def fork_error
-        Fork.new(self, nil, nil)
+        fork_output
       end
 
       def reopen_input(stdio, fork)
-        stdio.blocking = true
+        @io.blocking = true
+        reopen stdio, @io
       end
 
       def reopen_output(stdio, fork)
-        stdio.blocking = true
+        @io.blocking = true
+        reopen stdio, @io
       end
 
       def reopen_error(stdio, fork)
@@ -35,15 +42,15 @@ module Run
       end
 
       def input_for_process?(p)
-        STDIN
+        @io
       end
 
       def output_for_process?(p)
-        STDOUT
+        @io
       end
 
       def error_for_process?(p)
-        STDERR
+        @io
       end
     end
   end
