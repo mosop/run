@@ -1,3 +1,4 @@
+require "attempt"
 require "crystal_plus/named_tuple/#merge"
 require "./version"
 require "./run/as_command"

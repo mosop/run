@@ -77,7 +77,7 @@ module RunReadmeFeature
         Stdio.capture do |io|
           cg = Run.group
           100.times do
-            cg.spawn do
+            cg.future do
               puts ":)"
               1
             end

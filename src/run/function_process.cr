@@ -1,9 +1,9 @@
 module Run
+  # Represents a runnning process that executes a code block in a forked process.
   class FunctionProcess
     include AsProcess
 
     @impl : Impl?
-    getter signal_channel = Channel(Signal).new
 
     # Returns the source function.
     def function : ProcessFunction
@@ -39,14 +39,22 @@ module Run
           STDOUT.close_on_exec = false
           STDERR.close_on_exec = false
           Dir.cd context.chdir
-          ::Process.exit fp.function.proc.call
+          begin
+            ::Process.exit fp.function.proc.call
+          rescue ex
+            begin
+              STDERR.puts ex.message
+            rescue
+            end
+            ::Process.exit 1
+          end
         end
         input_fork.close_child
         output_fork.close_child
         error_fork.close_child
-        @input = input_fork.piped?
-        @output = output_fork.piped?
-        @error = error_fork.piped?
+        @input = input_fork.pipe?
+        @output = output_fork.pipe?
+        @error = error_fork.pipe?
       end
 
       def wait
@@ -62,6 +70,7 @@ module Run
       end
     end
 
+    # :nodoc:
     def new_impl
       Impl.new(self)
     end

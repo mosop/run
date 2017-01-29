@@ -1,4 +1,5 @@
 module Run
+  # Represents a runinng process.
   module AsProcess
     # Returns this parent group.
     getter parent : ProcessGroup
@@ -84,11 +85,8 @@ module Run
     # :nodoc:
     def _abort(signal)
       kill signal
-      begin
-        context.abort_timeout.try_and_wait(interval: 0.1, prewait: 0.1) do
-          break true unless exists?
-        end
-      rescue Timeout::Elapsed
+      context.abort_wait.start do
+        break unless exists?
       end
       @aborted = true
     end
@@ -103,10 +101,7 @@ module Run
 
     # :nodoc:
     def show_dir
-      current_dir = context.current_dir? || Dir.current
-      if File.real_path(context.chdir) != File.real_path(current_dir)
-        output.puts "\u{1F4C2} #{context.chdir}"
-      end
+      output.puts "\u{1F4C2} #{context.chdir}"
     end
 
     # :nodoc:

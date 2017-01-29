@@ -7,7 +7,7 @@ module RunWikiHandlingErrorsFeature
         Stdio.capture do |io|
           cg = Run.group do |g|
             g.command "fail", error: false, abort_on_error: true
-            g.command "echo", %w(test)
+            g.command "echo", %w(goodbye)
           end
           cg.run.wait
           io.out.gets_to_end.should eq ""
@@ -15,7 +15,7 @@ module RunWikiHandlingErrorsFeature
       end
 
       it "parallel" do
-        cg = Run.group(abort_timeout: 5) do |g|
+        cg = Run.group do |g|
           g.command "sleep", %w(60)
           g.command "fail", error: false, abort_on_error: true
         end

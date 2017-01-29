@@ -1,5 +1,5 @@
 module Run
-  @@processes = [] of Process
+  @@processes = [] of AsProcess
 
   # :nodoc:
   def self.processes
@@ -9,7 +9,7 @@ module Run
   # :nodoc:
   def self.<<(process : ProcessLike)
     case process
-    when Process
+    when AsProcess
       @@processes << process
     when ProcessGroup
     end

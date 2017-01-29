@@ -2,11 +2,11 @@ module Run
   struct Io
     struct Fork
       @io : Io
-      getter! piped : IO::FileDescriptor?
+      getter! pipe : IO::FileDescriptor?
       getter! child : IO::FileDescriptor?
       getter! exception : Exception?
 
-      def initialize(@io, @piped, @child, @exception = nil)
+      def initialize(@io, @pipe, @child, @exception = nil)
       end
 
       def reopen_input(stdio)

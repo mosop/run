@@ -10,6 +10,9 @@ dependencies:
   crystal_plus:
     github: mosop/crystal_plus
     version: ~> 0.1.2
+  attempt:
+    github: mosop/attempt
+    version: ~> 0.1.0
 
 development_dependencies:
   stdio:

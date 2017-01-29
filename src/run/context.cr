@@ -1,45 +1,73 @@
 module Run
+  # Represents a set of combinable attributes that determines how a command executes.
+  #
+  # ### Attributes
+  #
+  # #### command_name
+  #
+  # A command name. If given in multiple nested contexts, the nearest one is used.
+  #
+  # #### args
+  #
+  # Command arguments. If given in multiple nested contexts, all the values are concatenated from the earliest ancestor context.
+  #
+  # #### env
+  #
+  # Environment variables. If given in multiple nested contexts, all the values are merged from the earliest ancestor context.
+  #
+  # #### clear_env
+  #
+  # Specifies whether to pass the current environment variables to forked processes. If true, the variables are not passed. If given in multiple nested contexts, the nearest one is used. The default value is false.
+  #
+  # #### input, output, error
+  #
+  # Specifies IOs passed to forked processes.
+  #
+  # The types are:
+  #
+  # * `Run::Io::PIPE` : a new pipe
+  # * an arbitrary IO object
+  # * true or `Run::Io::PARENT` : the standard IO of the current process
+  # * false or `Run::Io::NULL` : no IO (/dev/null)
+  #
+  # If given in multiple nested contexts, the nearest one is used. The default value is `Run::Io::PARENT`.
+  #
+  # #### shell
+  #
+  # Specifies whether to run commands in the system's shell. If given in multiple nested contexts, the nearest one is used. The default value is true.
+  #
+  # #### chdir
+  #
+  # A working directory's path. If given in multiple nested contexts, all the paths are joined, with File.expand_path, from the earliest ancestor context.
+  #
+  # If the joined path is relative, the path is expanded with the current directory's path.
+  #
+  # #### parallel
+  #
+  # Specifies whether to run child commands asynchronously. Even if given in parent contexts, the current context's value is always used. The default value is false.
+  #
+  # Note: This attribute is only for command groups.
+  #
+  # #### abort_on_error
+  #
+  # Specifies whether to abort all processes when the process returns an error. If given in multiple nested contexts, the nearest one is used. The default value is false.
+  #
+  # #### abort_wait
+  #
+  # Specifies how it waits for processes to abort. If given in multiple nested contexts, the nearest one is used. The default value is `Run::NO_WAIT`.
+  #
+  # #### abort_signal
+  #
+  # A signal number that is sent on abort. If given in multiple nested contexts, the nearest one is used. The default value is Signal::TERM.
   class Context
-    # Initializes a new context with the attributes.
-    #
-    # For more information about the arguments, see `#set`.
-    def initialize(**attrs)
-      set **attrs
-    end
+    alias Name = String | Symbol
+    alias NameArg = Name?
 
     # Initializes a new context with the attributes.
     #
     # For more information about the arguments, see `#set`.
-    def initialize(command : String, **attrs)
-      self.command = command
-      set **attrs
-    end
-
-    # Initializes a new context with the attributes.
-    #
-    # For more information about the arguments, see `#set`.
-    def initialize(command : String, args : Array(String), **attrs)
-      self.command = command
-      self.args = args
-      set **attrs
-    end
-
-    # Initializes a new context with the attributes.
-    #
-    # For more information about the arguments, see `#set`.
-    def initialize(name : Symbol, **attrs)
-      self.name = name.to_s
-      set **attrs
-    end
-
-    # Initializes a new context with the attributes.
-    #
-    # For more information about the arguments, see `#set`.
-    def initialize(name : Symbol, command : String, args : Array(String), **attrs)
-      self.name = name.to_s
-      self.command = command
-      self.args = args
-      set **attrs
+    def initialize(**attributes)
+      set **attributes
     end
 
     # Returns this parent context.
@@ -62,16 +90,31 @@ module Run
       root? ? self : parent.root
     end
 
-    # :nodoc:
-    getter? current_dir : String?
-
     # Sets the attributes and returns self.
     #
     # If nil is specified, the attribute is not changed.
     #
-    # For more information about the context attributes, see [Wiki](https://github.com/mosop/run/wiki/Context-Attributes).
-    def set(name : String? = nil, command : String? = nil, args : Array(String)? = nil, parent : Context? = nil, env : Hash(String, String)? = nil, clear_env : Bool? = nil, shell : Bool? = nil, input : Io::Arg = nil, output : Io::Arg = nil, error : Io::Arg = nil, chdir : String? = nil, show_dir : Bool? = nil, show_command : Bool? = nil, abort_signal : Signal? = nil, parallel : Bool? = nil, abort_on_error : Bool? = nil, abort_timeout : Timeout::Arg = nil, current_dir : String? = nil)
-      @name = name unless name.nil?
+    # For more information about the attributes, see [Wiki](https://github.com/mosop/run/wiki/Context-Attributes).
+    def set(
+      name : NameArg = nil,
+      command : String? = nil,
+      args : Array(String)? = nil,
+      parent : Context? = nil,
+      env : Hash(String, String)? = nil,
+      clear_env : Bool? = nil,
+      shell : Bool? = nil,
+      input : Io::Arg = nil,
+      output : Io::Arg = nil,
+      error : Io::Arg = nil,
+      chdir : String? = nil,
+      show_dir : Bool? = nil,
+      show_command : Bool? = nil,
+      abort_signal : Signal? = nil,
+      parallel : Bool? = nil,
+      abort_on_error : Bool? = nil,
+      abort_wait : Attempt? = nil
+    )
+      @name = name.to_s unless name.nil?
       @command = command unless command.nil?
       @args = args unless args.nil?
       @parent = parent unless parent.nil?
@@ -87,8 +130,7 @@ module Run
       @abort_signal = abort_signal unless abort_signal.nil?
       @parallel = parallel unless parallel.nil?
       @abort_on_error = abort_on_error unless abort_on_error.nil?
-      @abort_timeout = Timeout.parse_arg(abort_timeout) unless abort_timeout.nil?
-      @current_dir = current_dir unless current_dir.nil?
+      @abort_wait = abort_wait unless abort_wait.nil?
       self
     end
 
@@ -121,8 +163,7 @@ module Run
         show_command: @show_command,
         parallel: @parallel,
         abort_on_error: @abort_on_error,
-        abort_timeout: @abort_timeout,
-        current_dir: @current_dir
+        abort_wait: @abort_wait
       }
     end
 
@@ -301,8 +342,8 @@ module Run
       __get_by_each :abort_on_error, Bool, false
     end
 
-    __property :abort_timeout, Timeout, parse_arg: true do
-      __get_by_each :abort_timeout, Timeout, Timeout::NO_WAIT
+    __property :abort_wait, Attempt do
+      __get_by_each :abort_wait, Attempt, Run::NO_WAIT
     end
 
     # :nodoc:

@@ -1,9 +1,11 @@
 module Run
+  # Represents a runnning process that executes a code block in a fiber.
+  #
+  # `FunctionFiber` does not handle singal messages sent by `AsProcess#abort` and `AsProcess#kill`. You have to implement inter-fiber communication with arbitrary methods, such as *Channel*.
   class FunctionFiber
     include AsProcess
 
     @impl : Impl?
-    getter signal_channel = Channel(Signal).new
 
     # Returns the source function.
     def function : FiberFunction
@@ -17,7 +19,11 @@ module Run
 
       def initialize(@process : FunctionFiber)
         @future = future do
-          @process.function.proc.call
+          begin
+            @process.function.proc.call
+          rescue
+            1
+          end
         end
       end
 
@@ -51,10 +57,10 @@ module Run
       end
 
       def kill(signal)
-        @process.signal_channel.send signal
       end
     end
 
+    # :nodoc:
     def new_impl
       Impl.new(self)
     end

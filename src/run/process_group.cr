@@ -1,4 +1,5 @@
 module Run
+  # Represents a set of processes.
   class ProcessGroup
     # Returns this parent group.
     getter? parent : ProcessGroup?
@@ -69,11 +70,9 @@ module Run
     # :nodoc:
     def start
       @start_mutex.synchronize do
-        if context.parallel?
+        if @context.parallel?
           @children.dup.each do |child|
-            future do
-              child.wait
-            end
+            child.start
           end
         else
           future do
@@ -97,8 +96,22 @@ module Run
     # Waits for all the child processes and groups to terminate.
     def wait
       @wait_mutex.synchronize do
-        @children.dup.each do |child|
-          child.wait
+        children = @children.dup
+        if @context.parallel?
+          fs = Array(Concurrent::Future(Nil)).new(children.size)
+          children.each do |child|
+            fs << future do
+              child.wait
+              nil
+            end
+          end
+          fs.each do |f|
+            f.get
+          end
+        else
+          children.each do |child|
+            child.wait
+          end
         end
       end
     end
@@ -123,12 +136,12 @@ module Run
       children.all?{|i| i.success?}
     end
 
-    # Delegated to [] of the result of `#processes`.
+    # Calls the `#processes` array' s [] method.
     def [](*args)
       @processes[*args]
     end
 
-    # Delegated to []? of the result of `#processes`.
+    # Calls the `#processes` array' s []? method.
     def []?(*args)
       @processes[*args]?
     end

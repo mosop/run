@@ -12,12 +12,12 @@ module Run
         @fork ||= @future.get
       end
 
-      def piped
-        fork.piped
+      def pipe
+        fork.pipe
       end
 
-      def piped?
-        fork.piped?
+      def pipe?
+        fork.pipe?
       end
 
       def child

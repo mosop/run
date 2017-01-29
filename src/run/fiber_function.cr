@@ -1,9 +1,11 @@
 module Run
+  # Represents a command that executes a code block in a forked process.
   class FiberFunction
     include AsCommand
 
     alias ProcType = Proc(Int32)
 
+    # Returns an executed code block.
     getter proc : ProcType
 
     # :nodoc:

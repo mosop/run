@@ -1,4 +1,5 @@
 module Run
+  # Represents a process that executes a command in a forked process.
   class Process
     include AsProcess
 

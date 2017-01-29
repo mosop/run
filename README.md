@@ -22,7 +22,7 @@ dependencies:
 
 ```crystal
 cmd = Run::Command.new("echo", [":)"])
-cmd.run.wait # => prints ":)"
+cmd.run.wait # prints ":)"
 ```
 
 ### Additional Arguments
@@ -103,9 +103,9 @@ process_group.wait
 ```crystal
 cg = Run.group
 100.times do
-  cg.fiber do
+  cg.future do
     puts ":)"
-    1
+    0
   end
 end
 cg.run.wait
@@ -118,7 +118,7 @@ cg = Run.group
 100.times do
   cg.fork do
     puts ":)"
-    1
+    0
   end
 end
 cg.run.wait
@@ -130,7 +130,11 @@ cg.run.wait
 require "run"
 ```
 
-And see [Code Samples](#code_samples), [Wiki](https://github.com/mosop/run/wiki) and [API Document](http://mosop.me/run/Run.html)!
+And see:
+
+* [Code Samples](#code_samples)
+* [Wiki](https://github.com/mosop/run/wiki)
+* [API Document](http://mosop.me/run/Run.html)
 
 ## Versioning Policy
 

@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run --rm -v `pwd`/lib:/app/lib -v `pwd`/lib/callback:/app/lib/callback -v `pwd`/bin:/app/bin -v `pwd`/spec:/app/spec -v `pwd`/src:/app/src mosop/run:latest bin/build_and_test
+docker run --rm -v `pwd`/lib:/app/lib -v `pwd`/lib/callback:/app/lib/callback -v `pwd`/lib/crystal_plus:/app/lib/crystal_plus -v `pwd`/lib/attempt:/app/lib/attempt -v `pwd`/lib/calling:/app/lib/calling -v `pwd`/bin:/app/bin -v `pwd`/spec:/app/spec -v `pwd`/src:/app/src mosop/run:latest bin/build_and_test

@@ -1,15 +1,15 @@
 module Run
+  # Represents an I/O that is set to running processes.
   abstract struct Io
     PARENT = Parent.new
     NULL = Null.new
+    PIPE = Pipe.new
+
+    alias Like = Bool | IO | Io
+    alias Arg = Like?
 
     # :nodoc:
-    alias ArgNotNil = Bool | IO | Io
-
-    alias Arg = ArgNotNil | Nil
-
-    # :nodoc:
-    def self.parse_arg(arg : ArgNotNil)
+    def self.parse_arg(arg : Like)
       case arg
       when Io
         arg
