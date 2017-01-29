@@ -101,7 +101,9 @@ module Run
 
     # :nodoc:
     def show_dir
-      output.puts "\u{1F4C2} #{context.chdir}"
+      if File.real_path(context.chdir) != Dir.current
+        output.puts "\u{1F4C2} #{context.chdir}"
+      end
     end
 
     # :nodoc:
