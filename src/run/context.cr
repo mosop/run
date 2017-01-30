@@ -59,6 +59,10 @@ module Run
   # #### abort_signal
   #
   # A signal number that is sent on abort. If given in multiple nested contexts, the nearest one is used. The default value is Signal::TERM.
+  #
+  # #### attempt
+  #
+  # Specifies how it attempts to start a process again when failed. Even if given in parent contexts, the current context's value is always used. The default value is `Run::NO_RETRY`.
   class Context
     alias Name = String | Symbol
     alias NameArg = Name?
@@ -112,7 +116,8 @@ module Run
       abort_signal : Signal? = nil,
       parallel : Bool? = nil,
       abort_on_error : Bool? = nil,
-      abort_wait : Attempt? = nil
+      abort_wait : Attempt? = nil,
+      attempt : Attempt? = nil
     )
       @name = name.to_s unless name.nil?
       @command = command unless command.nil?
@@ -131,6 +136,7 @@ module Run
       @parallel = parallel unless parallel.nil?
       @abort_on_error = abort_on_error unless abort_on_error.nil?
       @abort_wait = abort_wait unless abort_wait.nil?
+      @attempt = attempt unless attempt.nil?
       self
     end
 
@@ -163,7 +169,8 @@ module Run
         show_command: @show_command,
         parallel: @parallel,
         abort_on_error: @abort_on_error,
-        abort_wait: @abort_wait
+        abort_wait: @abort_wait,
+        attempt: @attempt
       }
     end
 
@@ -344,6 +351,10 @@ module Run
 
     __property :abort_wait, Attempt do
       __get_by_each :abort_wait, Attempt, Run::NO_WAIT
+    end
+
+    __property :attempt, Attempt do
+      self_attempt || Run::NO_RETRY
     end
 
     # :nodoc:

@@ -33,6 +33,7 @@ module Run
       yield self
     end
 
+    # :nodoc:
     macro __initialize(with_block = false, &block)
     {% if with_block %}
     # Initializes a command group with context attributes yielding the command group.
@@ -78,7 +79,7 @@ module Run
 
     # Appends a command.
     #
-    # This instance is set to the appended command as a parent.
+    # This instance is set to the appended command as its parent.
     def <<(command : Command)
       command.parent = self
       @children << command
@@ -87,7 +88,7 @@ module Run
 
     # Appends a command group.
     #
-    # This instance is set to the appended group as a parent.
+    # This instance is set to the appended group as its parent.
     def <<(group : CommandGroup)
       group.parent = self
       @children << group
@@ -96,7 +97,7 @@ module Run
 
     # Appends a fiber function.
     #
-    # This instance is set to the appended function as a parent.
+    # This instance is set to the appended function as its parent.
     def <<(function : FiberFunction)
       function.parent = self
       @children << function
@@ -105,7 +106,7 @@ module Run
 
     # Appends a process function.
     #
-    # This instance is set to the appended function as a parent.
+    # This instance is set to the appended function as its parent.
     def <<(function : ProcessFunction)
       function.parent = self
       @children << function
@@ -187,7 +188,7 @@ module Run
     end
 
     # :nodoc:
-    macro __group_doc(with_block = false)
+    macro __group(with_block = false, &block)
     {% if with_block %}
     # Appends and returns a new command group yielding the new command group.
     {% else %}
@@ -197,41 +198,54 @@ module Run
     # This method initializes the new command group's context attributes with the arguments.
     #
     # For more information about the context attributes, see `Context`.
+    {{block.body}}
     end
 
-    __group_doc
-    def group(**attributes)
-      group(Context.new(**attributes))
-    end
-
-    __group_doc
-    def group(name : Symbol, **optional_attributes)
-      group(Context.new(**optional_attributes).name(name))
-    end
-
-    __group_doc with_block: true
-    def group(**attributes, &block)
-      group(Context.new(**attributes)) do |g|
-        yield g
+    __group do
+      def group(**attributes)
+        group(Context.new(**attributes))
       end
     end
 
-    __group_doc with_block: true
-    def group(name : Symbol, **optional_attributes, &block)
-      group(Context.new(**optional_attributes).name(name)) do |g|
-        yield g
+    __group do
+      def group(name : Symbol, **optional_attributes)
+        group(Context.new(**optional_attributes).name(name))
       end
     end
 
-    # :nodoc:
-    def _future(**attributes, &block : FiberFunction::ProcType)
-      cmd = FiberFunction.new(**attributes, &block)
+    __group with_block: true do
+      def group(**attributes, &block)
+        group(Context.new(**attributes)) do |g|
+          yield g
+        end
+      end
+    end
+
+    __group with_block: true do
+      def group(name : Symbol, **optional_attributes, &block)
+        group(Context.new(**optional_attributes).name(name)) do |g|
+          yield g
+        end
+      end
+    end
+
+    # Appends and returns a new fiber function.
+    #
+    # The *block* will be invoked in a new fiber.
+    #
+    # The *block* must returns 0 if the process is succeeded. Otherwise, non-zero.
+    #
+    # This method initializes the function's context attributes with the *context* argument.
+    #
+    # For more information about the context, see `Context`.
+    def future(context : Context, &block : FiberFunction::ProcType)
+      cmd = FiberFunction.new(context, &block)
       self << cmd
       cmd
     end
 
     # :nodoc:
-    macro __future_doc
+    macro __future(&block)
     # Appends and returns a new fiber function.
     #
     # The *block* will be invoked in a new fiber.
@@ -240,47 +254,75 @@ module Run
     #
     # This method initializes the function's context attributes with the arguments.
     #
-    # For more information about the *named* arguments, see `Context`.
+    # For more information about the arguments, see `Context`.
+    {{block.body}}
     end
 
-    __future_doc
-    def future(**attributes, &block : FiberFunction::ProcType)
-      _future(**attributes, &block)
-    end
-
-    __future_doc
-    def future(name : Symbol, **optional_attributes, &block : FiberFunction::ProcType)
-      _future(Context.args(**optional_attributes).merge({name: name}), &block)
-    end
-
-    # :nodoc:
-    def _fork(**attributes, &block : ProcessFunction::ProcType)
-      cmd = ProcessFunction.new(**attributes, &block)
-      self << cmd
-      cmd
-    end
-
-    # :nodoc:
-    macro __fork_doc
-    # Appends and returns a new process function.
+    # Appends and returns a new fiber function.
     #
-    # The *block* will be invoked in a new forked process.
+    # The *block* will be invoked in a new fiber.
     #
     # The *block* must returns 0 if the process is succeeded. Otherwise, non-zero.
     #
     # This method initializes the function's context attributes with the arguments.
     #
-    # For more information about the *named* arguments, see `Context`.
+    # For more information about the arguments, see `Context`.
+    def future(**attributes, &block : FiberFunction::ProcType)
+      future(Context.new(**attributes), &block)
     end
 
-    __fork_doc
+    # Appends and returns a new fiber function.
+    #
+    # The *block* will be invoked in a new fiber.
+    #
+    # The *block* must returns 0 if the process is succeeded. Otherwise, non-zero.
+    #
+    # This method initializes the function's context attributes with the arguments.
+    #
+    # For more information about the arguments, see `Context`.
+    def future(name : Symbol, **optional_attributes, &block : FiberFunction::ProcType)
+      future(Context.new(**optional_attributes).name(name), &block)
+    end
+
+    # Appends and returns a new process function.
+    #
+    # The *block* will be invoked in a forked process.
+    #
+    # The *block* must returns 0 if the process is succeeded. Otherwise, non-zero.
+    #
+    # This method initializes the function's context attributes with the *context* argument.
+    #
+    # For more information about the context, see `Context`.
+    def fork(context : Context, &block : ProcessFunction::ProcType)
+      cmd = ProcessFunction.new(context, &block)
+      self << cmd
+      cmd
+    end
+
+    # Appends and returns a new process function.
+    #
+    # The *block* will be invoked in a forked process.
+    #
+    # The *block* must returns 0 if the process is succeeded. Otherwise, non-zero.
+    #
+    # This method initializes the function's context attributes with the arguments.
+    #
+    # For more information about the arguments, see `Context`.
     def fork(**attributes, &block : ProcessFunction::ProcType)
-      _fork(**attributes, &block)
+      fork(Context.new(**attributes), &block)
     end
 
-    __fork_doc
+    # Appends and returns a new process function.
+    #
+    # The *block* will be invoked in a forked process.
+    #
+    # The *block* must returns 0 if the process is succeeded. Otherwise, non-zero.
+    #
+    # This method initializes the function's context attributes with the arguments.
+    #
+    # For more information about the arguments, see `Context`.
     def fork(name : Symbol, **optional_attributes, &block : ProcessFunction::ProcType)
-      _fork(Context.args(**optional_attributes).merge({name: name}), &block)
+      fork(Context.new(optional_attributes).name(name), &block)
     end
 
     # Runs all children under this group.

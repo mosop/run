@@ -1,6 +1,6 @@
 module Run
   # Represents a process that executes a command in a forked process.
-  class Process
+  class CommandProcess
     include AsProcess
 
     @impl : ::Process?

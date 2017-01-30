@@ -19,20 +19,26 @@ module Run
     @start_mutex = Mutex.new
     @wait_mutex = Mutex.new
     @abort_mutex = Mutex.new
+    @attempt : Attempt::Context
 
     # :nodoc:
     def initialize(@parent, @command, @run_context)
-      @context = @run_context.dup
-        .parent(@command.context)
-        .name(@command.context.name)
+      @context = @run_context.dup.set(
+        parent: @command.context,
+        name: @command.context.name
+      )
+      @context.attempt = @command.context.self_attempt unless @context.self_attempt
+      @attempt = @context.attempt.new_context
     end
 
     # :nodoc:
     def start
       @start_mutex.synchronize do
         if @started.nil?
-          with_startup do
-            @impl = new_impl
+          @attempt.attempt_once do
+            with_startup do
+              @impl = new_impl
+            end
           end
           @started = true
         end
@@ -51,11 +57,30 @@ module Run
     end
 
     # :nodoc:
+    def restart
+      @start_mutex.synchronize do
+        unless terminated?
+          @attempt.attempt_once do
+            with_startup do
+              @impl = new_impl
+            end
+          end
+        end
+      end
+    end
+
+    # :nodoc:
     def wait
       @wait_mutex.synchronize do
         if @waited.nil?
           if start
-            @exit_code = status = @impl.not_nil!.wait.exit_code
+            status = 0
+            loop do
+              status = @impl.not_nil!.wait.exit_code
+              break if status == 0 || !@attempt.attempts?
+              restart
+            end
+            @exit_code = status
             @waited = true
             if status != 0
               if context.aborts_on_error?

@@ -42,11 +42,20 @@ module Run
     # Returns all the child processes and groups that directly belong to this group.
     getter children = [] of ProcessLike
 
-    # Returns all the child processes that directly belong to this group.
-    getter processes = [] of Process
+    # Returns all the single processes that directly belong to this group.
+    getter processes = [] of AsProcess
+
+    # Returns all the child command processes that directly belong to this group.
+    getter command_processes = [] of CommandProcess
 
     # Returns all the child process groups that directly belong to this group.
     getter process_groups = [] of ProcessGroup
+
+    # Returns all the child fiber function processes that directly belong to this group.
+    getter function_fibers = [] of FunctionFiber
+
+    # Returns all the child process function processes that directly belong to this group.
+    getter function_processes = [] of FunctionProcess
 
     # :nodoc:
     def <<(cg : CommandGroup)
@@ -56,15 +65,34 @@ module Run
     end
 
     # :nodoc:
-    def <<(process : ProcessLike)
+    def <<(process : CommandProcess)
       Run << process
       @children << process
-      case process
-      when Process
-        @processes << process
-      when ProcessGroup
-        @process_groups << process
-      end
+      @processes << process
+      @command_processes << process
+    end
+
+    # :nodoc:
+    def <<(process : FunctionFiber)
+      Run << process
+      @children << process
+      @processes << process
+      @function_fibers << process
+    end
+
+    # :nodoc:
+    def <<(process : FunctionProcess)
+      Run << process
+      @children << process
+      @processes << process
+      @function_processes << process
+    end
+
+    # :nodoc:
+    def <<(process : ProcessGroup)
+      Run << process
+      @children << process
+      @process_groups << process
     end
 
     # :nodoc:

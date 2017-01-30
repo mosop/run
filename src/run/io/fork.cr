@@ -1,5 +1,6 @@
 module Run
   struct Io
+    # :nodoc:
     struct Fork
       @io : Io
       getter! pipe : IO::FileDescriptor?

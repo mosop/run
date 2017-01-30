@@ -60,33 +60,15 @@ module Run
     end
 
     # Run this command with additional context attributes.
-    def run(**attributes) : Process
+    def run(**attributes)
       new_process(Context.new(**attributes)).tap do |process|
         process.start
       end
     end
 
     # :nodoc:
-    def new_process(attrs : Context) : Process
-      new_process(nil, attrs)
-    end
-
-    # :nodoc:
-    def new_process(parent : ProcessGroup) : Process
-      new_process(parent, Context.new)
-    end
-
-    # :nodoc:
-    def new_process(parent : ProcessGroup?, attrs : Context) : Process
-      if parent
-        rc = parent.run_context.dup.set(attrs)
-        Process.new(parent, self, rc)
-      else
-        parent = ProcessGroup.new
-        process = Process.new(parent, self, attrs.dup)
-        parent << process
-        process
-      end
+    def process_class
+      CommandProcess
     end
   end
 end

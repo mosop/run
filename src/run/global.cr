@@ -7,12 +7,12 @@ module Run
   end
 
   # :nodoc:
-  def self.<<(process : ProcessLike)
-    case process
-    when AsProcess
-      @@processes << process
-    when ProcessGroup
-    end
+  def self.<<(process : AsProcess)
+    @@processes << process
+  end
+
+  # :nodoc:
+  def self.<<(process : ProcessGroup)
   end
 
   # Aborts all processes.

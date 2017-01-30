@@ -9,27 +9,20 @@ module Run
     getter proc : ProcType
 
     # :nodoc:
-    def initialize(**named, &block : ProcType)
-      @context = Context.new(**named)
+    def initialize(**attributes, &block : ProcType)
+      @context = Context.new(**attributes)
       @proc = block
     end
 
     # :nodoc:
-    def new_process(parent : ProcessGroup) : FunctionFiber
-      new_process(parent, Context.new)
+    def initialize(context : Context, &block : ProcType)
+      @context = context
+      @proc = block
     end
 
     # :nodoc:
-    def new_process(parent : ProcessGroup?, attrs : Context) : FunctionFiber
-      if parent
-        rc = parent.run_context.dup.set(attrs)
-        FunctionFiber.new(parent, self, rc)
-      else
-        parent = ProcessGroup.new
-        process = FunctionFiber.new(parent, self, attrs.dup)
-        parent << process
-        process
-      end
+    def process_class
+      FunctionFiber
     end
   end
 end
