@@ -8,6 +8,7 @@ module Run
       end
 
       def for_exec
+        false
       end
 
       def for_run
