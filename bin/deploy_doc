@@ -8,7 +8,7 @@ Dir.mktmpdir do |dir|
   cred_file = File.join(dir, ".git-credentials")
   `touch #{cred_file}`
   `chmod 600 #{cred_file}`
-  File.write cred_file, "https://mosop:#{ENV["GITHUB_ACCESS_TOKEN"]}@github.com\n"
+  File.write cred_file, "https://mosop:#{ENV["MOSOP_GITHUB_ACCESS_TOKEN"]}@github.com\n"
   Dir.mktmpdir do |dir|
     Dir.chdir(dir) do
       `git init`
