@@ -254,7 +254,7 @@ module Run
       {%
         name = name.id
         predicate = (verb || name).id
-        negate = verb ? "not_to_#{verb.id}".id : "not_#{name}".id
+        negate = verb ? "dont_#{name.id}".id : "not_#{name}".id
         var = "@#{name}".id
       %}
 
