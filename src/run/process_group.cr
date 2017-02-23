@@ -25,9 +25,7 @@ module Run
     # Returns this context.
     getter context : Context
 
-    @start_mutex = Mutex.new
-    @wait_mutex = Mutex.new
-    @abort_mutex = Mutex.new
+    @mutex = Mutex.new
 
     # :nodoc:
     def initialize
@@ -67,76 +65,53 @@ module Run
     # :nodoc:
     def <<(process : CommandProcess)
       Run << process
-      @children << process
-      @processes << process
-      @command_processes << process
+      @mutex.synchronize do
+        @children << process
+        @processes << process
+        @command_processes << process
+      end
     end
 
     # :nodoc:
     def <<(process : FunctionFiber)
       Run << process
-      @children << process
-      @processes << process
-      @function_fibers << process
+      @mutex.synchronize do
+        @children << process
+        @processes << process
+        @function_fibers << process
+      end
     end
 
     # :nodoc:
     def <<(process : FunctionProcess)
       Run << process
-      @children << process
-      @processes << process
-      @function_processes << process
+      @mutex.synchronize do
+        @children << process
+        @processes << process
+        @function_processes << process
+      end
     end
 
     # :nodoc:
     def <<(process : ProcessGroup)
       Run << process
-      @children << process
-      @process_groups << process
+      @mutex.synchronize do
+        @children << process
+        @process_groups << process
+      end
     end
 
     # :nodoc:
     def start
-      @start_mutex.synchronize do
-        if @context.parallel?
-          @children.dup.each do |child|
-            child.start
-          end
-        else
-          future do
-            @children.dup.each do |child|
-              child.wait
-            end
-          end
-        end
+      children = @mutex.synchronize do
+        @children.dup
       end
-    end
-
-    # :nodoc:
-    def unstart
-      @start_mutex.synchronize do
-        @children.dup.each do |child|
-          child.unstart
+      if @context.parallel?
+        children.each do |child|
+          child.start
         end
-      end
-    end
-
-    # Waits for all the child processes and groups to terminate.
-    def wait
-      @wait_mutex.synchronize do
-        children = @children.dup
-        if @context.parallel?
-          fs = Array(Concurrent::Future(Nil)).new(children.size)
-          children.each do |child|
-            fs << future do
-              child.wait
-              nil
-            end
-          end
-          fs.each do |f|
-            f.get
-          end
-        else
+      else
+        future do
           children.each do |child|
             child.wait
           end
@@ -144,23 +119,54 @@ module Run
       end
     end
 
+    # :nodoc:
+    def unstart
+      children = @mutex.synchronize do
+        @children.dup
+      end
+      children.each do |child|
+        child.unstart
+      end
+    end
+
+    # Waits for all the child processes and groups to terminate.
+    def wait
+      children = @mutex.synchronize do
+        @children.dup
+      end
+      if @context.parallel?
+        fs = Array(Concurrent::Future(Nil)).new(children.size)
+        children.each do |child|
+          fs << future do
+            child.wait
+            nil
+          end
+        end
+        fs.each do |f|
+          f.get
+        end
+      else
+        children.each do |child|
+          child.wait
+        end
+      end
+    end
+
     # Aborts all the descendant processes.
     def abort(signal = nil)
-      @abort_mutex.synchronize do
-        @children.each do |child|
-          child.abort signal
-        end
+      children = @mutex.synchronize do
+        @children.dup
+      end
+      children.each do |child|
+        child.abort signal
       end
     end
 
     # Tests if all the child processes and groups successfully terminated.
     def success?
-      wait
-      children_success?
-    end
-
-    # :nodoc:
-    def children_success?
+      children = @mutex.synchronize do
+        @children.dup
+      end
       children.all?{|i| i.success?}
     end
 
