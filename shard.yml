@@ -1,5 +1,5 @@
 name: run
-version: 0.7.0
+version: 0.8.0
 
 authors:
   - mosop
@@ -18,3 +18,5 @@ development_dependencies:
   stdio:
     github: mosop/stdio
     version: ~> 0.1.3
+
+crystal: 0.21.0
