@@ -1,13 +1,13 @@
 module Run
-  struct Io
+  module Ios
     # :nodoc:
-    struct Parent < Io
+    struct Null < Io
       def for_exec
-        true
+        false
       end
 
       def for_run
-        true
+        false
       end
 
       def fork_input
@@ -23,11 +23,15 @@ module Run
       end
 
       def reopen_input(stdio, fork)
-        stdio.blocking = true
+        File.open("/dev/null", "rw") do |f|
+          reopen stdio, f
+        end
       end
 
       def reopen_output(stdio, fork)
-        stdio.blocking = true
+        File.open("/dev/null", "rw") do |f|
+          reopen stdio, f
+        end
       end
 
       def reopen_error(stdio, fork)
@@ -35,15 +39,12 @@ module Run
       end
 
       def input_for_process?(p)
-        STDIN
       end
 
       def output_for_process?(p)
-        STDOUT
       end
 
       def error_for_process?(p)
-        STDERR
       end
     end
   end

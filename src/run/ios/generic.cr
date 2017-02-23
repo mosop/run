@@ -1,5 +1,5 @@
 module Run
-  struct Io
+  module Ios
     # :nodoc:
     struct Generic < Io
       @io : IO

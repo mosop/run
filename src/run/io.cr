@@ -1,9 +1,8 @@
 module Run
-  # Represents an I/O that is set to running processes.
   abstract struct Io
-    PARENT = Parent.new
-    NULL = Null.new
-    PIPE = Pipe.new
+    PARENT = Ios::Parent.new
+    NULL = Ios::Null.new
+    PIPE = Ios::Pipe.new
 
     alias Like = Bool | IO | Io
     alias Arg = Like?
@@ -14,9 +13,9 @@ module Run
       when Io
         arg
       when IO::FileDescriptor
-        Fd.new(arg)
+        Ios::Fd.new(arg)
       when IO
-        Generic.new(arg)
+        Ios::Generic.new(arg)
       when Bool
         arg ? PARENT : NULL
       end

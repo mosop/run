@@ -1,36 +1,33 @@
 module Run
-  struct Io
+  module Ios
     # :nodoc:
-    struct Pipe < Io
+    struct Parent < Io
       def for_exec
         true
       end
 
       def for_run
+        true
       end
 
       def fork_input
-        r, w = IO.pipe(read_blocking: true)
-        Fork.new(self, w, r)
+        Fork.new(self, nil, nil)
       end
 
       def fork_output
-        r, w = IO.pipe(write_blocking: true)
-        Fork.new(self, r, w)
+        Fork.new(self, nil, nil)
       end
 
       def fork_error
-        fork_output
+        Fork.new(self, nil, nil)
       end
 
       def reopen_input(stdio, fork)
-        fork.child.blocking = true
-        reopen stdio, fork.child
+        stdio.blocking = true
       end
 
       def reopen_output(stdio, fork)
-        fork.child.blocking = true
-        reopen stdio, fork.child
+        stdio.blocking = true
       end
 
       def reopen_error(stdio, fork)
@@ -38,21 +35,15 @@ module Run
       end
 
       def input_for_process?(p)
-        if p
-          p.input?
-        end
+        STDIN
       end
 
       def output_for_process?(p)
-        if p
-          p.output?
-        end
+        STDOUT
       end
 
       def error_for_process?(p)
-        if p
-          p.error?
-        end
+        STDERR
       end
     end
   end
