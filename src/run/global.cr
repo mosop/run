@@ -21,4 +21,11 @@ module Run
       process.abort signal
     end
   end
+
+  # Waits for all processes.
+  def self.wait(signal = nil)
+    @@processes.dup.each do |process|
+      process.wait
+    end
+  end
 end
