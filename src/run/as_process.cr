@@ -172,9 +172,9 @@ module Run
     #
     # It waits for the running process to terminate.
     @exit_code : Int32?
-    def exit_code? : Int32?
+    def exit_code
       wait
-      @exit_code
+      @exit_code.not_nil!
     end
 
     # Tests if the process is started and exited.
@@ -186,7 +186,7 @@ module Run
     #
     # It waits for the running process to terminate.
     def success?
-      exit_code? == 0
+      exit_code == 0
     end
 
     # Tests if the process is unstarted, exited or aborted.
