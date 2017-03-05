@@ -3,7 +3,7 @@ module Run
   class CommandProcess
     include AsProcess
 
-    @impl : ::Process?
+    @impl : Impl?
 
     # Returns the source command.
     def command : Command
@@ -33,8 +33,41 @@ module Run
     end
 
     # :nodoc:
+    class Impl
+      @impl : ::Process
+
+      def initialize(cp : CommandProcess)
+        @impl = ::Process.new(**cp.to_impl_args)
+      end
+
+      def wait
+        ExitStatus.new(@impl.wait.exit_code)
+      end
+
+      def exists?
+        @impl.exists?
+      end
+
+      def kill(signal)
+        @impl.kill signal
+      end
+
+      def input?
+        @impl.input?
+      end
+
+      def output?
+        @impl.output?
+      end
+
+      def error?
+        @impl.error?
+      end
+    end
+
+    # :nodoc:
     def new_impl
-      ::Process.new(**to_impl_args)
+      Impl.new(self)
     end
   end
 end

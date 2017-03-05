@@ -14,33 +14,37 @@ module Run
 
     # :nodoc:
     class Impl
-      @future : Concurrent::Future(Int32)?
+      @future : Concurrent::Future(ExitStatus)?
       @wait_mutex = Mutex.new
+      @exit_status = ExitStatus.new(-1)
 
-      def initialize(@process : FunctionFiber)
+      def initialize(ff : FunctionFiber)
         @future = future do
           begin
-            @process.function.proc.call
-          rescue
-            1
+            raise Exit.new(ExitStatus.new(ff.function.proc.call))
+          rescue ex
+            case ex
+            when Exit
+              ex.status
+            else
+              begin
+                STDERR.puts ex.message
+              rescue
+              end
+              ExitStatus.new(1)
+            end
           end
         end
-      end
-
-      @exit_code : Int32?
-      def exit_code
-        wait
-        @exit_code.not_nil!
       end
 
       def wait
         @wait_mutex.synchronize do
           if future = @future
-            @exit_code = future.get
+            @exit_status = future.get
             @future = nil
           end
         end
-        self
+        @exit_status
       end
 
       def input?

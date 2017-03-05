@@ -74,15 +74,16 @@ module Run
       @wait_mutex.synchronize do
         if @waited.nil?
           if start
-            status = 0
+            exit_status = ExitStatus.new(-1)
             loop do
-              status = @impl.not_nil!.wait.exit_code
-              break if status == 0 || !@attempt.attempts?
+              exit_status = @impl.not_nil!.wait
+              break if exit_status.success? || !@attempt.attempts?
               restart
             end
-            @exit_code = status
+            @exit_status = exit_status
+            @exited = true
             @waited = true
-            if status != 0
+            if exit_status.error?
               if context.aborts_on_error?
                 root_group.abort
               end
@@ -168,25 +169,33 @@ module Run
       error?.not_nil!
     end
 
+    # Returns the exit code returned by the running process.
+    #
+    # It waits for the running process to terminate.
+    def exit_code
+      exit_status.code
+    end
+
+    @exit_status = ExitStatus.new(-1)
     # Returns the exit status returned by the running process.
     #
     # It waits for the running process to terminate.
-    @exit_code : Int32?
-    def exit_code
+    def exit_status
       wait
-      @exit_code.not_nil!
+      @exit_status
     end
 
+    @exited : Bool?
     # Tests if the process is started and exited.
     def exited?
-      !@exit_code.nil?
+      @exited
     end
 
     # Tests if the running process is successfully terminated.
     #
     # It waits for the running process to terminate.
     def success?
-      exit_code == 0
+      exit_status.success?
     end
 
     # Tests if the process is unstarted, exited or aborted.

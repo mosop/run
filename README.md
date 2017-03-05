@@ -124,6 +124,26 @@ end
 cg.run.wait
 ```
 
+### Returning Data by Forked Processes
+
+```crystal
+cg = Run.group
+100.times do
+  cg.fork do
+    Run::ExitStatus.new(0, ":)").exit!
+    0
+  end
+end
+
+cg.run.wait do |process|
+  if process = process.as?(Run::AsProcess)
+    puts process.exit_status.data
+  end
+end
+```
+
+This prints 100 of :).
+
 ## Usage
 
 ```crystal

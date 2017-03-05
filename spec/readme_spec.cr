@@ -104,4 +104,26 @@ module RunReadmeFeature
       end
     end
   end
+
+  module ReturningDataByForkedProcesses
+    it name do
+      Stdio.capture do |io|
+        cg = Run.group
+        100.times do
+          cg.fork do
+            Run::ExitStatus.new(0, ":)").exit!
+            0
+          end
+        end
+
+        cg.run.wait do |process|
+          if process = process.as?(Run::AsProcess)
+            puts process.exit_status.data?
+          end
+        end
+
+        io.out.gets_to_end.should eq ":)\n" * 100
+      end
+    end
+  end
 end

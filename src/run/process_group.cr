@@ -131,23 +131,31 @@ module Run
 
     # Waits for all the child processes and groups to terminate.
     def wait
+      wait {}
+    end
+
+    # Waits for all the child processes and groups to terminate.
+    #
+    # This method yields the terminated processes and groups.
+    def wait(&block)
       children = @mutex.synchronize do
         @children.dup
       end
       if @context.parallel?
-        fs = Array(Concurrent::Future(Nil)).new(children.size)
+        fs = Array(Concurrent::Future(ProcessLike)).new(children.size)
         children.each do |child|
           fs << future do
             child.wait
-            nil
+            child
           end
         end
         fs.each do |f|
-          f.get
+          yield f.get
         end
       else
         children.each do |child|
           child.wait
+          yield child
         end
       end
     end
