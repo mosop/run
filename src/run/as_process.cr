@@ -128,7 +128,7 @@ module Run
     # :nodoc:
     def show_dir
       if File.real_path(context.chdir) != Dir.current
-        output.puts "\u{1F4C2} #{context.chdir}"
+        puts "\u{1F4C2} #{context.chdir}"
       end
     end
 
@@ -136,7 +136,7 @@ module Run
     def show_command
       a = [context.command]
       a += context.args if context.args.size > 0
-      output.puts a.join(" ")
+      puts a.join(" ")
     end
 
     # Returns this input IO.
