@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Run::CommandGroup - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="../Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="../Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="../Run/Context.html">Context</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="../Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="../Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Process" data-name="run::process">
+      <a href="../Run/Process.html">Process</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessLike" data-name="run::processlike">
+      <a href="../Run/ProcessLike.html">ProcessLike</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Timeout" data-name="run::timeout">
+      <a href="../Run/Timeout.html">Timeout</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Timeout/Arg" data-name="run::timeout::arg">
+      <a href="../Run/Timeout/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Run::CommandGroup
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Run/CommandGroup.html">Run::CommandGroup</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L2" target="_blank">run/command_group.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28name%3ASymbol%2C%2A%2Aattrs%29-class-method" class="signature"><strong>.new</strong>(name : Symbol, **attrs)</a>
+        
+          <div class="summary"><p>Initializes a command group with context attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+          <div class="summary"><p>Initializes a command group with context attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28name%3ASymbol%2C%2A%2Aattrs%2C%26block%29-class-method" class="signature"><strong>.new</strong>(name : Symbol, **attrs, &block)</a>
+        
+          <div class="summary"><p>Initializes a command group with context attributes and yield a block with self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2A%2Aattrs%2C%26block%29-class-method" class="signature"><strong>.new</strong>(**attrs, &block)</a>
+        
+          <div class="summary"><p>Initializes a command group with context attributes and yield a block with self.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#%3C%3C%28group%3ACommandGroup%29-instance-method" class="signature"><strong>#<<</strong>(group : CommandGroup)</a>
+        
+          <div class="summary"><p>Appends a command group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3C%3C%28command%3ACommand%29-instance-method" class="signature"><strong>#<<</strong>(command : Command)</a>
+        
+          <div class="summary"><p>Appends a single command.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%28%2Aargs%29-instance-method" class="signature"><strong>#[]</strong>(*args)</a>
+        
+          <div class="summary"><p>Delegated to #[] of the result of <code><a href="../Run/CommandGroup.html#commands%3AArray%28Run%3A%3ACommand%29-instance-method">#commands</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3F%28%2Aargs%29-instance-method" class="signature"><strong>#[]?</strong>(*args)</a>
+        
+          <div class="summary"><p>Delegated to #[]? of the result of <code><a href="../Run/CommandGroup.html#commands%3AArray%28Run%3A%3ACommand%29-instance-method">#commands</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#children%3AArray%28Run%3A%3ACommand%7CRun%3A%3ACommandGroup%29-instance-method" class="signature"><strong>#children</strong> : Array(Run::Command | Run::CommandGroup)</a>
+        
+          <div class="summary"><p>Returns all the commands and the command groups appended to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command%28%2Anameless%2C%2A%2Anamed%29-instance-method" class="signature"><strong>#command</strong>(*nameless, **named)</a>
+        
+          <div class="summary"><p>Appends and returns a new single command.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command_groups%3AArray%28Run%3A%3ACommandGroup%29-instance-method" class="signature"><strong>#command_groups</strong> : Array(Run::CommandGroup)</a>
+        
+          <div class="summary"><p>Returns all the command groups appended to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#commands%3AArray%28Run%3A%3ACommand%29-instance-method" class="signature"><strong>#commands</strong> : Array(Run::Command)</a>
+        
+          <div class="summary"><p>Returns all the commands appended to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#context%3AContext-instance-method" class="signature"><strong>#context</strong> : Context</a>
+        
+          <div class="summary"><p>Returns this context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#group%28name%3ASymbol%2C%2A%2Anamed%29-instance-method" class="signature"><strong>#group</strong>(name : Symbol, **named)</a>
+        
+          <div class="summary"><p>Appends and returns a new command group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#group-instance-method" class="signature"><strong>#group</strong></a>
+        
+          <div class="summary"><p>Appends and returns a new command group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#group%28name%3ASymbol%2C%2A%2Anamed%2C%26block%3ACommandGroup-%3E_%29-instance-method" class="signature"><strong>#group</strong>(name : Symbol, **named, &block : CommandGroup -> _)</a>
+        
+          <div class="summary"><p>Appends and returns a new command group and yield a block with the group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#group%28child%3ACommandGroup%2C%26block%3ACommandGroup-%3E_%29-instance-method" class="signature"><strong>#group</strong>(child : CommandGroup, &block : CommandGroup -> _)</a>
+        
+          <div class="summary"><p>Appends and returns the specified group and yield a block with the group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#group%28%2A%2Anamed%2C%26block%3ACommandGroup-%3E_%29-instance-method" class="signature"><strong>#group</strong>(**named, &block : CommandGroup -> _)</a>
+        
+          <div class="summary"><p>Appends and returns a new command group and yield a block with the group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3D%28parent%3ACommandGroup%29-instance-method" class="signature"><strong>#parent=</strong>(parent : CommandGroup)</a>
+        
+          <div class="summary"><p>Sets a parent group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3F%3ACommandGroup%3F-instance-method" class="signature"><strong>#parent?</strong> : CommandGroup?</a>
+        
+          <div class="summary"><p>Returns this parent group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#run-instance-method" class="signature"><strong>#run</strong></a>
+        
+          <div class="summary"><p>Runs all commands and command groups under this group.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="new&#40;name:Symbol,**attrs&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(name : Symbol, **attrs)
+
+        <a class="method-permalink" href="#new%28name%3ASymbol%2C%2A%2Aattrs%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a command group with context attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a command group with context attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;name:Symbol,**attrs,&amp;block&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(name : Symbol, **attrs, &block)
+
+        <a class="method-permalink" href="#new%28name%3ASymbol%2C%2A%2Aattrs%2C%26block%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a command group with context attributes and yield a block with self.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;**attrs,&amp;block&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(**attrs, &block)
+
+        <a class="method-permalink" href="#new%28%2A%2Aattrs%2C%26block%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a command group with context attributes and yield a block with self.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="&lt;&lt;&#40;group:CommandGroup&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong><<</strong>(group : <a href="../Run/CommandGroup.html">CommandGroup</a>)
+
+        <a class="method-permalink" href="#%3C%3C%28group%3ACommandGroup%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends a command group.</p>
+
+<p>It sets self to the appended group as the parent.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L71" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&lt;&lt;&#40;command:Command&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong><<</strong>(command : <a href="../Run/Command.html">Command</a>)
+
+        <a class="method-permalink" href="#%3C%3C%28command%3ACommand%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends a single command.</p>
+
+<p>It sets self to the appended command as the parent.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L62" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&#91;&#93;&#40;*args&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>[]</strong>(*args)
+
+        <a class="method-permalink" href="#%5B%5D%28%2Aargs%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Delegated to #[] of the result of <code><a href="../Run/CommandGroup.html#commands%3AArray%28Run%3A%3ACommand%29-instance-method">#commands</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L200" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&#91;&#93;?&#40;*args&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>[]?</strong>(*args)
+
+        <a class="method-permalink" href="#%5B%5D%3F%28%2Aargs%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Delegated to #[]? of the result of <code><a href="../Run/CommandGroup.html#commands%3AArray%28Run%3A%3ACommand%29-instance-method">#commands</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L205" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="children:Array&#40;Run::Command|Run::CommandGroup&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>children</strong> : Array(<a href="../Run/Command.html">Run::Command</a> | <a href="../Run/CommandGroup.html">Run::CommandGroup</a>)
+
+        <a class="method-permalink" href="#children%3AArray%28Run%3A%3ACommand%7CRun%3A%3ACommandGroup%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the commands and the command groups appended to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command&#40;*nameless,**named&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>command</strong>(*nameless, **named)
+
+        <a class="method-permalink" href="#command%28%2Anameless%2C%2A%2Anamed%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends and returns a new single command.</p>
+
+<p>It initializes the command's context attributes with the arguments.</p>
+
+<p>For more information about the context attributes, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L82" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command_groups:Array&#40;Run::CommandGroup&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>command_groups</strong> : Array(<a href="../Run/CommandGroup.html">Run::CommandGroup</a>)
+
+        <a class="method-permalink" href="#command_groups%3AArray%28Run%3A%3ACommandGroup%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the command groups appended to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="commands:Array&#40;Run::Command&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>commands</strong> : Array(<a href="../Run/Command.html">Run::Command</a>)
+
+        <a class="method-permalink" href="#commands%3AArray%28Run%3A%3ACommand%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the commands appended to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="context:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>context</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#context%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="group&#40;name:Symbol,**named&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>group</strong>(name : Symbol, **named)
+
+        <a class="method-permalink" href="#group%28name%3ASymbol%2C%2A%2Anamed%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends and returns a new command group.</p>
+
+<p>It initializes the new group's context attributes with the arguments.</p>
+
+<p>For more information about the context attributes, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L104" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="group-instance-method">
+      <div class="signature">
+        
+        def <strong>group</strong>
+
+        <a class="method-permalink" href="#group-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends and returns a new command group.</p>
+
+<p>It initializes the new group's context attributes with the arguments.</p>
+
+<p>For more information about the context attributes, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L93" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="group&#40;name:Symbol,**named,&amp;block:CommandGroup-&gt;_&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>group</strong>(name : Symbol, **named, &block : <a href="../Run/CommandGroup.html">CommandGroup</a> -> _)
+
+        <a class="method-permalink" href="#group%28name%3ASymbol%2C%2A%2Anamed%2C%26block%3ACommandGroup-%3E_%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends and returns a new command group and yield a block with the group.</p>
+
+<p>It initializes the new group's context attributes with the arguments.</p>
+
+<p>For more information about the context attributes, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L137" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="group&#40;child:CommandGroup,&amp;block:CommandGroup-&gt;_&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>group</strong>(child : <a href="../Run/CommandGroup.html">CommandGroup</a>, &block : <a href="../Run/CommandGroup.html">CommandGroup</a> -> _)
+
+        <a class="method-permalink" href="#group%28child%3ACommandGroup%2C%26block%3ACommandGroup-%3E_%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends and returns the specified group and yield a block with the group.</p>
+
+<p>It initializes the new group's context attributes with the arguments.</p>
+
+<p>For more information about the context attributes, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L148" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="group&#40;**named,&amp;block:CommandGroup-&gt;_&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>group</strong>(**named, &block : <a href="../Run/CommandGroup.html">CommandGroup</a> -> _)
+
+        <a class="method-permalink" href="#group%28%2A%2Anamed%2C%26block%3ACommandGroup-%3E_%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Appends and returns a new command group and yield a block with the group.</p>
+
+<p>It initializes the new group's context attributes with the arguments.</p>
+
+<p>For more information about the context attributes, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">Context#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L115" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent&#61;&#40;parent:CommandGroup&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>parent=</strong>(parent : <a href="../Run/CommandGroup.html">CommandGroup</a>)
+
+        <a class="method-permalink" href="#parent%3D%28parent%3ACommandGroup%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets a parent group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent?:CommandGroup?-instance-method">
+      <div class="signature">
+        
+        def <strong>parent?</strong> : <a href="../Run/CommandGroup.html">CommandGroup</a>?
+
+        <a class="method-permalink" href="#parent%3F%3ACommandGroup%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this parent group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="run-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>
+
+        <a class="method-permalink" href="#run-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Runs all commands and command groups under this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/command_group.cr#L155" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

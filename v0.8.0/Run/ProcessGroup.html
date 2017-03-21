@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Run::ProcessGroup - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="../Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/AsCommand" data-name="run::ascommand">
+      <a href="../Run/AsCommand.html">AsCommand</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/AsProcess" data-name="run::asprocess">
+      <a href="../Run/AsProcess.html">AsProcess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="../Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandLike" data-name="run::commandlike">
+      <a href="../Run/CommandLike.html">CommandLike</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandProcess" data-name="run::commandprocess">
+      <a href="../Run/CommandProcess.html">CommandProcess</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="../Run/Context.html">Context</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context/Name" data-name="run::context::name">
+      <a href="../Run/Context/Name.html">Name</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context/NameArg" data-name="run::context::namearg">
+      <a href="../Run/Context/NameArg.html">NameArg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/FiberFunction" data-name="run::fiberfunction">
+      <a href="../Run/FiberFunction.html">FiberFunction</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/FiberFunction/ProcType" data-name="run::fiberfunction::proctype">
+      <a href="../Run/FiberFunction/ProcType.html">ProcType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/FunctionFiber" data-name="run::functionfiber">
+      <a href="../Run/FunctionFiber.html">FunctionFiber</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/FunctionProcess" data-name="run::functionprocess">
+      <a href="../Run/FunctionProcess.html">FunctionProcess</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="../Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="../Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Like" data-name="run::io::like">
+      <a href="../Run/Io/Like.html">Like</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Ios" data-name="run::ios">
+      <a href="../Run/Ios.html">Ios</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/ProcessFunction" data-name="run::processfunction">
+      <a href="../Run/ProcessFunction.html">ProcessFunction</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessFunction/ProcType" data-name="run::processfunction::proctype">
+      <a href="../Run/ProcessFunction/ProcType.html">ProcType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessLike" data-name="run::processlike">
+      <a href="../Run/ProcessLike.html">ProcessLike</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Run::ProcessGroup
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Run/ProcessGroup.html">Run::ProcessGroup</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Represents a set of processes.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L3" target="_blank">run/process_group.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%28%2Aargs%29-instance-method" class="signature"><strong>#[]</strong>(*args)</a>
+        
+          <div class="summary"><p>Calls the <code><a href="../Run/ProcessGroup.html#processes%3AArray%28Run%3A%3AAsProcess%29-instance-method">#processes</a></code> array' s [] method.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3F%28%2Aargs%29-instance-method" class="signature"><strong>#[]?</strong>(*args)</a>
+        
+          <div class="summary"><p>Calls the <code><a href="../Run/ProcessGroup.html#processes%3AArray%28Run%3A%3AAsProcess%29-instance-method">#processes</a></code> array' s []? method.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort%28signal%3Dnil%29-instance-method" class="signature"><strong>#abort</strong>(signal = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Aborts all the descendant processes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#children%3AArray%28Run%3A%3ACommandProcess%7CRun%3A%3AFunctionFiber%7CRun%3A%3AFunctionProcess%7CRun%3A%3AProcessGroup%29-instance-method" class="signature"><strong>#children</strong> : Array(Run::CommandProcess | Run::FunctionFiber | Run::FunctionProcess | Run::ProcessGroup)</a>
+        
+          <div class="summary"><p>Returns all the child processes and groups that directly belong to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command_processes%3AArray%28Run%3A%3ACommandProcess%29-instance-method" class="signature"><strong>#command_processes</strong> : Array(Run::CommandProcess)</a>
+        
+          <div class="summary"><p>Returns all the child command processes that directly belong to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#context%3AContext-instance-method" class="signature"><strong>#context</strong> : Context</a>
+        
+          <div class="summary"><p>Returns this context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#function_fibers%3AArray%28Run%3A%3AFunctionFiber%29-instance-method" class="signature"><strong>#function_fibers</strong> : Array(Run::FunctionFiber)</a>
+        
+          <div class="summary"><p>Returns all the child fiber function processes that directly belong to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#function_processes%3AArray%28Run%3A%3AFunctionProcess%29-instance-method" class="signature"><strong>#function_processes</strong> : Array(Run::FunctionProcess)</a>
+        
+          <div class="summary"><p>Returns all the child process function processes that directly belong to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3AProcessGroup-instance-method" class="signature"><strong>#parent</strong> : ProcessGroup</a>
+        
+          <div class="summary"><p>Returns this parent group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3F%3AProcessGroup%3F-instance-method" class="signature"><strong>#parent?</strong> : ProcessGroup?</a>
+        
+          <div class="summary"><p>Returns this parent group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#process_groups%3AArray%28Run%3A%3AProcessGroup%29-instance-method" class="signature"><strong>#process_groups</strong> : Array(Run::ProcessGroup)</a>
+        
+          <div class="summary"><p>Returns all the child process groups that directly belong to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#processes%3AArray%28Run%3A%3AAsProcess%29-instance-method" class="signature"><strong>#processes</strong> : Array(Run::AsProcess)</a>
+        
+          <div class="summary"><p>Returns all the single processes that directly belong to this group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root%3AProcessGroup-instance-method" class="signature"><strong>#root</strong> : ProcessGroup</a>
+        
+          <div class="summary"><p>Returns this root group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root%3F-instance-method" class="signature"><strong>#root?</strong></a>
+        
+          <div class="summary"><p>Tests if this group is the root.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#success%3F-instance-method" class="signature"><strong>#success?</strong></a>
+        
+          <div class="summary"><p>Tests if all the child processes and groups successfully terminated.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#wait-instance-method" class="signature"><strong>#wait</strong></a>
+        
+          <div class="summary"><p>Waits for all the child processes and groups to terminate.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="&#91;&#93;&#40;*args&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>[]</strong>(*args)
+
+        <a class="method-permalink" href="#%5B%5D%28%2Aargs%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Calls the <code><a href="../Run/ProcessGroup.html#processes%3AArray%28Run%3A%3AAsProcess%29-instance-method">#processes</a></code> array' s [] method.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L174" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&#91;&#93;?&#40;*args&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>[]?</strong>(*args)
+
+        <a class="method-permalink" href="#%5B%5D%3F%28%2Aargs%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Calls the <code><a href="../Run/ProcessGroup.html#processes%3AArray%28Run%3A%3AAsProcess%29-instance-method">#processes</a></code> array' s []? method.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L179" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort&#40;signal&#61;nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>abort</strong>(signal = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#abort%28signal%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Aborts all the descendant processes.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L156" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="children:Array&#40;Run::CommandProcess|Run::FunctionFiber|Run::FunctionProcess|Run::ProcessGroup&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>children</strong> : Array(<a href="../Run/CommandProcess.html">Run::CommandProcess</a> | <a href="../Run/FunctionFiber.html">Run::FunctionFiber</a> | <a href="../Run/FunctionProcess.html">Run::FunctionProcess</a> | <a href="../Run/ProcessGroup.html">Run::ProcessGroup</a>)
+
+        <a class="method-permalink" href="#children%3AArray%28Run%3A%3ACommandProcess%7CRun%3A%3AFunctionFiber%7CRun%3A%3AFunctionProcess%7CRun%3A%3AProcessGroup%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the child processes and groups that directly belong to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command_processes:Array&#40;Run::CommandProcess&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>command_processes</strong> : Array(<a href="../Run/CommandProcess.html">Run::CommandProcess</a>)
+
+        <a class="method-permalink" href="#command_processes%3AArray%28Run%3A%3ACommandProcess%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the child command processes that directly belong to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="context:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>context</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#context%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="function_fibers:Array&#40;Run::FunctionFiber&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>function_fibers</strong> : Array(<a href="../Run/FunctionFiber.html">Run::FunctionFiber</a>)
+
+        <a class="method-permalink" href="#function_fibers%3AArray%28Run%3A%3AFunctionFiber%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the child fiber function processes that directly belong to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="function_processes:Array&#40;Run::FunctionProcess&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>function_processes</strong> : Array(<a href="../Run/FunctionProcess.html">Run::FunctionProcess</a>)
+
+        <a class="method-permalink" href="#function_processes%3AArray%28Run%3A%3AFunctionProcess%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the child process function processes that directly belong to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent:ProcessGroup-instance-method">
+      <div class="signature">
+        
+        def <strong>parent</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+
+        <a class="method-permalink" href="#parent%3AProcessGroup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this parent group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent?:ProcessGroup?-instance-method">
+      <div class="signature">
+        
+        def <strong>parent?</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a>?
+
+        <a class="method-permalink" href="#parent%3F%3AProcessGroup%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this parent group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="process_groups:Array&#40;Run::ProcessGroup&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>process_groups</strong> : Array(<a href="../Run/ProcessGroup.html">Run::ProcessGroup</a>)
+
+        <a class="method-permalink" href="#process_groups%3AArray%28Run%3A%3AProcessGroup%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the child process groups that directly belong to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L50" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="processes:Array&#40;Run::AsProcess&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>processes</strong> : Array(<a href="../Run/AsProcess.html">Run::AsProcess</a>)
+
+        <a class="method-permalink" href="#processes%3AArray%28Run%3A%3AAsProcess%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns all the single processes that directly belong to this group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root:ProcessGroup-instance-method">
+      <div class="signature">
+        
+        def <strong>root</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+
+        <a class="method-permalink" href="#root%3AProcessGroup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this root group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root?-instance-method">
+      <div class="signature">
+        
+        def <strong>root?</strong>
+
+        <a class="method-permalink" href="#root%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if this group is the root.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="success?-instance-method">
+      <div class="signature">
+        
+        def <strong>success?</strong>
+
+        <a class="method-permalink" href="#success%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if all the child processes and groups successfully terminated.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L166" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="wait-instance-method">
+      <div class="signature">
+        
+        def <strong>wait</strong>
+
+        <a class="method-permalink" href="#wait-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Waits for all the child processes and groups to terminate.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/90931b9af40799e15b6e0ea1b878d2b1ee41ad3d/src/run/process_group.cr#L133" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

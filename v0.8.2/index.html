@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/doc.js"></script>
+  <title>README - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li class="current"><a href="index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/AsCommand" data-name="run::ascommand">
+      <a href="Run/AsCommand.html">AsCommand</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/AsProcess" data-name="run::asprocess">
+      <a href="Run/AsProcess.html">AsProcess</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandLike" data-name="run::commandlike">
+      <a href="Run/CommandLike.html">CommandLike</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandProcess" data-name="run::commandprocess">
+      <a href="Run/CommandProcess.html">CommandProcess</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="Run/Context.html">Context</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context/Name" data-name="run::context::name">
+      <a href="Run/Context/Name.html">Name</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context/NameArg" data-name="run::context::namearg">
+      <a href="Run/Context/NameArg.html">NameArg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Exit" data-name="run::exit">
+      <a href="Run/Exit.html">Exit</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ExitStatus" data-name="run::exitstatus">
+      <a href="Run/ExitStatus.html">ExitStatus</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/FiberFunction" data-name="run::fiberfunction">
+      <a href="Run/FiberFunction.html">FiberFunction</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/FiberFunction/ProcType" data-name="run::fiberfunction::proctype">
+      <a href="Run/FiberFunction/ProcType.html">ProcType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/FunctionFiber" data-name="run::functionfiber">
+      <a href="Run/FunctionFiber.html">FunctionFiber</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/FunctionProcess" data-name="run::functionprocess">
+      <a href="Run/FunctionProcess.html">FunctionProcess</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Like" data-name="run::io::like">
+      <a href="Run/Io/Like.html">Like</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Ios" data-name="run::ios">
+      <a href="Run/Ios.html">Ios</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/ProcessFunction" data-name="run::processfunction">
+      <a href="Run/ProcessFunction.html">ProcessFunction</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessFunction/ProcType" data-name="run::processfunction::proctype">
+      <a href="Run/ProcessFunction/ProcType.html">ProcType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessLike" data-name="run::processlike">
+      <a href="Run/ProcessLike.html">ProcessLike</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1>Crystal Run</h1>
+
+<p>A Crystal library for running commands in reusable contexts.</p>
+
+<p><a href="https://travis-ci.org/mosop/run" target="_blank"><img src="https://travis-ci.org/mosop/run.svg?branch=master" alt="Build Status"/></a></p>
+
+<h2>Installation</h2>
+
+<p>Add this to your application's <code>shard.yml</code>:</p>
+
+<pre><code class='language-yaml'>dependencies:
+  run:
+    github: mosop/run</code></pre>
+
+<p>&lt;a name="code_samples">&lt;/a></p>
+
+<h2>Code Samples</h2>
+
+<h3>Smiley</h3>
+
+<pre><code class='language-crystal'>cmd <span class="o">=</span> <span class="t">Run</span><span class="t">::</span><span class="t">Command</span>.<span class="k">new</span>(<span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;:&#41;&quot;</span>])
+cmd.run.wait <span class="c"># prints &quot;:&#41;&quot;</span></code></pre>
+
+<h3>Additional Arguments</h3>
+
+<pre><code class='language-crystal'>cmd <span class="o">=</span> <span class="t">Run</span>.command(<span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;:&#41;&quot;</span>])
+<span class="s">%w(hello goodbye)</span>.each <span class="k">do</span> <span class="o">|</span>i<span class="o">|</span>
+  cmd.run(args: [i]).wait
+<span class="k">end</span></code></pre>
+
+<p>This prints:</p>
+
+<pre><code>:) hello
+:) goodbye</code></pre>
+
+<h3>Over and Over</h3>
+
+<pre><code class='language-crystal'>cmd <span class="o">=</span> <span class="t">Run</span>.command(<span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;:&#41;&quot;</span>])
+<span class="n">100</span>.times <span class="k">do</span>
+  cmd.run.wait
+<span class="k">end</span></code></pre>
+
+<p>This prints 100 of :).</p>
+
+<h3>Multiple at Once</h3>
+
+<pre><code class='language-crystal'>cg <span class="o">=</span> <span class="t">Run</span>.group
+<span class="n">100</span>.times <span class="k">do</span>
+  cg.command <span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;:&#41;&quot;</span>]
+<span class="k">end</span>
+cg.run.wait</code></pre>
+
+<p>This prints 100 of :) too.</p>
+
+<h3>Nested Contexts</h3>
+
+<pre><code class='language-crystal'>cg <span class="o">=</span> <span class="t">Run</span>.group(chdir: <span class="s">&quot;path&quot;</span>)
+cg.command <span class="s">&quot;pwd&quot;</span>
+cg.command <span class="s">&quot;pwd&quot;</span>, chdir: <span class="s">&quot;to&quot;</span>
+cg.command <span class="s">&quot;pwd&quot;</span>, chdir: <span class="s">&quot;..&quot;</span>
+cg.run.wait</code></pre>
+
+<p>If the current directory is <em>/Users/mosop</em>, this code prints:</p>
+
+<pre><code><span class="s">/Users/</span>mosop<span class="s">/path
+/</span><span class="t">Users</span><span class="s">/mosop/</span>path<span class="s">/to
+/</span><span class="t">Users</span><span class="s">/mosop</code></pre>
+
+<h3>Parallel</h3>
+
+<pre><code class='language-crystal'>cg <span class="o">=</span> <span class="t">Run</span>.group
+cg.command <span class="s">&quot;wget&quot;</span>, <span class="s">%w(http://mosop.rocks)</span>
+cg.command <span class="s">&quot;wget&quot;</span>, <span class="s">%w(http://mosop.yoga)</span>
+cg.command <span class="s">&quot;wget&quot;</span>, <span class="s">%w(http://mosop.ninja)</span>
+process_group <span class="o">=</span> cg.run(parallel: <span class="n">true</span>)
+
+<span class="c"># do other things</span>
+
+process_group.wait</code></pre>
+
+<h3>Running Code Blocks</h3>
+
+<ul><li>In a fiber</li></ul>
+
+<pre><code class='language-crystal'>cg <span class="o">=</span> <span class="t">Run</span>.group
+<span class="n">100</span>.times <span class="k">do</span>
+  cg.future <span class="k">do</span>
+    puts <span class="s">&quot;:&#41;&quot;</span>
+    <span class="n">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+cg.run.wait</code></pre>
+
+<ul><li>In a forked process</li></ul>
+
+<pre><code class='language-crystal'>cg <span class="o">=</span> <span class="t">Run</span>.group
+<span class="n">100</span>.times <span class="k">do</span>
+  cg.fork <span class="k">do</span>
+    puts <span class="s">&quot;:&#41;&quot;</span>
+    <span class="n">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+cg.run.wait</code></pre>
+
+<h3>Returning Data by Forked Processes</h3>
+
+<pre><code class='language-crystal'>cg <span class="o">=</span> <span class="t">Run</span>.group
+<span class="n">100</span>.times <span class="k">do</span>
+  cg.fork <span class="k">do</span>
+    <span class="t">Run</span><span class="t">::</span><span class="t">ExitStatus</span>.<span class="k">new</span>(<span class="n">0</span>, <span class="s">&quot;:&#41;&quot;</span>).exit!
+    <span class="n">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+cg.run.wait <span class="k">do</span> <span class="o">|</span>process<span class="o">|</span>
+  <span class="k">if</span> process <span class="o">=</span> process.as?(<span class="t">Run</span><span class="t">::</span><span class="t">AsProcess</span>)
+    puts process.exit_status.data
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>This prints 100 of :).</p>
+
+<h2>Usage</h2>
+
+<pre><code class='language-crystal'><span class="k">require</span> <span class="s">&quot;run&quot;</span></code></pre>
+
+<p>And see:</p>
+
+<ul><li><a href="#code_samples" target="_blank">Code Samples</a></li><li><a href="https://github.com/mosop/run/wiki" target="_blank">Wiki</a></li><li><a href="http://mosop.me/run/Run.html" target="_blank">API Document</a></li></ul>
+
+<h2>Versioning Policy</h2>
+
+<p>See <a href="https://github.com/mosop/mosop.github.io/wiki/Versioning-Policy" target="_blank">Wiki</a>.</p>
+
+<h2>Release Notes</h2>
+
+<p>See <a href="https://github.com/mosop/run/releases" target="_blank">Releases</a>.</p>
+</div>
+</body>
+</html>

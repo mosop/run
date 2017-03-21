@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Run::Context - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="../Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="../Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="../Run/Context.html">Context</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="../Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="../Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Process" data-name="run::process">
+      <a href="../Run/Process.html">Process</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessLike" data-name="run::processlike">
+      <a href="../Run/ProcessLike.html">ProcessLike</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Timeout" data-name="run::timeout">
+      <a href="../Run/Timeout.html">Timeout</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Timeout/Arg" data-name="run::timeout::arg">
+      <a href="../Run/Timeout/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Run::Context
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Run/Context.html">Run::Context</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L1" target="_blank">run/context.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28name%3ASymbol%2Ccommand%3AString%2Cargs%3AArray%28String%29%2C%2A%2Aattrs%29-class-method" class="signature"><strong>.new</strong>(name : Symbol, command : String, args : Array(String), **attrs)</a>
+        
+          <div class="summary"><p>Initializes a new context with the attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28command%3AString%2Cargs%3AArray%28String%29%2C%2A%2Aattrs%29-class-method" class="signature"><strong>.new</strong>(command : String, args : Array(String), **attrs)</a>
+        
+          <div class="summary"><p>Initializes a new context with the attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28command%3AString%2C%2A%2Aattrs%29-class-method" class="signature"><strong>.new</strong>(command : String, **attrs)</a>
+        
+          <div class="summary"><p>Initializes a new context with the attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28name%3ASymbol%2C%2A%2Aattrs%29-class-method" class="signature"><strong>.new</strong>(name : Symbol, **attrs)</a>
+        
+          <div class="summary"><p>Initializes a new context with the attributes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+          <div class="summary"><p>Initializes a new context with the attributes.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#abort_on_error%28value%3ABool%3F%29%3AContext-instance-method" class="signature"><strong>#abort_on_error</strong>(value : Bool?) : Context</a>
+        
+          <div class="summary"><p>Sets the abort_on_error attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_on_error%21%3AContext-instance-method" class="signature"><strong>#abort_on_error!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the abort_on_error attribute to true and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_signal%3ASignal-instance-method" class="signature"><strong>#abort_signal</strong> : Signal</a>
+        
+          <div class="summary"><p>Returns the combined value of the abort_signal attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_signal%28value%3ASignal%3F%29-instance-method" class="signature"><strong>#abort_signal</strong>(value : Signal?)</a>
+        
+          <div class="summary"><p>Sets the abort_signal attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_signal%3D%28value%3ASignal%3F%29-instance-method" class="signature"><strong>#abort_signal=</strong>(value : Signal?)</a>
+        
+          <div class="summary"><p>Sets the abort_signal attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_timeout%3ATimeout%3A%3AArg-instance-method" class="signature"><strong>#abort_timeout</strong> : Timeout::Arg</a>
+        
+          <div class="summary"><p>Returns the combined value of the abort_timeout attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_timeout%28value%3ATimeout%3A%3AArg%3F%29-instance-method" class="signature"><strong>#abort_timeout</strong>(value : Timeout::Arg?)</a>
+        
+          <div class="summary"><p>Sets the abort_timeout attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abort_timeout%3D%28value%3ATimeout%3A%3AArg%3F%29-instance-method" class="signature"><strong>#abort_timeout=</strong>(value : Timeout::Arg?)</a>
+        
+          <div class="summary"><p>Sets the abort_timeout attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#aborts_on_error%3F%3ABool-instance-method" class="signature"><strong>#aborts_on_error?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns the combined value of the abort_on_error attribute in the context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#args%3AArray%28String%29-instance-method" class="signature"><strong>#args</strong> : Array(String)</a>
+        
+          <div class="summary"><p>Returns the combined value of the args attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#args%28value%3AArray%28String%29%3F%29-instance-method" class="signature"><strong>#args</strong>(value : Array(String)?)</a>
+        
+          <div class="summary"><p>Sets the args attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#args%3D%28value%3AArray%28String%29%3F%29-instance-method" class="signature"><strong>#args=</strong>(value : Array(String)?)</a>
+        
+          <div class="summary"><p>Sets the args attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#chdir%28value%3AString%3F%29-instance-method" class="signature"><strong>#chdir</strong>(value : String?)</a>
+        
+          <div class="summary"><p>Sets the chdir attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#chdir%3AString-instance-method" class="signature"><strong>#chdir</strong> : String</a>
+        
+          <div class="summary"><p>Returns the combined value of the chdir attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#chdir%3D%28value%3AString%3F%29-instance-method" class="signature"><strong>#chdir=</strong>(value : String?)</a>
+        
+          <div class="summary"><p>Sets the chdir attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clear_env%28value%3ABool%3F%29%3AContext-instance-method" class="signature"><strong>#clear_env</strong>(value : Bool?) : Context</a>
+        
+          <div class="summary"><p>Sets the clear_env attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clear_env%21%3AContext-instance-method" class="signature"><strong>#clear_env!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the clear_env attribute to true and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clears_env%3F%3ABool-instance-method" class="signature"><strong>#clears_env?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns the combined value of the clear_env attribute in the context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command%3AString-instance-method" class="signature"><strong>#command</strong> : String</a>
+        
+          <div class="summary"><p>Returns the combined value of the command attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command%28value%3AString%3F%29-instance-method" class="signature"><strong>#command</strong>(value : String?)</a>
+        
+          <div class="summary"><p>Sets the command attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#command%3D%28value%3AString%3F%29-instance-method" class="signature"><strong>#command=</strong>(value : String?)</a>
+        
+          <div class="summary"><p>Sets the command attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dup-instance-method" class="signature"><strong>#dup</strong></a>
+        
+          <div class="summary"><p>Copies this context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#env%28value%3AHash%28String%2CString%29%3F%29-instance-method" class="signature"><strong>#env</strong>(value : Hash(String, String)?)</a>
+        
+          <div class="summary"><p>Sets the env attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#env%3AHash%28String%2CString%29-instance-method" class="signature"><strong>#env</strong> : Hash(String, String)</a>
+        
+          <div class="summary"><p>Returns the combined value of the env attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#env%3D%28value%3AHash%28String%2CString%29%3F%29-instance-method" class="signature"><strong>#env=</strong>(value : Hash(String, String)?)</a>
+        
+          <div class="summary"><p>Sets the env attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error%3AIo%3A%3AArg-instance-method" class="signature"><strong>#error</strong> : Io::Arg</a>
+        
+          <div class="summary"><p>Returns the combined value of the error attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error%28value%3AIo%3A%3AArg%3F%29-instance-method" class="signature"><strong>#error</strong>(value : Io::Arg?)</a>
+        
+          <div class="summary"><p>Sets the error attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error%3D%28value%3AIo%3A%3AArg%3F%29-instance-method" class="signature"><strong>#error=</strong>(value : Io::Arg?)</a>
+        
+          <div class="summary"><p>Sets the error attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input%3AIo%3A%3AArg-instance-method" class="signature"><strong>#input</strong> : Io::Arg</a>
+        
+          <div class="summary"><p>Returns the combined value of the input attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input%28value%3AIo%3A%3AArg%3F%29-instance-method" class="signature"><strong>#input</strong>(value : Io::Arg?)</a>
+        
+          <div class="summary"><p>Sets the input attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input%3D%28value%3AIo%3A%3AArg%3F%29-instance-method" class="signature"><strong>#input=</strong>(value : Io::Arg?)</a>
+        
+          <div class="summary"><p>Sets the input attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name%28value%3AString%3F%29-instance-method" class="signature"><strong>#name</strong>(value : String?)</a>
+        
+          <div class="summary"><p>Sets the name attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name%3A%3A%3AUnion%28String%2CNil%29-instance-method" class="signature"><strong>#name</strong> : ::Union(String, Nil)</a>
+        
+          <div class="summary"><p>Returns the combined value of the name attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name%3D%28value%3AString%3F%29-instance-method" class="signature"><strong>#name=</strong>(value : String?)</a>
+        
+          <div class="summary"><p>Sets the name attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_parallel%21%3AContext-instance-method" class="signature"><strong>#not_parallel!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the parallel attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_shell%21%3AContext-instance-method" class="signature"><strong>#not_shell!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the shell attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_to_aborts_on_error%21%3AContext-instance-method" class="signature"><strong>#not_to_aborts_on_error!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the abort_on_error attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_to_clears_env%21%3AContext-instance-method" class="signature"><strong>#not_to_clears_env!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the clear_env attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_to_shows_command%21%3AContext-instance-method" class="signature"><strong>#not_to_shows_command!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the show_command attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_to_shows_dir%21%3AContext-instance-method" class="signature"><strong>#not_to_shows_dir!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the show_dir attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output%3AIo%3A%3AArg-instance-method" class="signature"><strong>#output</strong> : Io::Arg</a>
+        
+          <div class="summary"><p>Returns the combined value of the output attribute in the nested context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output%28value%3AIo%3A%3AArg%3F%29-instance-method" class="signature"><strong>#output</strong>(value : Io::Arg?)</a>
+        
+          <div class="summary"><p>Sets the output attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output%3D%28value%3AIo%3A%3AArg%3F%29-instance-method" class="signature"><strong>#output=</strong>(value : Io::Arg?)</a>
+        
+          <div class="summary"><p>Sets the output attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parallel%28value%3ABool%3F%29%3AContext-instance-method" class="signature"><strong>#parallel</strong>(value : Bool?) : Context</a>
+        
+          <div class="summary"><p>Sets the parallel attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parallel%21%3AContext-instance-method" class="signature"><strong>#parallel!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the parallel attribute to true and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parallel%3F%3ABool-instance-method" class="signature"><strong>#parallel?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns the combined value of the parallel attribute in the context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent-instance-method" class="signature"><strong>#parent</strong></a>
+        
+          <div class="summary"><p>Returns this parent context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%28value%3AContext%3F%29-instance-method" class="signature"><strong>#parent</strong>(value : Context?)</a>
+        
+          <div class="summary"><p>Sets the parent attribute and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3D%28value%3AContext%3F%29-instance-method" class="signature"><strong>#parent=</strong>(value : Context?)</a>
+        
+          <div class="summary"><p>Sets the parent attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3F%3AContext%3F-instance-method" class="signature"><strong>#parent?</strong> : Context?</a>
+        
+          <div class="summary"><p>Returns this parent context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root%3AContext-instance-method" class="signature"><strong>#root</strong> : Context</a>
+        
+          <div class="summary"><p>Returns the root context in the nested contexts.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root%3F-instance-method" class="signature"><strong>#root?</strong></a>
+        
+          <div class="summary"><p>Tests if this context is the root in the nested contexts.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_abort_on_error%3ABool%3F-instance-method" class="signature"><strong>#self_abort_on_error</strong> : Bool?</a>
+        
+          <div class="summary"><p>Returns the abort_on_error attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_abort_signal%3ASignal%3F-instance-method" class="signature"><strong>#self_abort_signal</strong> : Signal?</a>
+        
+          <div class="summary"><p>Returns the abort_signal attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_abort_timeout%3ATimeout%3A%3AArg%3F-instance-method" class="signature"><strong>#self_abort_timeout</strong> : Timeout::Arg?</a>
+        
+          <div class="summary"><p>Returns the abort_timeout attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_args%3AArray%28String%29%3F-instance-method" class="signature"><strong>#self_args</strong> : Array(String)?</a>
+        
+          <div class="summary"><p>Returns the args attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_chdir%3AString%3F-instance-method" class="signature"><strong>#self_chdir</strong> : String?</a>
+        
+          <div class="summary"><p>Returns the chdir attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_clear_env%3ABool%3F-instance-method" class="signature"><strong>#self_clear_env</strong> : Bool?</a>
+        
+          <div class="summary"><p>Returns the clear_env attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_command%3AString%3F-instance-method" class="signature"><strong>#self_command</strong> : String?</a>
+        
+          <div class="summary"><p>Returns the command attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_env%3AHash%28String%2CString%29%3F-instance-method" class="signature"><strong>#self_env</strong> : Hash(String, String)?</a>
+        
+          <div class="summary"><p>Returns the env attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_error%3AIo%3A%3AArg%3F-instance-method" class="signature"><strong>#self_error</strong> : Io::Arg?</a>
+        
+          <div class="summary"><p>Returns the error attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_input%3AIo%3A%3AArg%3F-instance-method" class="signature"><strong>#self_input</strong> : Io::Arg?</a>
+        
+          <div class="summary"><p>Returns the input attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_name%3AString%3F-instance-method" class="signature"><strong>#self_name</strong> : String?</a>
+        
+          <div class="summary"><p>Returns the name attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_output%3AIo%3A%3AArg%3F-instance-method" class="signature"><strong>#self_output</strong> : Io::Arg?</a>
+        
+          <div class="summary"><p>Returns the output attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_parallel%3ABool%3F-instance-method" class="signature"><strong>#self_parallel</strong> : Bool?</a>
+        
+          <div class="summary"><p>Returns the parallel attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_shell%3ABool%3F-instance-method" class="signature"><strong>#self_shell</strong> : Bool?</a>
+        
+          <div class="summary"><p>Returns the shell attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_show_command%3ABool%3F-instance-method" class="signature"><strong>#self_show_command</strong> : Bool?</a>
+        
+          <div class="summary"><p>Returns the show_command attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#self_show_dir%3ABool%3F-instance-method" class="signature"><strong>#self_show_dir</strong> : Bool?</a>
+        
+          <div class="summary"><p>Returns the show_dir attribute.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method" class="signature"><strong>#set</strong>(name : String? = <span class="n">nil</span>, command : String? = <span class="n">nil</span>, args : Array(String)? = <span class="n">nil</span>, parent : Context? = <span class="n">nil</span>, env : Hash(String, String)? = <span class="n">nil</span>, clear_env : Bool? = <span class="n">nil</span>, shell : Bool? = <span class="n">nil</span>, input : Io::Arg = <span class="n">nil</span>, output : Io::Arg = <span class="n">nil</span>, error : Io::Arg = <span class="n">nil</span>, chdir : String? = <span class="n">nil</span>, show_dir : Bool? = <span class="n">nil</span>, show_command : Bool? = <span class="n">nil</span>, abort_signal : Signal? = <span class="n">nil</span>, parallel : Bool? = <span class="n">nil</span>, abort_on_error : Bool? = <span class="n">nil</span>, abort_timeout : Timeout::Arg = <span class="n">nil</span>, current_dir : String? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Sets the attributes and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shell%28value%3ABool%3F%29%3AContext-instance-method" class="signature"><strong>#shell</strong>(value : Bool?) : Context</a>
+        
+          <div class="summary"><p>Sets the shell attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shell%21%3AContext-instance-method" class="signature"><strong>#shell!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the shell attribute to true and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shell%3F%3ABool-instance-method" class="signature"><strong>#shell?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns the combined value of the shell attribute in the context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#show_command%28value%3ABool%3F%29%3AContext-instance-method" class="signature"><strong>#show_command</strong>(value : Bool?) : Context</a>
+        
+          <div class="summary"><p>Sets the show_command attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#show_command%21%3AContext-instance-method" class="signature"><strong>#show_command!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the show_command attribute to true and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#show_dir%28value%3ABool%3F%29%3AContext-instance-method" class="signature"><strong>#show_dir</strong>(value : Bool?) : Context</a>
+        
+          <div class="summary"><p>Sets the show_dir attribute to false and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#show_dir%21%3AContext-instance-method" class="signature"><strong>#show_dir!</strong> : Context</a>
+        
+          <div class="summary"><p>Sets the show_dir attribute to true and returns self.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shows_command%3F%3ABool-instance-method" class="signature"><strong>#shows_command?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns the combined value of the show_command attribute in the context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shows_dir%3F%3ABool-instance-method" class="signature"><strong>#shows_dir?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns the combined value of the show_dir attribute in the context.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="new&#40;name:Symbol,command:String,args:Array&#40;String&#41;,**attrs&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(name : Symbol, command : String, args : Array(String), **attrs)
+
+        <a class="method-permalink" href="#new%28name%3ASymbol%2Ccommand%3AString%2Cargs%3AArray%28String%29%2C%2A%2Aattrs%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a new context with the attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;command:String,args:Array&#40;String&#41;,**attrs&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(command : String, args : Array(String), **attrs)
+
+        <a class="method-permalink" href="#new%28command%3AString%2Cargs%3AArray%28String%29%2C%2A%2Aattrs%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a new context with the attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;command:String,**attrs&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(command : String, **attrs)
+
+        <a class="method-permalink" href="#new%28command%3AString%2C%2A%2Aattrs%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a new context with the attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;name:Symbol,**attrs&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(name : Symbol, **attrs)
+
+        <a class="method-permalink" href="#new%28name%3ASymbol%2C%2A%2Aattrs%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a new context with the attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Initializes a new context with the attributes.</p>
+
+<p>For more information about the arguments, see <code><a href="../Run/Context.html#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">#set</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="abort_on_error&#40;value:Bool?&#41;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_on_error</strong>(value : Bool?) : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#abort_on_error%28value%3ABool%3F%29%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_on_error attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L299" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_on_error&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_on_error!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#abort_on_error%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_on_error attribute to true and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L299" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_signal:Signal-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_signal</strong> : Signal
+
+        <a class="method-permalink" href="#abort_signal%3ASignal-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the abort_signal attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L291" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_signal&#40;value:Signal?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_signal</strong>(value : Signal?)
+
+        <a class="method-permalink" href="#abort_signal%28value%3ASignal%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_signal attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L291" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_signal&#61;&#40;value:Signal?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_signal=</strong>(value : Signal?)
+
+        <a class="method-permalink" href="#abort_signal%3D%28value%3ASignal%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_signal attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L291" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_timeout:Timeout::Arg-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_timeout</strong> : <a href="../Run/Timeout/Arg.html">Timeout::Arg</a>
+
+        <a class="method-permalink" href="#abort_timeout%3ATimeout%3A%3AArg-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the abort_timeout attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L303" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_timeout&#40;value:Timeout::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_timeout</strong>(value : <a href="../Run/Timeout/Arg.html">Timeout::Arg</a>?)
+
+        <a class="method-permalink" href="#abort_timeout%28value%3ATimeout%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_timeout attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L303" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abort_timeout&#61;&#40;value:Timeout::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>abort_timeout=</strong>(value : <a href="../Run/Timeout/Arg.html">Timeout::Arg</a>?)
+
+        <a class="method-permalink" href="#abort_timeout%3D%28value%3ATimeout%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_timeout attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L303" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="aborts_on_error?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>aborts_on_error?</strong> : Bool
+
+        <a class="method-permalink" href="#aborts_on_error%3F%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the abort_on_error attribute in the context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L299" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="args:Array&#40;String&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>args</strong> : Array(String)
+
+        <a class="method-permalink" href="#args%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the args attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L249" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="args&#40;value:Array&#40;String&#41;?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>args</strong>(value : Array(String)?)
+
+        <a class="method-permalink" href="#args%28value%3AArray%28String%29%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the args attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L249" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="args&#61;&#40;value:Array&#40;String&#41;?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>args=</strong>(value : Array(String)?)
+
+        <a class="method-permalink" href="#args%3D%28value%3AArray%28String%29%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the args attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L249" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="chdir&#40;value:String?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>chdir</strong>(value : String?)
+
+        <a class="method-permalink" href="#chdir%28value%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the chdir attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L279" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="chdir:String-instance-method">
+      <div class="signature">
+        
+        def <strong>chdir</strong> : String
+
+        <a class="method-permalink" href="#chdir%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the chdir attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L279" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="chdir&#61;&#40;value:String?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>chdir=</strong>(value : String?)
+
+        <a class="method-permalink" href="#chdir%3D%28value%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the chdir attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L279" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="clear_env&#40;value:Bool?&#41;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>clear_env</strong>(value : Bool?) : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#clear_env%28value%3ABool%3F%29%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the clear_env attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L259" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="clear_env&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>clear_env!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#clear_env%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the clear_env attribute to true and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L259" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="clears_env?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>clears_env?</strong> : Bool
+
+        <a class="method-permalink" href="#clears_env%3F%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the clear_env attribute in the context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L259" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command:String-instance-method">
+      <div class="signature">
+        
+        def <strong>command</strong> : String
+
+        <a class="method-permalink" href="#command%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the command attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L245" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command&#40;value:String?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>command</strong>(value : String?)
+
+        <a class="method-permalink" href="#command%28value%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the command attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L245" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="command&#61;&#40;value:String?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>command=</strong>(value : String?)
+
+        <a class="method-permalink" href="#command%3D%28value%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the command attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L245" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dup-instance-method">
+      <div class="signature">
+        
+        def <strong>dup</strong>
+
+        <a class="method-permalink" href="#dup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Copies this context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L100" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="env&#40;value:Hash&#40;String,String&#41;?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>env</strong>(value : Hash(String, String)?)
+
+        <a class="method-permalink" href="#env%28value%3AHash%28String%2CString%29%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the env attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L255" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="env:Hash&#40;String,String&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>env</strong> : Hash(String, String)
+
+        <a class="method-permalink" href="#env%3AHash%28String%2CString%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the env attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L255" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="env&#61;&#40;value:Hash&#40;String,String&#41;?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>env=</strong>(value : Hash(String, String)?)
+
+        <a class="method-permalink" href="#env%3D%28value%3AHash%28String%2CString%29%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the env attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L255" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error:Io::Arg-instance-method">
+      <div class="signature">
+        
+        def <strong>error</strong> : <a href="../Run/Io/Arg.html">Io::Arg</a>
+
+        <a class="method-permalink" href="#error%3AIo%3A%3AArg-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the error attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L275" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error&#40;value:Io::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>error</strong>(value : <a href="../Run/Io/Arg.html">Io::Arg</a>?)
+
+        <a class="method-permalink" href="#error%28value%3AIo%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the error attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L275" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error&#61;&#40;value:Io::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>error=</strong>(value : <a href="../Run/Io/Arg.html">Io::Arg</a>?)
+
+        <a class="method-permalink" href="#error%3D%28value%3AIo%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the error attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L275" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input:Io::Arg-instance-method">
+      <div class="signature">
+        
+        def <strong>input</strong> : <a href="../Run/Io/Arg.html">Io::Arg</a>
+
+        <a class="method-permalink" href="#input%3AIo%3A%3AArg-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the input attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L267" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input&#40;value:Io::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>input</strong>(value : <a href="../Run/Io/Arg.html">Io::Arg</a>?)
+
+        <a class="method-permalink" href="#input%28value%3AIo%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the input attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L267" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input&#61;&#40;value:Io::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>input=</strong>(value : <a href="../Run/Io/Arg.html">Io::Arg</a>?)
+
+        <a class="method-permalink" href="#input%3D%28value%3AIo%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the input attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L267" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name&#40;value:String?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>name</strong>(value : String?)
+
+        <a class="method-permalink" href="#name%28value%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the name attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L241" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name:::Union&#40;String,Nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>name</strong> : ::Union(String, Nil)
+
+        <a class="method-permalink" href="#name%3A%3A%3AUnion%28String%2CNil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the name attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L241" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name&#61;&#40;value:String?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>name=</strong>(value : String?)
+
+        <a class="method-permalink" href="#name%3D%28value%3AString%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the name attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L241" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_parallel&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>not_parallel!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#not_parallel%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the parallel attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L295" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_shell&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>not_shell!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#not_shell%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the shell attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L263" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_to_aborts_on_error&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>not_to_aborts_on_error!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#not_to_aborts_on_error%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the abort_on_error attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L299" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_to_clears_env&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>not_to_clears_env!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#not_to_clears_env%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the clear_env attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L259" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_to_shows_command&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>not_to_shows_command!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#not_to_shows_command%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the show_command attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L287" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_to_shows_dir&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>not_to_shows_dir!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#not_to_shows_dir%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the show_dir attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L283" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output:Io::Arg-instance-method">
+      <div class="signature">
+        
+        def <strong>output</strong> : <a href="../Run/Io/Arg.html">Io::Arg</a>
+
+        <a class="method-permalink" href="#output%3AIo%3A%3AArg-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the output attribute in the nested context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L271" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output&#40;value:Io::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>output</strong>(value : <a href="../Run/Io/Arg.html">Io::Arg</a>?)
+
+        <a class="method-permalink" href="#output%28value%3AIo%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the output attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L271" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output&#61;&#40;value:Io::Arg?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>output=</strong>(value : <a href="../Run/Io/Arg.html">Io::Arg</a>?)
+
+        <a class="method-permalink" href="#output%3D%28value%3AIo%3A%3AArg%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the output attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L271" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parallel&#40;value:Bool?&#41;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>parallel</strong>(value : Bool?) : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#parallel%28value%3ABool%3F%29%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the parallel attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L295" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parallel&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>parallel!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#parallel%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the parallel attribute to true and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L295" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parallel?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>parallel?</strong> : Bool
+
+        <a class="method-permalink" href="#parallel%3F%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the parallel attribute in the context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L295" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent-instance-method">
+      <div class="signature">
+        
+        def <strong>parent</strong>
+
+        <a class="method-permalink" href="#parent-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this parent context.</p>
+
+<p>It raises an exception if this context is the root.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L50" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent&#40;value:Context?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>parent</strong>(value : <a href="../Run/Context.html">Context</a>?)
+
+        <a class="method-permalink" href="#parent%28value%3AContext%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the parent attribute and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L253" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent&#61;&#40;value:Context?&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>parent=</strong>(value : <a href="../Run/Context.html">Context</a>?)
+
+        <a class="method-permalink" href="#parent%3D%28value%3AContext%3F%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the parent attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L253" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent?:Context?-instance-method">
+      <div class="signature">
+        
+        def <strong>parent?</strong> : <a href="../Run/Context.html">Context</a>?
+
+        <a class="method-permalink" href="#parent%3F%3AContext%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this parent context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L45" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>root</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#root%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the root context in the nested contexts.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L60" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root?-instance-method">
+      <div class="signature">
+        
+        def <strong>root?</strong>
+
+        <a class="method-permalink" href="#root%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if this context is the root in the nested contexts.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_abort_on_error:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_abort_on_error</strong> : Bool?
+
+        <a class="method-permalink" href="#self_abort_on_error%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the abort_on_error attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L299" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_abort_signal:Signal?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_abort_signal</strong> : Signal?
+
+        <a class="method-permalink" href="#self_abort_signal%3ASignal%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the abort_signal attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L291" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_abort_timeout:Timeout::Arg?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_abort_timeout</strong> : <a href="../Run/Timeout/Arg.html">Timeout::Arg</a>?
+
+        <a class="method-permalink" href="#self_abort_timeout%3ATimeout%3A%3AArg%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the abort_timeout attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L303" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_args:Array&#40;String&#41;?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_args</strong> : Array(String)?
+
+        <a class="method-permalink" href="#self_args%3AArray%28String%29%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the args attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L249" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_chdir:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_chdir</strong> : String?
+
+        <a class="method-permalink" href="#self_chdir%3AString%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the chdir attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L279" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_clear_env:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_clear_env</strong> : Bool?
+
+        <a class="method-permalink" href="#self_clear_env%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the clear_env attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L259" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_command:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_command</strong> : String?
+
+        <a class="method-permalink" href="#self_command%3AString%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the command attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L245" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_env:Hash&#40;String,String&#41;?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_env</strong> : Hash(String, String)?
+
+        <a class="method-permalink" href="#self_env%3AHash%28String%2CString%29%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the env attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L255" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_error:Io::Arg?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_error</strong> : <a href="../Run/Io/Arg.html">Io::Arg</a>?
+
+        <a class="method-permalink" href="#self_error%3AIo%3A%3AArg%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the error attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L275" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_input:Io::Arg?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_input</strong> : <a href="../Run/Io/Arg.html">Io::Arg</a>?
+
+        <a class="method-permalink" href="#self_input%3AIo%3A%3AArg%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the input attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L267" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_name:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_name</strong> : String?
+
+        <a class="method-permalink" href="#self_name%3AString%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the name attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L241" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_output:Io::Arg?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_output</strong> : <a href="../Run/Io/Arg.html">Io::Arg</a>?
+
+        <a class="method-permalink" href="#self_output%3AIo%3A%3AArg%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the output attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L271" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_parallel:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_parallel</strong> : Bool?
+
+        <a class="method-permalink" href="#self_parallel%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the parallel attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L295" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_shell:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_shell</strong> : Bool?
+
+        <a class="method-permalink" href="#self_shell%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the shell attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L263" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_show_command:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_show_command</strong> : Bool?
+
+        <a class="method-permalink" href="#self_show_command%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the show_command attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L287" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="self_show_dir:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>self_show_dir</strong> : Bool?
+
+        <a class="method-permalink" href="#self_show_dir%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the show_dir attribute.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L283" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set&#40;name:String?&#61;nil,command:String?&#61;nil,args:Array&#40;String&#41;?&#61;nil,parent:Context?&#61;nil,env:Hash&#40;String,String&#41;?&#61;nil,clear_env:Bool?&#61;nil,shell:Bool?&#61;nil,input:Io::Arg&#61;nil,output:Io::Arg&#61;nil,error:Io::Arg&#61;nil,chdir:String?&#61;nil,show_dir:Bool?&#61;nil,show_command:Bool?&#61;nil,abort_signal:Signal?&#61;nil,parallel:Bool?&#61;nil,abort_on_error:Bool?&#61;nil,abort_timeout:Timeout::Arg&#61;nil,current_dir:String?&#61;nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>set</strong>(name : String? = <span class="n">nil</span>, command : String? = <span class="n">nil</span>, args : Array(String)? = <span class="n">nil</span>, parent : <a href="../Run/Context.html">Context</a>? = <span class="n">nil</span>, env : Hash(String, String)? = <span class="n">nil</span>, clear_env : Bool? = <span class="n">nil</span>, shell : Bool? = <span class="n">nil</span>, input : <a href="../Run/Io/Arg.html">Io::Arg</a> = <span class="n">nil</span>, output : <a href="../Run/Io/Arg.html">Io::Arg</a> = <span class="n">nil</span>, error : <a href="../Run/Io/Arg.html">Io::Arg</a> = <span class="n">nil</span>, chdir : String? = <span class="n">nil</span>, show_dir : Bool? = <span class="n">nil</span>, show_command : Bool? = <span class="n">nil</span>, abort_signal : Signal? = <span class="n">nil</span>, parallel : Bool? = <span class="n">nil</span>, abort_on_error : Bool? = <span class="n">nil</span>, abort_timeout : <a href="../Run/Timeout/Arg.html">Timeout::Arg</a> = <span class="n">nil</span>, current_dir : String? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#set%28name%3AString%3F%3Dnil%2Ccommand%3AString%3F%3Dnil%2Cargs%3AArray%28String%29%3F%3Dnil%2Cparent%3AContext%3F%3Dnil%2Cenv%3AHash%28String%2CString%29%3F%3Dnil%2Cclear_env%3ABool%3F%3Dnil%2Cshell%3ABool%3F%3Dnil%2Cinput%3AIo%3A%3AArg%3Dnil%2Coutput%3AIo%3A%3AArg%3Dnil%2Cerror%3AIo%3A%3AArg%3Dnil%2Cchdir%3AString%3F%3Dnil%2Cshow_dir%3ABool%3F%3Dnil%2Cshow_command%3ABool%3F%3Dnil%2Cabort_signal%3ASignal%3F%3Dnil%2Cparallel%3ABool%3F%3Dnil%2Cabort_on_error%3ABool%3F%3Dnil%2Cabort_timeout%3ATimeout%3A%3AArg%3Dnil%2Ccurrent_dir%3AString%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the attributes and returns self.</p>
+
+<p>If nil is specified, the attribute is not changed.</p>
+
+<p>For more information about the context attributes, see <a href="https://github.com/mosop/run/wiki/Context-Attributes" target="_blank">Wiki</a>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L72" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shell&#40;value:Bool?&#41;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>shell</strong>(value : Bool?) : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#shell%28value%3ABool%3F%29%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the shell attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L263" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shell&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>shell!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#shell%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the shell attribute to true and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L263" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shell?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>shell?</strong> : Bool
+
+        <a class="method-permalink" href="#shell%3F%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the shell attribute in the context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L263" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="show_command&#40;value:Bool?&#41;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>show_command</strong>(value : Bool?) : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#show_command%28value%3ABool%3F%29%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the show_command attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L287" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="show_command&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>show_command!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#show_command%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the show_command attribute to true and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L287" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="show_dir&#40;value:Bool?&#41;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>show_dir</strong>(value : Bool?) : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#show_dir%28value%3ABool%3F%29%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the show_dir attribute to false and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L283" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="show_dir&#33;:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>show_dir!</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#show_dir%21%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the show_dir attribute to true and returns self.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L283" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shows_command?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>shows_command?</strong> : Bool
+
+        <a class="method-permalink" href="#shows_command%3F%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the show_command attribute in the context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L287" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shows_dir?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>shows_dir?</strong> : Bool
+
+        <a class="method-permalink" href="#shows_dir%3F%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the combined value of the show_dir attribute in the context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/dcaec613bf37bfda5d5e35ecb1c054663f6ea7a3/src/run/context.cr#L283" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

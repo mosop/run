@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Run::Io - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="../Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="../Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="../Run/Context.html">Context</a>
+      
+    </li>
+  
+  <li class="parent current" data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="../Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="../Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Process" data-name="run::process">
+      <a href="../Run/Process.html">Process</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessLike" data-name="run::processlike">
+      <a href="../Run/ProcessLike.html">ProcessLike</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Timeout" data-name="run::timeout">
+      <a href="../Run/Timeout.html">Timeout</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Timeout/Arg" data-name="run::timeout::arg">
+      <a href="../Run/Timeout/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">abstract struct</span> Run::Io
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Run/Io.html">Run::Io</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mosop/run/blob/a450da55010b259b1ff8c35ad90472391c7cd90f/src/run/io.cr#L2" target="_blank">run/io.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/mosop/run/blob/a450da55010b259b1ff8c35ad90472391c7cd90f/src/run/io/generic_io.cr#L1" target="_blank">run/io/generic_io.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/mosop/run/blob/a450da55010b259b1ff8c35ad90472391c7cd90f/src/run/io/null.cr#L1" target="_blank">run/io/null.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/mosop/run/blob/a450da55010b259b1ff8c35ad90472391c7cd90f/src/run/io/parent.cr#L1" target="_blank">run/io/parent.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/mosop/run/blob/a450da55010b259b1ff8c35ad90472391c7cd90f/src/run/io/pipe.cr#L1" target="_blank">run/io/pipe.cr</a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="NULL">
+        <strong>NULL</strong> = <code><span class="t">Null</span>.<span class="k">new</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="PARENT">
+        <strong>PARENT</strong> = <code><span class="t">Parent</span>.<span class="k">new</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="PIPE">
+        <strong>PIPE</strong> = <code><span class="t">Pipe</span>.<span class="k">new</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/a450da55010b259b1ff8c35ad90472391c7cd90f/src/run/io.cr#L2" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

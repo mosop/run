@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/mosop/run">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Run::Process - github.com/mosop/run</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/mosop/run/Run" data-name="run">
+      <a href="../Run.html">Run</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Command" data-name="run::command">
+      <a href="../Run/Command.html">Command</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/CommandGroup" data-name="run::commandgroup">
+      <a href="../Run/CommandGroup.html">CommandGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Context" data-name="run::context">
+      <a href="../Run/Context.html">Context</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Io" data-name="run::io">
+      <a href="../Run/Io.html">Io</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Io/Arg" data-name="run::io::arg">
+      <a href="../Run/Io/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/mosop/run/Run/Process" data-name="run::process">
+      <a href="../Run/Process.html">Process</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessGroup" data-name="run::processgroup">
+      <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/ProcessLike" data-name="run::processlike">
+      <a href="../Run/ProcessLike.html">ProcessLike</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/mosop/run/Run/Timeout" data-name="run::timeout">
+      <a href="../Run/Timeout.html">Timeout</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/mosop/run/Run/Timeout/Arg" data-name="run::timeout::arg">
+      <a href="../Run/Timeout/Arg.html">Arg</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Run::Process
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Run/Process.html">Run::Process</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L2" target="_blank">run/process.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#abort%28signal%3ASignal%3F%3Dnil%29-instance-method" class="signature"><strong>#abort</strong>(signal : Signal? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Aborts this process.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#aborted%3F%3ABool%3F-instance-method" class="signature"><strong>#aborted?</strong> : Bool?</a>
+        
+          <div class="summary"><p>Tests if the running process is aborted.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#context%3AContext-instance-method" class="signature"><strong>#context</strong> : Context</a>
+        
+          <div class="summary"><p>Returns this context.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error%3AIO-instance-method" class="signature"><strong>#error</strong> : IO</a>
+        
+          <div class="summary"><p>Returns this error IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#error%3F%3AIO%3F-instance-method" class="signature"><strong>#error?</strong> : IO?</a>
+        
+          <div class="summary"><p>Returns this error IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exists%3F-instance-method" class="signature"><strong>#exists?</strong></a>
+        
+          <div class="summary"><p>Tests if the running process exists.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exit_code%3F%3AInt32%3F-instance-method" class="signature"><strong>#exit_code?</strong> : Int32?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exited%3F-instance-method" class="signature"><strong>#exited?</strong></a>
+        
+          <div class="summary"><p>Tests if the process is started and exited.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input%3AIO-instance-method" class="signature"><strong>#input</strong> : IO</a>
+        
+          <div class="summary"><p>Returns this input IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input%3F%3AIO%3F-instance-method" class="signature"><strong>#input?</strong> : IO?</a>
+        
+          <div class="summary"><p>Returns this input IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#kill%28signal%3ASignal%3F%3Dnil%29-instance-method" class="signature"><strong>#kill</strong>(signal : Signal? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Kills this process.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#kill%21%28signal%3ASignal%3F%3Dnil%29-instance-method" class="signature"><strong>#kill!</strong>(signal : Signal? = <span class="n">nil</span>)</a>
+        
+          <div class="summary"><p>Kills this process.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output%3AIO-instance-method" class="signature"><strong>#output</strong> : IO</a>
+        
+          <div class="summary"><p>Returns this output IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output%3F%3AIO%3F-instance-method" class="signature"><strong>#output?</strong> : IO?</a>
+        
+          <div class="summary"><p>Returns this output IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent%3AProcessGroup-instance-method" class="signature"><strong>#parent</strong> : ProcessGroup</a>
+        
+          <div class="summary"><p>Returns this parent group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#root_group%3AProcessGroup-instance-method" class="signature"><strong>#root_group</strong> : ProcessGroup</a>
+        
+          <div class="summary"><p>Returns this root group.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#source%3ACommand-instance-method" class="signature"><strong>#source</strong> : Command</a>
+        
+          <div class="summary"><p>Returns this source command.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#started%3F%3ABool%3F-instance-method" class="signature"><strong>#started?</strong> : Bool?</a>
+        
+          <div class="summary"><p>Tests if the running process is started.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#success%3F-instance-method" class="signature"><strong>#success?</strong></a>
+        
+          <div class="summary"><p>Tests if the running process is successfully terminated.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#terminated%3F-instance-method" class="signature"><strong>#terminated?</strong></a>
+        
+          <div class="summary"><p>Tests if the process is unstarted, exited or aborted.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unstarted%3F-instance-method" class="signature"><strong>#unstarted?</strong></a>
+        
+          <div class="summary"><p>Tests if the running process is unstarted.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="abort&#40;signal:Signal?&#61;nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>abort</strong>(signal : Signal? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#abort%28signal%3ASignal%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Aborts this process.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L181" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="aborted?:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>aborted?</strong> : Bool?
+
+        <a class="method-permalink" href="#aborted%3F%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the running process is aborted.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L244" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="context:Context-instance-method">
+      <div class="signature">
+        
+        def <strong>context</strong> : <a href="../Run/Context.html">Context</a>
+
+        <a class="method-permalink" href="#context%3AContext-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this context.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error:IO-instance-method">
+      <div class="signature">
+        
+        def <strong>error</strong> : IO
+
+        <a class="method-permalink" href="#error%3AIO-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this error IO.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="error?:IO?-instance-method">
+      <div class="signature">
+        
+        def <strong>error?</strong> : IO?
+
+        <a class="method-permalink" href="#error%3F%3AIO%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this error IO.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exists?-instance-method">
+      <div class="signature">
+        
+        def <strong>exists?</strong>
+
+        <a class="method-permalink" href="#exists%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the running process exists.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L224" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exit_code?:Int32?-instance-method">
+      <div class="signature">
+        
+        def <strong>exit_code?</strong> : Int32?
+
+        <a class="method-permalink" href="#exit_code%3F%3AInt32%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L168" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exited?-instance-method">
+      <div class="signature">
+        
+        def <strong>exited?</strong>
+
+        <a class="method-permalink" href="#exited%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the process is started and exited.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L236" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input:IO-instance-method">
+      <div class="signature">
+        
+        def <strong>input</strong> : IO
+
+        <a class="method-permalink" href="#input%3AIO-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this input IO.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input?:IO?-instance-method">
+      <div class="signature">
+        
+        def <strong>input?</strong> : IO?
+
+        <a class="method-permalink" href="#input%3F%3AIO%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this input IO.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="kill&#40;signal:Signal?&#61;nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>kill</strong>(signal : Signal? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#kill%28signal%3ASignal%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Kills this process.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L206" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="kill&#33;&#40;signal:Signal?&#61;nil&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>kill!</strong>(signal : Signal? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#kill%21%28signal%3ASignal%3F%3Dnil%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Kills this process.</p>
+
+<p>Raises an Errno (ESRCH) exception if no process or process group can be found.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L217" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output:IO-instance-method">
+      <div class="signature">
+        
+        def <strong>output</strong> : IO
+
+        <a class="method-permalink" href="#output%3AIO-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this output IO.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output?:IO?-instance-method">
+      <div class="signature">
+        
+        def <strong>output?</strong> : IO?
+
+        <a class="method-permalink" href="#output%3F%3AIO%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this output IO.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L45" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent:ProcessGroup-instance-method">
+      <div class="signature">
+        
+        def <strong>parent</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+
+        <a class="method-permalink" href="#parent%3AProcessGroup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this parent group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="root_group:ProcessGroup-instance-method">
+      <div class="signature">
+        
+        def <strong>root_group</strong> : <a href="../Run/ProcessGroup.html">ProcessGroup</a>
+
+        <a class="method-permalink" href="#root_group%3AProcessGroup-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this root group.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="source:Command-instance-method">
+      <div class="signature">
+        
+        def <strong>source</strong> : <a href="../Run/Command.html">Command</a>
+
+        <a class="method-permalink" href="#source%3ACommand-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns this source command.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="started?:Bool?-instance-method">
+      <div class="signature">
+        
+        def <strong>started?</strong> : Bool?
+
+        <a class="method-permalink" href="#started%3F%3ABool%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the running process is started.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L241" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="success?-instance-method">
+      <div class="signature">
+        
+        def <strong>success?</strong>
+
+        <a class="method-permalink" href="#success%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the running process is successfully terminated.</p>
+
+<p>It waits for the running process to terminate.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L176" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="terminated?-instance-method">
+      <div class="signature">
+        
+        def <strong>terminated?</strong>
+
+        <a class="method-permalink" href="#terminated%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the process is unstarted, exited or aborted.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L231" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unstarted?-instance-method">
+      <div class="signature">
+        
+        def <strong>unstarted?</strong>
+
+        <a class="method-permalink" href="#unstarted%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Tests if the running process is unstarted.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/mosop/run/blob/f3b665af43673c0c58d7b2226dd71b9f8f030109/src/run/process.cr#L247" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
